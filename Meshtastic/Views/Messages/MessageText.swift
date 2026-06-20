@@ -70,6 +70,10 @@ struct MessageText: View {
 	}
 
 	private var messageContent: some View {
+		// Voice messages render their own player; no translation/markdown.
+		if message.isAudioMessage {
+			return AnyView(AudioMessageView(message: message, isCurrentUser: isCurrentUser))
+		}
 		#if !targetEnvironment(macCatalyst)
 		if #available(iOS 17.4, macOS 14.4, *), canTranslate {
 			return AnyView(

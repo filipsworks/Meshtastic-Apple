@@ -396,6 +396,172 @@ extension AccessoryManager {
 
 	}
 
+	public func sendAudioMessage(audioData: Data, toUserNum: Int64, channel: Int32, replyID: Int64) async throws {
+		guard let fromUserNum = self.activeConnection?.device.num else {
+			Logger.services.error("Error while sending audio message. No active device.")
+			throw AccessoryError.ioFailed("No active device")
+		}
+
+		guard !audioData.isEmpty else {
+			Logger.mesh.info("🚫 Don't Send an Empty Audio Message")
+			return
+		}
+
+		let messageUsers = UserEntity.fetchRequest()
+		messageUsers.predicate = NSPredicate(format: "num IN %@", [fromUserNum, Int64(toUserNum)])
+
+		do {
+			let fetchedUsers = try context.fetch(messageUsers)
+			if fetchedUsers.isEmpty {
+				Logger.data.error("🚫 Message Users Not Found, Fail")
+				throw AccessoryError.ioFailed("🚫 Message Users Not Found, Fail")
+			}
+			
+			let newMessage = MessageEntity(context: context)
+			newMessage.messageId = Int64(UInt32.random(in: UInt32(UInt8.max)..<UInt32.max))
+			newMessage.messageTimestamp = Int32(Date().timeIntervalSince1970)
+			newMessage.receivedACK = false
+			newMessage.read = true
+			if toUserNum > 0 {
+				newMessage.toUser = fetchedUsers.first(where: { $0.num == toUserNum })
+				newMessage.toUser?.lastMessage = Date()
+				if newMessage.toUser?.pkiEncrypted ?? false {
+					newMessage.publicKey = newMessage.toUser?.publicKey
+					newMessage.pkiEncrypted = true
+				}
+			}
+			newMessage.fromUser = fetchedUsers.first(where: { $0.num == fromUserNum })
+			newMessage.admin = false
+			newMessage.channel = channel
+			if replyID > 0 {
+				newMessage.replyID = replyID
+			}
+			
+			Logger.audio.info("🎙️ Building Audio Message. raw audio size: \(audioData.count) bytes")
+			// Empty markdown payload, store binary data in audioData
+			newMessage.messagePayload = "Voice Message"
+			newMessage.messagePayloadMarkdown = "Voice Message"
+			newMessage.audioData = audioData
+			
+			// Split audioData into chunks of up to 200 bytes
+			let chunkSize = 200
+			let totalChunks = Int(ceil(Double(audioData.count) / Double(chunkSize)))
+			let audioMessageId = UInt16(truncatingIfNeeded: newMessage.messageId) // Link the packets together deterministically
+			
+			// Extract thread-safe properties to use inside async loop
+			let messageIdBase = newMessage.messageId
+			let isEncrypted = newMessage.toUser?.pkiEncrypted ?? false
+			let pubKey = newMessage.toUser?.publicKey ?? Data()
+			let destNodeNum = toUserNum
+			let sourceNodeNum = fromUserNum
+			let chan = channel
+			let repId = replyID
+			
+			// Get connected node's LoRa config for delay calculation
+			var hopLmt: UInt32? = nil
+			if let fromUserNode = newMessage.fromUser?.userNode {
+				let hopsAway = fromUserNode.hopsAway
+				if hopsAway > Int32(truncatingIfNeeded: fromUserNode.loRaConfig?.hopLimit ?? 0) {
+					hopLmt = UInt32(truncatingIfNeeded: hopsAway)
+				}
+			}
+			
+			// Use the connected node's LoRa config for delay calculation (our device's tx speed)
+			let connectedNodeNum = self.activeConnection?.device.num ?? 0
+			let connectedNodeRequest = NodeInfoEntity.fetchRequest()
+			connectedNodeRequest.predicate = NSPredicate(format: "num == %lld", connectedNodeNum)
+			let connectedNode = try? context.fetch(connectedNodeRequest).first
+			let modemPreset = connectedNode?.loRaConfig?.modemPreset
+			let chunkDelayNs = calculateChunkDelayNs(modemPreset: modemPreset)
+			
+			Task {
+				for chunkIndex in 0..<totalChunks {
+					let startIndex = chunkIndex * chunkSize
+					let endIndex = min(startIndex + chunkSize, audioData.count)
+					let chunkData = audioData[startIndex..<endIndex]
+					
+					// 8-byte Multi-part Header: [0xc0, 0xde, 0xc2] [0x08] [id_high, id_low] [chunkIndex] [totalChunks]
+					// 0x08 corresponds to CODEC2_700C (ha-bridge compatible)
+					var payloadData = Data([
+						0xc0, 0xde, 0xc2, 0x08,
+						UInt8(audioMessageId >> 8), UInt8(audioMessageId & 0xff),
+						UInt8(chunkIndex), UInt8(totalChunks)
+					])
+					payloadData.append(contentsOf: chunkData)
+					Logger.audio.info("🎙️ Sending Audio Message chunk \(chunkIndex + 1)/\(totalChunks) to radio. packet payload size: \(payloadData.count)")
+
+					var dataMessage = DataMessage()
+					dataMessage.payload = payloadData
+					dataMessage.portnum = PortNum.audioApp
+
+					var meshPacket = MeshPacket()
+					if isEncrypted {
+						meshPacket.pkiEncrypted = true
+						meshPacket.publicKey = pubKey
+					}
+					meshPacket.id = UInt32(messageIdBase) + UInt32(chunkIndex)
+					if destNodeNum > 0 {
+						meshPacket.to = UInt32(destNodeNum)
+						if let hopLimitSet = hopLmt {
+							meshPacket.hopLimit = hopLimitSet
+						}
+					} else {
+						meshPacket.to = Constants.maximumNodeNum
+					}
+					meshPacket.channel = UInt32(chan)
+					meshPacket.from	= UInt32(sourceNodeNum)
+					meshPacket.decoded = dataMessage
+					if repId > 0 {
+						meshPacket.decoded.replyID = UInt32(repId)
+					}
+					meshPacket.wantAck = true // Try to ack every chunk for reliability
+
+					var toRadio = ToRadio()
+					toRadio.packet = meshPacket
+					let logString = String.localizedStringWithFormat("Sent audio message %@ chunk %d from %@ to %@".localized, String(messageIdBase), chunkIndex, sourceNodeNum.toHex(), destNodeNum.toHex())
+					try? await send(toRadio, debugDescription: logString)
+					
+					if chunkIndex < totalChunks - 1 {
+						try? await Task.sleep(nanoseconds: chunkDelayNs)
+					}
+				}
+			}
+			do {
+				try context.save()
+				Logger.data.info("💾 Saved a new sent audio message from \(self.activeDeviceNum?.toHex() ?? "0", privacy: .public) to \(toUserNum.toHex(), privacy: .public)")
+			} catch {
+				context.rollback()
+				let nsError = error as NSError
+				Logger.data.error("Error Saving Entity: \(nsError, privacy: .public)")
+				throw error
+			}
+		} catch {
+			Logger.data.error("💥 Send audio message failure \(self.activeDeviceNum?.toHex() ?? "0", privacy: .public) to \(toUserNum.toHex(), privacy: .public)")
+		}
+	}
+	
+	private func calculateChunkDelayNs(modemPreset: Int32?) -> UInt64 {
+		guard let preset = modemPreset else {
+			return 1_500_000_000
+		}
+		switch Config.LoRaConfig.ModemPreset(rawValue: Int(preset)) {
+		case .shortTurbo, .longTurbo:
+			return 200_000_000
+		case .shortFast:
+			return 400_000_000
+		case .mediumFast:
+			return 700_000_000
+		case .longModerate, .longFast:
+			return 1_000_000_000
+		case .mediumSlow, .shortSlow:
+			return 1_500_000_000
+		case .longSlow, .veryLongSlow:
+			return 2_500_000_000
+		default:
+			return 1_500_000_000
+		}
+	}
+
 	public func setFavoriteNode(node: NodeInfoEntity, connectedNodeNum: Int64) async throws {
 		var adminPacket = AdminMessage()
 		adminPacket.setFavoriteNode = UInt32(node.num)

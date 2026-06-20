@@ -57,6 +57,9 @@ struct Settings: View {
 	}
 
 	private func isModuleSupported(_ module: ExcludedModules, excludedModules: Int) -> Bool {
+		// Voice messages (AUDIO_APP) are encoded/decoded in-app with codec2, so the
+		// feature works on every device regardless of the firmware's excluded modules.
+		if module == .audioConfig { return true }
 		return excludedModules & module.rawValue == 0
 	}
 

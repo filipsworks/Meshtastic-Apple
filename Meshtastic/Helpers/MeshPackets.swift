@@ -73,6 +73,9 @@ actor MeshPackets {
 		let metricsType: Int32
 	}
 
+	/// Inbound codec2 voice chunks, keyed by audio-message id, until complete.
+	private var partialAudioMessages: [UInt16: [Int: Data]] = [:]
+
 	/// Always the current shared container. Computed (not cached) so that after a data clear
 	/// recreates the container, the next `recreateShared()` rebuilds the actor on the new one
 	/// rather than a stale, torn-down container. Only read on the main actor (recreateShared and
@@ -813,7 +816,14 @@ actor MeshPackets {
 						}
 					}
 					fetchedMessage[0].relayNode = Int64(packet.relayNode)
-					fetchedMessage[0].ackError = Int32(routingMessage.errorReason.rawValue)
+					// Voice messages are delivered as their own chunk stream; a
+					// maxRetransmit on a chunk is normal over lossy LoRa, so don't
+					// surface it as an error on the audio bubble.
+					let isAudioMessage = fetchedMessage[0].portNum == Int32(PortNum.audioApp.rawValue)
+					let isMaxRetransmit = routingMessage.errorReason == Routing.Error.maxRetransmit
+					if !(isAudioMessage && isMaxRetransmit) {
+						fetchedMessage[0].ackError = Int32(routingMessage.errorReason.rawValue)
+					}
 					if routingMessage.errorReason == Routing.Error.none {
 						fetchedMessage[0].receivedACK = true
 						fetchedMessage[0].relays += 1
@@ -1058,6 +1068,153 @@ actor MeshPackets {
 			}
 		} else {
 			Logger.data.error("💥 Error Fetching NodeInfoEntity for Node \(packet.from.toHex(), privacy: .public)")
+		}
+	}
+
+	// Codec2 voice over AUDIO_APP (ha-bridge compatible). Ported from the original
+	// Core Data implementation to this SwiftData @ModelActor — verify in Xcode,
+	// especially the #Predicate relationship lookups.
+	func audioAppPacket(
+		packet: MeshPacket,
+		wantRangeTestPackets: Bool,
+		critical: Bool = false,
+		connectedNode: Int64,
+		storeForward: Bool = false,
+		appState: AppState?
+	) async {
+		let payloadData = packet.decoded.payload
+		guard payloadData.count >= 8 else {
+			Logger.mesh.error("📉 AUDIO_APP packet too short for the 8-byte multi-part header.")
+			return
+		}
+		guard payloadData[0] == 0xC0, payloadData[1] == 0xDE, payloadData[2] == 0xC2 else {
+			Logger.mesh.error("🚨 AUDIO_APP packet with invalid header.")
+			return
+		}
+
+		// Resend request (mode byte 0xFF): retransmit our stored clip from a chunk.
+		if payloadData[3] == 0xFF {
+			let reqAudioId = UInt16(payloadData[4]) << 8 | UInt16(payloadData[5])
+			let startChunk = Int(payloadData[6])
+			Logger.audio.info("🎙️ Resend request for audio msg \(reqAudioId) from chunk \(startChunk)")
+			let toNum = Int64(packet.to)
+			let fromNum = Int64(packet.from)
+			var descriptor = FetchDescriptor<MessageEntity>(
+				predicate: #Predicate { $0.fromUser?.num == toNum && $0.toUser?.num == fromNum },
+				sortBy: [SortDescriptor(\.messageTimestamp, order: .reverse)])
+			descriptor.fetchLimit = 20
+			if let msgs = try? modelContext.fetch(descriptor),
+			   let originalMsg = msgs.first(where: { UInt16(truncatingIfNeeded: $0.messageId) == reqAudioId && $0.audioData != nil }),
+			   let fullAudio = originalMsg.audioData,
+			   originalMsg.partialAudioInfo == nil {
+				let chunkSize = 200
+				let totalChunks = Int(ceil(Double(fullAudio.count) / Double(chunkSize)))
+				let channel = originalMsg.channel
+				let originalId = originalMsg.messageId
+				if startChunk < totalChunks {
+					Task {
+						for chunkIndex in startChunk..<totalChunks {
+							let startIndex = chunkIndex * chunkSize
+							let endIndex = min(startIndex + chunkSize, fullAudio.count)
+							var respData = Data([0xc0, 0xde, 0xc2, 0x08,
+								UInt8(reqAudioId >> 8), UInt8(reqAudioId & 0xff),
+								UInt8(chunkIndex), UInt8(totalChunks)])
+							respData.append(contentsOf: fullAudio[startIndex..<endIndex])
+							var dataMessage = DataMessage()
+							dataMessage.payload = respData
+							dataMessage.portnum = PortNum.audioApp
+							var meshPkt = MeshPacket()
+							meshPkt.id = UInt32(originalId) + UInt32(chunkIndex) + 2000
+							meshPkt.channel = UInt32(channel)
+							meshPkt.from = packet.to
+							meshPkt.to = packet.from
+							meshPkt.decoded = dataMessage
+							meshPkt.wantAck = true
+							var toRadio = ToRadio()
+							toRadio.packet = meshPkt
+							try? await AccessoryManager.shared.send(toRadio, debugDescription: "🎙️ Resending chunk \(chunkIndex)/\(totalChunks)")
+							try? await Task.sleep(nanoseconds: 1_500_000_000)
+						}
+					}
+				}
+			}
+			return
+		}
+
+		// Data chunk: reassemble.
+		let messageId = UInt16(payloadData[4]) << 8 | UInt16(payloadData[5])
+		let chunkIndex = Int(payloadData[6])
+		let totalChunks = Int(payloadData[7])
+		let chunkData = Data(payloadData.dropFirst(8))
+		Logger.audio.info("🎙️ Audio chunk \(chunkIndex + 1)/\(totalChunks) (\(chunkData.count)B)")
+
+		var chunks = partialAudioMessages[messageId] ?? [:]
+		chunks[chunkIndex] = chunkData
+		partialAudioMessages[messageId] = chunks
+		let isComplete = chunks.count == totalChunks
+
+		var assembledAudioData = Data()
+		if isComplete {
+			for i in 0..<totalChunks where chunks[i] != nil { assembledAudioData.append(chunks[i]!) }
+			partialAudioMessages.removeValue(forKey: messageId)
+			Logger.audio.info("🎙️ Voice message assembled (\(assembledAudioData.count)B)")
+		} else {
+			let partialInfo = PartialVoiceInfo(id: messageId, total: totalChunks, chunks: chunks)
+			if let encoded = try? JSONEncoder().encode(partialInfo) {
+				assembledAudioData = "PARTIAL_AUDIO:".data(using: .utf8)!
+				assembledAudioData.append(encoded)
+			}
+		}
+
+		let toNum = Int64(packet.to)
+		let fromNum = Int64(packet.from)
+		let usersDescriptor = FetchDescriptor<UserEntity>(predicate: #Predicate { $0.num == toNum || $0.num == fromNum })
+		do {
+			let fetchedUsers = try modelContext.fetch(usersDescriptor)
+
+			// Update the in-flight partial for this audio id, else create a new message.
+			var recent = FetchDescriptor<MessageEntity>(
+				predicate: #Predicate { $0.fromUser?.num == fromNum },
+				sortBy: [SortDescriptor(\.messageTimestamp, order: .reverse)])
+			recent.fetchLimit = 20
+			let existingMessage = (try? modelContext.fetch(recent))?.first(where: { $0.partialAudioInfo?.id == messageId })
+
+			let newMessage = existingMessage ?? MessageEntity()
+			if existingMessage == nil {
+				modelContext.insert(newMessage)
+				newMessage.messageId = Int64(packet.id)
+				newMessage.messageTimestamp = packet.rxTime > 0 ? Int32(bitPattern: packet.rxTime) : Int32(Date().timeIntervalSince1970)
+				if packet.relayNode != 0 { newMessage.relayNode = Int64(packet.relayNode) }
+				newMessage.receivedACK = false
+				newMessage.snr = packet.rxSnr
+				newMessage.rssi = packet.rxRssi
+				newMessage.channel = Int32(packet.channel)
+				newMessage.portNum = Int32(packet.decoded.portnum.rawValue)
+				if packet.decoded.replyID > 0 { newMessage.replyID = Int64(packet.decoded.replyID) }
+				if fetchedUsers.first(where: { $0.num == packet.to }) != nil, packet.to != Constants.maximumNodeNum {
+					newMessage.toUser = fetchedUsers.first(where: { $0.num == packet.to })
+				}
+				if let from = fetchedUsers.first(where: { $0.num == packet.from }) {
+					newMessage.fromUser = from
+				} else if let newUser = try? createUser(num: Int64(truncatingIfNeeded: packet.from), context: modelContext) {
+					newMessage.fromUser = newUser
+				}
+				newMessage.fromUser?.userNode?.lastHeard = packet.rxTime > 0 ? Date(timeIntervalSince1970: TimeInterval(Int64(packet.rxTime))) : Date()
+				if packet.to != Constants.maximumNodeNum { newMessage.fromUser?.lastMessage = Date() }
+			}
+
+			let text = isComplete ? "Voice Message" : "Voice Message (Partial)"
+			newMessage.messagePayload = text
+			newMessage.messagePayloadMarkdown = text
+			newMessage.audioData = assembledAudioData
+			do {
+				try modelContext.save()
+				Logger.data.info("💾 Saved audio message \(newMessage.messageId, privacy: .public)")
+			} catch {
+				Logger.data.error("Failed to save audio MessageEntity: \(error.localizedDescription, privacy: .public)")
+			}
+		} catch {
+			Logger.data.error("Failed to fetch users for audio message: \(error.localizedDescription, privacy: .public)")
 		}
 	}
 

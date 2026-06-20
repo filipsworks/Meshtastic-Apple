@@ -718,6 +718,7 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 					Logger.mesh.info("[SFPP] packet received from \(packet.from.toHex(), privacy: .public)")
 				case .audioApp:
 					Logger.mesh.info("[Audio] packet received from \(packet.from.toHex(), privacy: .public)")
+					await handleAudioAppPacket(packet)
 				case .nodeStatusApp:
 					await MeshPackets.shared.upsertNodeStatusPacket(packet: packet)
 				case .tracerouteApp:

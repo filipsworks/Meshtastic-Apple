@@ -80,6 +80,7 @@
         <attribute name="ackTimestamp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="admin" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="adminDescription" optional="YES" attributeType="String"/>
+        <attribute name="audioData" optional="YES" attributeType="Binary"/>
         <attribute name="channel" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isEmoji" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="messageId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
