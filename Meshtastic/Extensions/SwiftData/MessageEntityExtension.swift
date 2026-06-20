@@ -11,7 +11,29 @@ import Foundation
 import MapKit
 import SwiftUI
 
+public struct PartialVoiceInfo: Codable {
+	public let id: UInt16
+	public let total: Int
+	public var chunks: [Int: Data]
+}
+
 extension MessageEntity {
+	/// Codec2 voice-message reassembly state, stored as a JSON blob in `audioData`
+	/// (prefixed "PARTIAL_AUDIO:") until all chunks arrive; nil once complete.
+	public var partialAudioInfo: PartialVoiceInfo? {
+		guard let data = audioData else { return nil }
+		if let prefix = "PARTIAL_AUDIO:".data(using: .utf8), data.count >= prefix.count, data.prefix(prefix.count) == prefix {
+			let json = data.dropFirst(prefix.count)
+			return try? JSONDecoder().decode(PartialVoiceInfo.self, from: json)
+		}
+		return nil
+	}
+
+	/// True once a full codec2 voice clip has been received and stored.
+	public var isAudioMessage: Bool {
+		return audioData != nil && !audioData!.isEmpty && partialAudioInfo == nil
+	}
+
 	var hasTranslatedPayload: Bool {
 		!(messagePayloadTranslated?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
 	}

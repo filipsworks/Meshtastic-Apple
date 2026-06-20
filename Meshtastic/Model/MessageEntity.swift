@@ -15,6 +15,8 @@ final class MessageEntity {
 	var ackTimestamp: Int32 = 0
 	var admin: Bool = false
 	var adminDescription: String?
+	/// Codec2 voice clip (or a "PARTIAL_AUDIO:" reassembly blob); nil for text.
+	var audioData: Data?
 	var channel: Int32 = 0
 	var isEmoji: Bool = false
 	@Attribute(.unique) var messageId: Int64 = 0

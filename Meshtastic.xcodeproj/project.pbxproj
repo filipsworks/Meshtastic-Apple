@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0516B3FE2F68892000D0FC40 /* NodeFilterParametersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DCA1AE2F646B3B00D0724C /* NodeFilterParametersTests.swift */; };
 		0B9642EC0DB1B971CB26E8AE /* RadarSweepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E06A9BCC789BD452DFA9CFB /* RadarSweepView.swift */; };
+		0C578A3A4426A60F8EA5337D /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AD0973D1DEA4E5D28871556 /* dump.c */; };
 		102B5EAB2E172F41003D191E /* DatadogCore in Frameworks */ = {isa = PBXBuildFile; productRef = 102B5EAA2E172F41003D191E /* DatadogCore */; };
 		102B5EAD2E172F41003D191E /* DatadogCrashReporting in Frameworks */ = {isa = PBXBuildFile; productRef = 102B5EAC2E172F41003D191E /* DatadogCrashReporting */; };
 		102B5EAF2E172F41003D191E /* DatadogLogs in Frameworks */ = {isa = PBXBuildFile; productRef = 102B5EAE2E172F41003D191E /* DatadogLogs */; };
@@ -20,7 +21,11 @@
 		10D109F42E2047D600536CE6 /* DatadogTrace in Frameworks */ = {isa = PBXBuildFile; productRef = 10D109F32E2047D600536CE6 /* DatadogTrace */; };
 		10D80CF7AD2B4269BE0A4933 /* MeshtasticSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DF7D72AA0A450399DBC592 /* MeshtasticSchema.swift */; };
 		1396606FC903D7DA662B6326 /* DiscoveryModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C6057F9508D4356DAF411F /* DiscoveryModelTests.swift */; };
+		13A90A0B9D862A608065BC9B /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = F3196A22E5E3A4AB175B1E3F /* kiss_fftr.c */; };
+		143F51C184B0C233FE9B5BB4 /* codec2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7139AE5B3ABBA1F61F720AF2 /* codec2.c */; };
+		189F0D712B1441C2A6CCE490 /* sine.c in Sources */ = {isa = PBXBuildFile; fileRef = D95310ABEC684B3D2AF05280 /* sine.c */; };
 		1A8723A6288B46538396E9F1 /* DeviceLinkEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32D1D722C64814981AB215 /* DeviceLinkEntity.swift */; };
+		22E335CCFC9AFC38327B661A /* phase.c in Sources */ = {isa = PBXBuildFile; fileRef = C5BEA4D9C4978EC689C21A89 /* phase.c */; };
 		230A98402EF86A44004D87F1 /* AsyncCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230A983F2EF86A44004D87F1 /* AsyncCentral.swift */; };
 		230A98422EF86AA9004D87F1 /* ESP32BLEOTAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230A98412EF86AA9004D87F1 /* ESP32BLEOTAViewModel.swift */; };
 		230BC3972E31071E0046BF2A /* AccessoryManager+Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230BC3962E31071E0046BF2A /* AccessoryManager+Discovery.swift */; };
@@ -115,16 +120,26 @@
 		25F5D5C22C3F6E4B008036E3 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F5D5C12C3F6E4B008036E3 /* AppState.swift */; };
 		25F5D5D12C4375DF008036E3 /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F5D5D02C4375DF008036E3 /* RouterTests.swift */; };
 		2849A5E4CE9FDC1DB33DFA34 /* TAKConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01028778B8BFD81F7A039593 /* TAKConnection.swift */; };
+		28727A3963F72CE18C8B9C82 /* mbest.c in Sources */ = {isa = PBXBuildFile; fileRef = 3960EC9BE7DEEC47AFBA99C0 /* mbest.c */; };
 		300424F80C4A445A0FBAE82D /* TAKMeshtasticBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D006C85B250291D5925F30 /* TAKMeshtasticBridge.swift */; };
+		3483028FA214DB1831E62303 /* AudioMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5B994B516CF7F9B849B5B1 /* AudioMessageView.swift */; };
 		3D3417B42E2730EC006A988B /* GeoJSONOverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3417B32E2730EC006A988B /* GeoJSONOverlayManager.swift */; };
 		3D3417C82E29D38A006A988B /* GeoJSONOverlayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3417C72E29D38A006A988B /* GeoJSONOverlayConfig.swift */; };
 		3D3417D22E2DC260006A988B /* MapDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3417D12E2DC260006A988B /* MapDataManager.swift */; };
 		3D3417D42E2DC293006A988B /* MapDataFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3417D32E2DC293006A988B /* MapDataFiles.swift */; };
+		3F9ADC53332ABCB79132170A /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F707A31CB7D7BF9D9023DE /* AudioManager.swift */; };
 		43C0CB306098FD005C2D489F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA63632A10C2DD076FA222BE /* IntentHandler.swift */; };
+		480AA94CBAEF3724415284DD /* Codec2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25FCB935A82B520B8BABB0 /* Codec2.swift */; };
 		48E682ECE71246C3BFBD6B8F /* ChannelEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E6EDE744E3446FA1084499 /* ChannelEntity.swift */; };
+		50D5C924DAA4B093B7A7C063 /* codebookjmv.c in Sources */ = {isa = PBXBuildFile; fileRef = 4C97C9C2C9C4D79A2010EDBA /* codebookjmv.c */; };
+		58D9198355AA5DD9C782C492 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AF6BE728E10B08B3E1B9281 /* kiss_fft.c */; };
 		5D3AFC6F08ED4C909C830C55 /* TelemetryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31483AF5F5354D3481698E32 /* TelemetryEntity.swift */; };
+		5F5ADB76A52D3C63268D3D0C /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2793179BEE852D18F05648A3 /* lpc.c */; };
+		6161CE1A0FE66B9AF8F67E39 /* codebookge.c in Sources */ = {isa = PBXBuildFile; fileRef = 35001FFA98A6936E0651BF39 /* codebookge.c */; };
 		6467579F9E9E4B0EAA009615 /* MeshtasticSchemaV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E0BD1A81CF4F6A90D56CE3 /* MeshtasticSchemaV1.swift */; };
 		655AF7816E76D5F310DF87A6 /* FountainCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F203877F307073096C89179 /* FountainCodec.swift */; };
+		68FBB392B3394C94EBEA1257 /* codec2_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBEEAD67A4100CD0A2C02A /* codec2_fft.c */; };
+		6930B681D6ECBB34C92B2587 /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA3C63C33D5CBB8518B631 /* codebook.c */; };
 		6AC10554C1BCC1DF509C85EE /* NodeListHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A96594950B87789C0BB96DB /* NodeListHelp.swift */; };
 		6C95257E7B3E55D4FED5694C /* MapWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B990EE65E4D5CABBA4DD8DC2 /* MapWindow.swift */; };
 		6D825E622C34786C008DBEE4 /* CommonRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D825E612C34786C008DBEE4 /* CommonRegex.swift */; };
@@ -134,6 +149,7 @@
 		70A5B362F7EC4F14A99A8C39 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918722D2C1474B2D99ED01DC /* UserEntity.swift */; };
 		74BEA4429B3945AEBA11E977 /* MeshtasticMigrationPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAEAD87807B4F34820A60C2 /* MeshtasticMigrationPlan.swift */; };
 		7717E5954788B23527BACF65 /* IntentMessageConverters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D80697D5BB72C4566988E0 /* IntentMessageConverters.swift */; };
+		787A41BA811B7D3E2CD3224C /* pack.c in Sources */ = {isa = PBXBuildFile; fileRef = 22D05FB569B2493B0970F3CD /* pack.c */; };
 		7B1684B5E1AF4137829C03B8 /* TraceRouteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D66A4063FE4E868CD30D3C /* TraceRouteModels.swift */; };
 		7CCBCA0251DAB58FD9D63D06 /* GenericCoTHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1B62B5CB54395476C3A924 /* GenericCoTHandler.swift */; };
 		82F6BD3326F1BFEAF0F16723 /* DiscoveryPresetResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF19C19E9E7EE08A3462338E /* DiscoveryPresetResultEntity.swift */; };
@@ -143,6 +159,7 @@
 		86CCA3EEDD7E1036893B2663 /* DiscoverySessionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C39534FE860C7FCF5B9A2 /* DiscoverySessionEntity.swift */; };
 		898C6C4E60B640B3A285AF25 /* ConfigModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B88B4AE298C43D1B8F4516C /* ConfigModels.swift */; };
 		8A8F2D8A3769D24BAB88B4A1 /* CoTMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA216CF50721EE1AE7D7251 /* CoTMessage.swift */; };
+		8D18CE1FC298424F38142439 /* codebookd.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A5AED2FE1D23AC64C86B0FC /* codebookd.c */; };
 		8D3F8A3F2D44BB02009EAAA4 /* PowerMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F8A3E2D44BB02009EAAA4 /* PowerMetrics.swift */; };
 		8D3F8A412D44C2A6009EAAA4 /* PowerMetricsLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F8A402D44C2A6009EAAA4 /* PowerMetricsLog.swift */; };
 		8E587743574CE17703E892C6 /* Certificates in Resources */ = {isa = PBXBuildFile; fileRef = 518D504DED9874EBF9D76578 /* Certificates */; };
@@ -151,7 +168,11 @@
 		9604373EEB96801AA89DF48C /* EXICodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0A8ABAEF1E587683970927 /* EXICodec.swift */; };
 		9BC51D7EF97090D149658843 /* SetMessageAttributeIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA6A18109101FA06A9FBBFB /* SetMessageAttributeIntentHandler.swift */; };
 		9C744FC4C34549008EADCA4E /* NodeInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7101240749F24E96835A040A /* NodeInfoEntity.swift */; };
+		9F351D341B6AA3FEDBF090E2 /* nlp.c in Sources */ = {isa = PBXBuildFile; fileRef = 56F20706A282AF9915C834E1 /* nlp.c */; };
+		A2A21186001E28C84DF9E55F /* newamp1.c in Sources */ = {isa = PBXBuildFile; fileRef = AE191EF045B705790D1B7178 /* newamp1.c */; };
 		A5339E2F74E83F8FC41EEE33 /* TAKServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0618E6D0DF90B74EE32E6C06 /* TAKServerConfig.swift */; };
+		A55F0F93529BD5CA2CD5109A /* quantise.c in Sources */ = {isa = PBXBuildFile; fileRef = DA54EA436FDD6FF7F522D309 /* quantise.c */; };
+		A5B9A711052585405DBBBFE5 /* codebooknewamp1_energy.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DE55D4C0D8215FAEE1740C2 /* codebooknewamp1_energy.c */; };
 		AA000001303050030000B001 /* Color+Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002303050030000B001 /* Color+Brand.swift */; };
 		AA0001012E2730EC00600001 /* ConnectViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00010022E2730EC0060000 /* ConnectViewTests.swift */; };
 		AA0001032F07A4B000600001 /* TAKModuleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001042F07A4B000600001 /* TAKModuleConfig.swift */; };
@@ -159,17 +180,6 @@
 		AA000201CPLAY000000000004 /* CarPlayIntentDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000201CPLAY000000000003 /* CarPlayIntentDonation.swift */; };
 		AA000301CPTST000000000002 /* CarPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000301CPTST000000000001 /* CarPlayTests.swift */; };
 		AA000401SIRI000000000002 /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA000401SIRI000000000001 /* AppIntentVocabulary.plist */; };
-		AA0005WTCH00000000BF0001 /* MeshtasticWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0001 /* MeshtasticWatchApp.swift */; };
-		AA0005WTCH00000000BF0002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0002 /* ContentView.swift */; };
-		AA0005WTCH00000000BF0003 /* MeshNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0003 /* MeshNode.swift */; };
-		AA0005WTCH00000000BF0004 /* PhoneConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0004 /* PhoneConnectivityManager.swift */; };
-		AA0005WTCH00000000BF0005 /* WatchLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0005 /* WatchLocationManager.swift */; };
-		AA0005WTCH00000000BF0006 /* FoxhuntCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0006 /* FoxhuntCompassView.swift */; };
-		AA0005WTCH00000000BF0007 /* NearbyNodesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0007 /* NearbyNodesListView.swift */; };
-		AA0005WTCH00000000BF0008 /* DeviceConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0008 /* DeviceConnectionView.swift */; };
-		AA0005WTCH00000000BF0009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0009 /* Assets.xcassets */; };
-		AA0005WTCH00000000BF0011 /* Meshtastic Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0012 /* Meshtastic Watch App.app */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		AA0005WTCH00000000BF0013 /* WatchCircleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0005WTCH00000000FR0013 /* WatchCircleText.swift */; };
 		AA003DOC0000002000000001 /* DocModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA003DOC0000001000000001 /* DocModels.swift */; };
 		AA003DOC0000002000000002 /* DocBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA003DOC0000001000000002 /* DocBrowserView.swift */; };
 		AA003DOC0000002000000003 /* DocPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA003DOC0000001000000003 /* DocPageView.swift */; };
@@ -206,6 +216,7 @@
 		B3E905B12B71F7F300654D07 /* TextMessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E905B02B71F7F300654D07 /* TextMessageField.swift */; };
 		B734732C0C394582BD6CD0CA /* urls.json in Resources */ = {isa = PBXBuildFile; fileRef = AF44FDF549704E29A8E5FE2F /* urls.json */; };
 		B96123C9177242AFA768AA8F /* DeviceMetadataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509A1C42A695463093654617 /* DeviceMetadataEntity.swift */; };
+		BA450FD40BC048AB49695774 /* postfilter.c in Sources */ = {isa = PBXBuildFile; fileRef = DB80C6F342D9BFCFADF95629 /* postfilter.c */; };
 		BC10380F2DD4334400B00BFA /* AddContactIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC10380E2DD4333C00B00BFA /* AddContactIntent.swift */; };
 		BC6B45FF2CB2F98900723CEB /* SaveChannelSettingsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6B45FE2CB2F98900723CEB /* SaveChannelSettingsIntent.swift */; };
 		BC996F276BA82B1229C119D8 /* DiscoveryHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB21EF91CA0B50FDC20B85 /* DiscoveryHistoryView.swift */; };
@@ -484,12 +495,15 @@
 		DEA1C1302F10002000A1B2C3 /* AudioConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1C1312F10002000A1B2C3 /* AudioConfig.swift */; };
 		DEA1C1322F10002000A1B2C3 /* NeighborInfoConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1C1332F10002000A1B2C3 /* NeighborInfoConfig.swift */; };
 		DEA1C1342F10002000A1B2C3 /* TrafficManagementConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1C1352F10002000A1B2C3 /* TrafficManagementConfig.swift */; };
-		DEA1C1362F10002000A1B2C3 /* BackupManagement/BackupManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1C1372F10002000A1B2C3 /* BackupManagement/BackupManagement.swift */; };
-		DEA1C1382F10002000A1B2C3 /* BackupManagement/BackupRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1C1392F10002000A1B2C3 /* BackupManagement/BackupRowView.swift */; };
+		DEA1C1362F10002000A1B2C3 /* BackupManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1C1372F10002000A1B2C3 /* BackupManagement.swift */; };
+		DEA1C1382F10002000A1B2C3 /* BackupRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1C1392F10002000A1B2C3 /* BackupRowView.swift */; };
 		E340A7CA75194A49AB8763C7 /* WaypointEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98797BFD67F449B9ACCEDA7 /* WaypointEntity.swift */; };
 		E3ED80145D0E873011982556 /* TAKServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B37CCEE8B44A4BA123ED118 /* TAKServerManager.swift */; };
+		E87CFFE745242491DF1444B1 /* lsp.c in Sources */ = {isa = PBXBuildFile; fileRef = C03D3717430B2B23D04C6925 /* lsp.c */; };
 		EBC37722779D4F2E9D537D74 /* DeviceLinksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281DB7C20B6F46B89F4AB29E /* DeviceLinksSection.swift */; };
 		EE7E2D900ACAC8053153354A /* DiscoveryScanEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99855DBF52EBBBE07CEBA9 /* DiscoveryScanEngine.swift */; };
+		EF88B6685704EC34DB7C9E14 /* codebooknewamp1.c in Sources */ = {isa = PBXBuildFile; fileRef = 1792FFBA6184949262B76280 /* codebooknewamp1.c */; };
+		F81B61B048273360BA11157A /* interp.c in Sources */ = {isa = PBXBuildFile; fileRef = 77AECB649CABCD37D5734E34 /* interp.c */; };
 		FCEFC176A62447319948ACEF /* DeviceLinkDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24506086F81240A9BFE18FA6 /* DeviceLinkDirectory.swift */; };
 		FE508F9AF5AD5DA20AA64DBF /* AccessoryManager+TAK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82232A3CF2DD284ED5B9B8ED /* AccessoryManager+TAK.swift */; };
 		FE57A71500000000000000A2 /* StatusMessageConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE57A71500000000000000A1 /* StatusMessageConfig.swift */; };
@@ -502,13 +516,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = DDC2E15326CE248E0042C5E4;
 			remoteInfo = Meshtastic;
-		};
-		AA0005WTCH00000000CX0001 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DDC2E14C26CE248E0042C5E4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AA0005WTCH00000000NT0001;
-			remoteInfo = "Meshtastic Watch App";
 		};
 		DDDE5A0129AF163E00490C6C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -535,7 +542,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				AA0005WTCH00000000BF0011 /* Meshtastic Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,13 +564,18 @@
 		05DCA1AE2F646B3B00D0724C /* NodeFilterParametersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeFilterParametersTests.swift; sourceTree = "<group>"; };
 		05E0BD1A81CF4F6A90D56CE3 /* MeshtasticSchemaV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshtasticSchemaV1.swift; sourceTree = "<group>"; };
 		0618E6D0DF90B74EE32E6C06 /* TAKServerConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKServerConfig.swift; sourceTree = "<group>"; };
+		06F707A31CB7D7BF9D9023DE /* AudioManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AudioManager.swift; path = Meshtastic/Audio/AudioManager.swift; sourceTree = "<group>"; };
 		09936BEBD6D82479B2360FDC /* TAKCertificateManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKCertificateManager.swift; sourceTree = "<group>"; };
+		0DE55D4C0D8215FAEE1740C2 /* codebooknewamp1_energy.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codebooknewamp1_energy.c; path = "Meshtastic/Audio/codec2-ios/codebooknewamp1_energy.c"; sourceTree = "<group>"; };
 		0E644AE784C52500A9241481 /* SearchForMessagesIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForMessagesIntentHandler.swift; sourceTree = "<group>"; };
 		10794B242F8C2C90000CA23F /* RouteDataPackageGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDataPackageGenerator.swift; sourceTree = "<group>"; };
 		108FFECA2DD3F43C00BFAA81 /* ShareContactQRDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContactQRDialog.swift; sourceTree = "<group>"; };
 		108FFECC2DD4005600BFAA81 /* NodeInfoEntityToNodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeInfoEntityToNodeInfo.swift; sourceTree = "<group>"; };
+		1792FFBA6184949262B76280 /* codebooknewamp1.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codebooknewamp1.c; path = "Meshtastic/Audio/codec2-ios/codebooknewamp1.c"; sourceTree = "<group>"; };
+		1AF6BE728E10B08B3E1B9281 /* kiss_fft.c */ = {isa = PBXFileReference; includeInIndex = 1; name = kiss_fft.c; path = "Meshtastic/Audio/codec2-ios/kiss_fft.c"; sourceTree = "<group>"; };
 		1CAEAD87807B4F34820A60C2 /* MeshtasticMigrationPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshtasticMigrationPlan.swift; sourceTree = "<group>"; };
 		1D5AD8037A0D583C614B0597 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		22D05FB569B2493B0970F3CD /* pack.c */ = {isa = PBXFileReference; includeInIndex = 1; name = pack.c; path = "Meshtastic/Audio/codec2-ios/pack.c"; sourceTree = "<group>"; };
 		230A983F2EF86A44004D87F1 /* AsyncCentral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCentral.swift; sourceTree = "<group>"; };
 		230A98412EF86AA9004D87F1 /* ESP32BLEOTAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESP32BLEOTAViewModel.swift; sourceTree = "<group>"; };
 		230BC3962E31071E0046BF2A /* AccessoryManager+Discovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccessoryManager+Discovery.swift"; sourceTree = "<group>"; };
@@ -651,10 +662,14 @@
 		25F5D5C12C3F6E4B008036E3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		25F5D5C72C4375A8008036E3 /* MeshtasticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeshtasticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25F5D5D02C4375DF008036E3 /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
+		2793179BEE852D18F05648A3 /* lpc.c */ = {isa = PBXFileReference; includeInIndex = 1; name = lpc.c; path = "Meshtastic/Audio/codec2-ios/lpc.c"; sourceTree = "<group>"; };
 		281DB7C20B6F46B89F4AB29E /* DeviceLinksSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLinksSection.swift; sourceTree = "<group>"; };
 		2B37CCEE8B44A4BA123ED118 /* TAKServerManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKServerManager.swift; sourceTree = "<group>"; };
+		2CEA3C63C33D5CBB8518B631 /* codebook.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codebook.c; path = "Meshtastic/Audio/codec2-ios/codebook.c"; sourceTree = "<group>"; };
 		31483AF5F5354D3481698E32 /* TelemetryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEntity.swift; sourceTree = "<group>"; };
+		35001FFA98A6936E0651BF39 /* codebookge.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codebookge.c; path = "Meshtastic/Audio/codec2-ios/codebookge.c"; sourceTree = "<group>"; };
 		38DF7D72AA0A450399DBC592 /* MeshtasticSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshtasticSchema.swift; sourceTree = "<group>"; };
+		3960EC9BE7DEEC47AFBA99C0 /* mbest.c */ = {isa = PBXFileReference; includeInIndex = 1; name = mbest.c; path = "Meshtastic/Audio/codec2-ios/mbest.c"; sourceTree = "<group>"; };
 		39D80697D5BB72C4566988E0 /* IntentMessageConverters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentMessageConverters.swift; sourceTree = "<group>"; };
 		3D0A8ABAEF1E587683970927 /* EXICodec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EXICodec.swift; sourceTree = "<group>"; };
 		3D3417B32E2730EC006A988B /* GeoJSONOverlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONOverlayManager.swift; sourceTree = "<group>"; };
@@ -665,20 +680,28 @@
 		41EB21EF91CA0B50FDC20B85 /* DiscoveryHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryHistoryView.swift; sourceTree = "<group>"; };
 		45E6EDE744E3446FA1084499 /* ChannelEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelEntity.swift; sourceTree = "<group>"; };
 		4AA216CF50721EE1AE7D7251 /* CoTMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CoTMessage.swift; sourceTree = "<group>"; };
+		4ABBEEAD67A4100CD0A2C02A /* codec2_fft.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codec2_fft.c; path = "Meshtastic/Audio/codec2-ios/codec2_fft.c"; sourceTree = "<group>"; };
 		4B88B4AE298C43D1B8F4516C /* ConfigModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigModels.swift; sourceTree = "<group>"; };
 		4B9C39534FE860C7FCF5B9A2 /* DiscoverySessionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverySessionEntity.swift; sourceTree = "<group>"; };
+		4C97C9C2C9C4D79A2010EDBA /* codebookjmv.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codebookjmv.c; path = "Meshtastic/Audio/codec2-ios/codebookjmv.c"; sourceTree = "<group>"; };
 		4D942B763789DEA044C5EBD6 /* DiscoveryMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryMapView.swift; sourceTree = "<group>"; };
 		4E06A9BCC789BD452DFA9CFB /* RadarSweepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarSweepView.swift; sourceTree = "<group>"; };
 		509A1C42A695463093654617 /* DeviceMetadataEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMetadataEntity.swift; sourceTree = "<group>"; };
 		518D504DED9874EBF9D76578 /* Certificates */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = Certificates; sourceTree = "<group>"; };
+		56F20706A282AF9915C834E1 /* nlp.c */ = {isa = PBXFileReference; includeInIndex = 1; name = nlp.c; path = "Meshtastic/Audio/codec2-ios/nlp.c"; sourceTree = "<group>"; };
+		5AD0973D1DEA4E5D28871556 /* dump.c */ = {isa = PBXFileReference; includeInIndex = 1; name = dump.c; path = "Meshtastic/Audio/codec2-ios/dump.c"; sourceTree = "<group>"; };
 		5FCB3877F157D9011FA5C6CF /* SendMessageIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageIntentHandler.swift; sourceTree = "<group>"; };
 		64C6057F9508D4356DAF411F /* DiscoveryModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryModelTests.swift; sourceTree = "<group>"; };
+		6A5AED2FE1D23AC64C86B0FC /* codebookd.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codebookd.c; path = "Meshtastic/Audio/codec2-ios/codebookd.c"; sourceTree = "<group>"; };
 		6D825E612C34786C008DBEE4 /* CommonRegex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonRegex.swift; sourceTree = "<group>"; };
 		6DA39D8D2A92DC52007E311C /* MeshtasticAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshtasticAppDelegate.swift; sourceTree = "<group>"; };
 		6DEDA5592A957B8E00321D2E /* DetectionSensorLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionSensorLog.swift; sourceTree = "<group>"; };
 		6DEDA55B2A9592F900321D2E /* MessageEntityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEntityExtension.swift; sourceTree = "<group>"; };
+		6E25FCB935A82B520B8BABB0 /* Codec2.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Codec2.swift; path = "Meshtastic/Audio/codec2-ios/Codec2.swift"; sourceTree = "<group>"; };
 		7101240749F24E96835A040A /* NodeInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeInfoEntity.swift; sourceTree = "<group>"; };
+		7139AE5B3ABBA1F61F720AF2 /* codec2.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codec2.c; path = "Meshtastic/Audio/codec2-ios/codec2.c"; sourceTree = "<group>"; };
 		748E4806582595DE80D455CD /* CoTXMLParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CoTXMLParser.swift; sourceTree = "<group>"; };
+		77AECB649CABCD37D5734E34 /* interp.c */ = {isa = PBXFileReference; includeInIndex = 1; name = interp.c; path = "Meshtastic/Audio/codec2-ios/interp.c"; sourceTree = "<group>"; };
 		7F1B62B5CB54395476C3A924 /* GenericCoTHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GenericCoTHandler.swift; sourceTree = "<group>"; };
 		82232A3CF2DD284ED5B9B8ED /* AccessoryManager+TAK.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "AccessoryManager+TAK.swift"; sourceTree = "<group>"; };
 		84CCF00CDD3D48C9B9DCA554 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
@@ -689,6 +712,7 @@
 		8D3F8A402D44C2A6009EAAA4 /* PowerMetricsLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMetricsLog.swift; sourceTree = "<group>"; };
 		9155703C39B55FC9DDF3E4C1 /* TAKDataPackageGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKDataPackageGenerator.swift; sourceTree = "<group>"; };
 		918722D2C1474B2D99ED01DC /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		9D5B994B516CF7F9B849B5B1 /* AudioMessageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AudioMessageView.swift; path = Meshtastic/Views/Messages/AudioMessageView.swift; sourceTree = "<group>"; };
 		A97241903A924144A3EEB679 /* PositionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionEntity.swift; sourceTree = "<group>"; };
 		AA000002303050030000B001 /* Color+Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Brand.swift"; sourceTree = "<group>"; };
 		AA00010022E2730EC0060000 /* ConnectViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewTests.swift; sourceTree = "<group>"; };
@@ -724,7 +748,6 @@
 		AA0005WTCH00000000FR0008 /* DeviceConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceConnectionView.swift; sourceTree = "<group>"; };
 		AA0005WTCH00000000FR0009 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA0005WTCH00000000FR0010 /* Meshtastic Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Meshtastic Watch App.entitlements"; sourceTree = "<group>"; };
-		AA0005WTCH00000000FR0012 /* Meshtastic Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meshtastic Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0005WTCH00000000FR0013 /* WatchCircleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCircleText.swift; sourceTree = "<group>"; };
 		AA003DOC0000001000000001 /* DocModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocModels.swift; sourceTree = "<group>"; };
 		AA003DOC0000001000000002 /* DocBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocBrowserView.swift; sourceTree = "<group>"; };
@@ -756,6 +779,7 @@
 		AB6E72752E3FC85A00639328 /* LayoutEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutEnums.swift; sourceTree = "<group>"; };
 		ABA8E63F2E2F2A2300E27791 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
 		ABB99DEA2E2EA1C500CFBD05 /* AppIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconPicker.swift; sourceTree = "<group>"; };
+		AE191EF045B705790D1B7178 /* newamp1.c */ = {isa = PBXFileReference; includeInIndex = 1; name = newamp1.c; path = "Meshtastic/Audio/codec2-ios/newamp1.c"; sourceTree = "<group>"; };
 		AF19C19E9E7EE08A3462338E /* DiscoveryPresetResultEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryPresetResultEntity.swift; sourceTree = "<group>"; };
 		AF44FDF549704E29A8E5FE2F /* urls.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = urls.json; sourceTree = "<group>"; };
 		B399E8A32B6F486400E4488E /* RetryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryButton.swift; sourceTree = "<group>"; };
@@ -780,6 +804,8 @@
 		BCE2D3C82C7C377F008E6199 /* FactoryResetNodeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetNodeIntent.swift; sourceTree = "<group>"; };
 		BEC437CA60D4A60C870E63CA /* DiscoveredNodeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredNodeEntity.swift; sourceTree = "<group>"; };
 		BF32D1D722C64814981AB215 /* DeviceLinkEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLinkEntity.swift; sourceTree = "<group>"; };
+		C03D3717430B2B23D04C6925 /* lsp.c */ = {isa = PBXFileReference; includeInIndex = 1; name = lsp.c; path = "Meshtastic/Audio/codec2-ios/lsp.c"; sourceTree = "<group>"; };
+		C5BEA4D9C4978EC689C21A89 /* phase.c */ = {isa = PBXFileReference; includeInIndex = 1; name = phase.c; path = "Meshtastic/Audio/codec2-ios/phase.c"; sourceTree = "<group>"; };
 		CA63632A10C2DD076FA222BE /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		CDA6A18109101FA06A9FBBFB /* SetMessageAttributeIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMessageAttributeIntentHandler.swift; sourceTree = "<group>"; };
 		D8D66A4063FE4E868CD30D3C /* TraceRouteModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceRouteModels.swift; sourceTree = "<group>"; };
@@ -794,10 +820,13 @@
 		D93069072B81DF040066FBC8 /* SaveConfigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveConfigButton.swift; sourceTree = "<group>"; };
 		D9306A002B81FF010066FBC8 /* RequestConfigOnAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfigOnAppear.swift; sourceTree = "<group>"; };
 		D9306A102B81FF020066FBC8 /* ConfigSaveHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigSaveHelper.swift; sourceTree = "<group>"; };
+		D95310ABEC684B3D2AF05280 /* sine.c */ = {isa = PBXFileReference; includeInIndex = 1; name = sine.c; path = "Meshtastic/Audio/codec2-ios/sine.c"; sourceTree = "<group>"; };
 		D9C9839C2B79CFD700BDBE6A /* TextMessageSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageSize.swift; sourceTree = "<group>"; };
 		D9C9839F2B79D0E800BDBE6A /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		D9C983A12B79D1A600BDBE6A /* RequestPositionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPositionButton.swift; sourceTree = "<group>"; };
+		DA54EA436FDD6FF7F522D309 /* quantise.c */ = {isa = PBXFileReference; includeInIndex = 1; name = quantise.c; path = "Meshtastic/Audio/codec2-ios/quantise.c"; sourceTree = "<group>"; };
 		DB55D64F064C45ADBD31ABF8 /* RouteModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteModels.swift; sourceTree = "<group>"; };
+		DB80C6F342D9BFCFADF95629 /* postfilter.c */ = {isa = PBXFileReference; includeInIndex = 1; name = postfilter.c; path = "Meshtastic/Audio/codec2-ios/postfilter.c"; sourceTree = "<group>"; };
 		DC5970BC1CAF4B66999C7248 /* MyInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoEntity.swift; sourceTree = "<group>"; };
 		DD000000275499A500A42001 /* PerformanceSeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceSeedData.swift; sourceTree = "<group>"; };
 		DD000001NODNAVTST00000000 /* NodeNavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeNavigationTests.swift; sourceTree = "<group>"; };
@@ -1096,10 +1125,11 @@
 		DEA1C1312F10002000A1B2C3 /* AudioConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioConfig.swift; sourceTree = "<group>"; };
 		DEA1C1332F10002000A1B2C3 /* NeighborInfoConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborInfoConfig.swift; sourceTree = "<group>"; };
 		DEA1C1352F10002000A1B2C3 /* TrafficManagementConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficManagementConfig.swift; sourceTree = "<group>"; };
-		DEA1C1372F10002000A1B2C3 /* BackupManagement/BackupManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManagement/BackupManagement.swift; sourceTree = "<group>"; };
-		DEA1C1392F10002000A1B2C3 /* BackupManagement/BackupRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManagement/BackupRowView.swift; sourceTree = "<group>"; };
+		DEA1C1372F10002000A1B2C3 /* BackupManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManagement/BackupManagement.swift; sourceTree = "<group>"; };
+		DEA1C1392F10002000A1B2C3 /* BackupRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManagement/BackupRowView.swift; sourceTree = "<group>"; };
 		E98797BFD67F449B9ACCEDA7 /* WaypointEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaypointEntity.swift; sourceTree = "<group>"; };
 		F1B6FB13C4D4E03503BB1DF8 /* DiscoverySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverySummaryView.swift; sourceTree = "<group>"; };
+		F3196A22E5E3A4AB175B1E3F /* kiss_fftr.c */ = {isa = PBXFileReference; includeInIndex = 1; name = kiss_fftr.c; path = "Meshtastic/Audio/codec2-ios/kiss_fftr.c"; sourceTree = "<group>"; };
 		F3204EF969484E549C139730 /* MessageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEntity.swift; sourceTree = "<group>"; };
 		F5CA8BAC814CF82E127EEABF /* DiscoveryScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryScanView.swift; sourceTree = "<group>"; };
 		FC99855DBF52EBBBE07CEBA9 /* DiscoveryScanEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryScanEngine.swift; sourceTree = "<group>"; };
@@ -1107,7 +1137,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		236CA24C2EE3071A00A47F96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		236CA24C2EE3071A00A47F96 /* Exceptions for "images" folder in "Meshtastic" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				crowpanel_2_8.svg,
@@ -1175,8 +1205,29 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		236CA20D2EE3036A00A47F96 /* images */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (236CA24C2EE3071A00A47F96 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = images; sourceTree = "<group>"; };
-		DD4C11E02E8099C3003F2F2E /* PreferenceKeys */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PreferenceKeys; sourceTree = "<group>"; };
+		236CA20D2EE3036A00A47F96 /* images */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				236CA24C2EE3071A00A47F96 /* Exceptions for "images" folder in "Meshtastic" target */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		DD4C11E02E8099C3003F2F2E /* PreferenceKeys */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = PreferenceKeys;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1185,13 +1236,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD00003C000SNAP00000001 /* SnapshotTesting in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA0005WTCH00000000FP0001 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1226,6 +1270,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CDFAE9D41C11533B5270858 /* AudioVoice */ = {
+			isa = PBXGroup;
+			children = (
+				7139AE5B3ABBA1F61F720AF2 /* codec2.c */,
+				5AD0973D1DEA4E5D28871556 /* dump.c */,
+				2793179BEE852D18F05648A3 /* lpc.c */,
+				56F20706A282AF9915C834E1 /* nlp.c */,
+				DB80C6F342D9BFCFADF95629 /* postfilter.c */,
+				D95310ABEC684B3D2AF05280 /* sine.c */,
+				4ABBEEAD67A4100CD0A2C02A /* codec2_fft.c */,
+				77AECB649CABCD37D5734E34 /* interp.c */,
+				C03D3717430B2B23D04C6925 /* lsp.c */,
+				3960EC9BE7DEEC47AFBA99C0 /* mbest.c */,
+				AE191EF045B705790D1B7178 /* newamp1.c */,
+				C5BEA4D9C4978EC689C21A89 /* phase.c */,
+				DA54EA436FDD6FF7F522D309 /* quantise.c */,
+				22D05FB569B2493B0970F3CD /* pack.c */,
+				1AF6BE728E10B08B3E1B9281 /* kiss_fft.c */,
+				F3196A22E5E3A4AB175B1E3F /* kiss_fftr.c */,
+				2CEA3C63C33D5CBB8518B631 /* codebook.c */,
+				6A5AED2FE1D23AC64C86B0FC /* codebookd.c */,
+				4C97C9C2C9C4D79A2010EDBA /* codebookjmv.c */,
+				35001FFA98A6936E0651BF39 /* codebookge.c */,
+				1792FFBA6184949262B76280 /* codebooknewamp1.c */,
+				0DE55D4C0D8215FAEE1740C2 /* codebooknewamp1_energy.c */,
+				06F707A31CB7D7BF9D9023DE /* AudioManager.swift */,
+				6E25FCB935A82B520B8BABB0 /* Codec2.swift */,
+				9D5B994B516CF7F9B849B5B1 /* AudioMessageView.swift */,
+			);
+			name = AudioVoice;
+			sourceTree = "<group>";
+		};
 		23148E2E2EE1CCB100F0DB2C /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -1811,8 +1887,8 @@
 				0618E6D0DF90B74EE32E6C06 /* TAKServerConfig.swift */,
 				1D5AD8037A0D583C614B0597 /* Tools.swift */,
 				71084780865585DCE48BD08F /* Discovery */,
-				DEA1C1372F10002000A1B2C3 /* BackupManagement/BackupManagement.swift */,
-				DEA1C1392F10002000A1B2C3 /* BackupManagement/BackupRowView.swift */,
+				DEA1C1372F10002000A1B2C3 /* BackupManagement.swift */,
+				DEA1C1392F10002000A1B2C3 /* BackupRowView.swift */,
 				AA003DOC0000003000000001 /* HelpAndDocumentation */,
 			);
 			path = Settings;
@@ -2015,6 +2091,7 @@
 				DDC2E15526CE248E0042C5E4 /* Products */,
 				DD8EDE9226F97A2B00A5A10B /* Frameworks */,
 				DD86C7C62FE385D2000BC38E /* Recovered References */,
+				0CDFAE9D41C11533B5270858 /* AudioVoice */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 1;
@@ -2025,7 +2102,6 @@
 				DDC2E15426CE248E0042C5E4 /* Meshtastic.app */,
 				DDDE59F429AF163D00490C6C /* WidgetsExtension.appex */,
 				25F5D5C72C4375A8008036E3 /* MeshtasticTests.xctest */,
-				AA0005WTCH00000000FR0012 /* Meshtastic Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2353,23 +2429,6 @@
 			productReference = 25F5D5C72C4375A8008036E3 /* MeshtasticTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AA0005WTCH00000000NT0001 /* Meshtastic Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AA0005WTCH00000000CL0001 /* Build configuration list for PBXNativeTarget "Meshtastic Watch App" */;
-			buildPhases = (
-				AA0005WTCH00000000SP0001 /* Sources */,
-				AA0005WTCH00000000FP0001 /* Frameworks */,
-				AA0005WTCH00000000RP0001 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Meshtastic Watch App";
-			productName = "Meshtastic Watch App";
-			productReference = AA0005WTCH00000000FR0012 /* Meshtastic Watch App.app */;
-			productType = "com.apple.product-type.application";
-		};
 		DDC2E15326CE248E0042C5E4 /* Meshtastic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DDC2E17E26CE248F0042C5E4 /* Build configuration list for PBXNativeTarget "Meshtastic" */;
@@ -2387,7 +2446,6 @@
 			);
 			dependencies = (
 				DDDE5A0229AF163E00490C6C /* PBXTargetDependency */,
-				AA0005WTCH00000000TD0001 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				236CA20D2EE3036A00A47F96 /* images */,
@@ -2497,7 +2555,6 @@
 				DDC2E15326CE248E0042C5E4 /* Meshtastic */,
 				DDDE59F329AF163D00490C6C /* WidgetsExtension */,
 				25F5D5C62C4375A8008036E3 /* MeshtasticTests */,
-				AA0005WTCH00000000NT0001 /* Meshtastic Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -2507,14 +2564,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA0005WTCH00000000RP0001 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA0005WTCH00000000BF0009 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2657,22 +2706,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AA0005WTCH00000000SP0001 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA0005WTCH00000000BF0001 /* MeshtasticWatchApp.swift in Sources */,
-				AA0005WTCH00000000BF0002 /* ContentView.swift in Sources */,
-				AA0005WTCH00000000BF0003 /* MeshNode.swift in Sources */,
-				AA0005WTCH00000000BF0004 /* PhoneConnectivityManager.swift in Sources */,
-				AA0005WTCH00000000BF0005 /* WatchLocationManager.swift in Sources */,
-				AA0005WTCH00000000BF0006 /* FoxhuntCompassView.swift in Sources */,
-				AA0005WTCH00000000BF0007 /* NearbyNodesListView.swift in Sources */,
-				AA0005WTCH00000000BF0008 /* DeviceConnectionView.swift in Sources */,
-				AA0005WTCH00000000BF0013 /* WatchCircleText.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		DDC2E15026CE248E0042C5E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2784,8 +2817,8 @@
 				DD769E0328D18BF1001A3F05 /* DeviceMetricsLog.swift in Sources */,
 				108FFECD2DD4005600BFAA81 /* NodeInfoEntityToNodeInfo.swift in Sources */,
 				DEA1C1302F10002000A1B2C3 /* AudioConfig.swift in Sources */,
-				DEA1C1362F10002000A1B2C3 /* BackupManagement/BackupManagement.swift in Sources */,
-				DEA1C1382F10002000A1B2C3 /* BackupManagement/BackupRowView.swift in Sources */,
+				DEA1C1362F10002000A1B2C3 /* BackupManagement.swift in Sources */,
+				DEA1C1382F10002000A1B2C3 /* BackupRowView.swift in Sources */,
 				DD15E4F32B8BA56E00654F61 /* PaxCounterConfig.swift in Sources */,
 				DDDB445229F8ACF900EE2349 /* Date.swift in Sources */,
 				2373AE132D0A216C0086C749 /* MetricsChartSeries.swift in Sources */,
@@ -3057,6 +3090,31 @@
 				DD6F657D2C6EC2910053C113 /* HelpItem.swift in Sources */,
 				DD000031FWEDTENUM0000001 /* FirmwareEditionEnum.swift in Sources */,
 				DDC1B81B2AB5377B00C71E39 /* PersistentTipStyle.swift in Sources */,
+				143F51C184B0C233FE9B5BB4 /* codec2.c in Sources */,
+				0C578A3A4426A60F8EA5337D /* dump.c in Sources */,
+				5F5ADB76A52D3C63268D3D0C /* lpc.c in Sources */,
+				9F351D341B6AA3FEDBF090E2 /* nlp.c in Sources */,
+				BA450FD40BC048AB49695774 /* postfilter.c in Sources */,
+				189F0D712B1441C2A6CCE490 /* sine.c in Sources */,
+				68FBB392B3394C94EBEA1257 /* codec2_fft.c in Sources */,
+				F81B61B048273360BA11157A /* interp.c in Sources */,
+				E87CFFE745242491DF1444B1 /* lsp.c in Sources */,
+				28727A3963F72CE18C8B9C82 /* mbest.c in Sources */,
+				A2A21186001E28C84DF9E55F /* newamp1.c in Sources */,
+				22E335CCFC9AFC38327B661A /* phase.c in Sources */,
+				A55F0F93529BD5CA2CD5109A /* quantise.c in Sources */,
+				787A41BA811B7D3E2CD3224C /* pack.c in Sources */,
+				58D9198355AA5DD9C782C492 /* kiss_fft.c in Sources */,
+				13A90A0B9D862A608065BC9B /* kiss_fftr.c in Sources */,
+				6930B681D6ECBB34C92B2587 /* codebook.c in Sources */,
+				8D18CE1FC298424F38142439 /* codebookd.c in Sources */,
+				50D5C924DAA4B093B7A7C063 /* codebookjmv.c in Sources */,
+				6161CE1A0FE66B9AF8F67E39 /* codebookge.c in Sources */,
+				EF88B6685704EC34DB7C9E14 /* codebooknewamp1.c in Sources */,
+				A5B9A711052585405DBBBFE5 /* codebooknewamp1_energy.c in Sources */,
+				3F9ADC53332ABCB79132170A /* AudioManager.swift in Sources */,
+				480AA94CBAEF3724415284DD /* Codec2.swift in Sources */,
+				3483028FA214DB1831E62303 /* AudioMessageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3079,12 +3137,6 @@
 			isa = PBXTargetDependency;
 			target = DDC2E15326CE248E0042C5E4 /* Meshtastic */;
 			targetProxy = 25F5D5CB2C4375A8008036E3 /* PBXContainerItemProxy */;
-		};
-		AA0005WTCH00000000TD0001 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = AA0005WTCH00000000NT0001 /* Meshtastic Watch App */;
-			targetProxy = AA0005WTCH00000000CX0001 /* PBXContainerItemProxy */;
 		};
 		DDDE5A0229AF163E00490C6C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3133,9 +3185,9 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.MeshtasticTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.voidware.meshtastic-voice.MeshtasticTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -3158,9 +3210,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.MeshtasticTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.voidware.meshtastic-voice.MeshtasticTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -3169,74 +3221,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Meshtastic.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Meshtastic";
-			};
-			name = Release;
-		};
-		AA0005WTCH00000000BC0001 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = "Meshtastic Watch App/Meshtastic Watch App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BL449T369M;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Meshtastic Watch App/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Meshtastic;
-				INFOPLIST_KEY_CFBundleIconName = AppIcon;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Meshtastic needs your location to calculate distance and bearing to mesh nodes during foxhunt.";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = eu.voidware.meshtastic-voice;
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.7.14;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "watchos watchsimulator";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Debug;
-		};
-		AA0005WTCH00000000BC0002 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = "Meshtastic Watch App/Meshtastic Watch App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BL449T369M;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Meshtastic Watch App/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Meshtastic;
-				INFOPLIST_KEY_CFBundleIconName = AppIcon;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Meshtastic needs your location to calculate distance and bearing to mesh nodes during foxhunt.";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = eu.voidware.meshtastic-voice;
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.7.14;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "watchos watchsimulator";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -3386,11 +3370,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Meshtastic/Preview Content\"";
+				DEVELOPMENT_TEAM = LC728N76ZT;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
 				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
 				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
 				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
@@ -3398,10 +3383,14 @@
 				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Meshtastic/Audio/codec2-ios",
+				);
 				INFOPLIST_FILE = Meshtastic/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Meshtastic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3412,11 +3401,12 @@
 					"-weak_framework",
 					SwiftUI,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice;
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.voidware.meshtastic-voice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Meshtastic/Meshtastic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3435,11 +3425,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Meshtastic/Preview Content\"";
+				DEVELOPMENT_TEAM = LC728N76ZT;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
 				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
 				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
 				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
@@ -3447,10 +3438,14 @@
 				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
 				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
 				ENABLE_RESOURCE_ACCESS_USB = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Meshtastic/Audio/codec2-ios",
+				);
 				INFOPLIST_FILE = Meshtastic/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Meshtastic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3461,11 +3456,12 @@
 					"-weak_framework",
 					SwiftUI,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice;
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.voidware.meshtastic-voice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Meshtastic/Meshtastic-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3481,11 +3477,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LC728N76ZT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3493,7 +3490,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 2.7.14;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.Widgets;
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.voidware.meshtastic-voice.Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -3516,11 +3513,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LC728N76ZT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3528,7 +3526,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 2.7.14;
-				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.Widgets;
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.voidware.meshtastic-voice.Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -3549,15 +3547,6 @@
 			buildConfigurations = (
 				25F5D5CD2C4375A8008036E3 /* Debug */,
 				25F5D5CE2C4375A8008036E3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AA0005WTCH00000000CL0001 /* Build configuration list for PBXNativeTarget "Meshtastic Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AA0005WTCH00000000BC0001 /* Debug */,
-				AA0005WTCH00000000BC0002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
