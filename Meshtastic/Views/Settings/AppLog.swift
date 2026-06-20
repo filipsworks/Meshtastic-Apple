@@ -227,7 +227,7 @@ extension AppLog {
 			/// Create an array of predicates to hold our AND predicates
 			var predicates: [NSPredicate] = []
 			/// Subsystem Predicate
-			let subsystemPredicate = NSPredicate(format: "subsystem IN %@", ["com.apple.SwiftUI", "com.apple.coredata", "gvh.MeshtasticClient"])
+			let subsystemPredicate = NSPredicate(format: "subsystem IN %@", ["com.apple.SwiftUI", "com.apple.coredata", Bundle.main.bundleIdentifier ?? ""])
 			predicates.append(subsystemPredicate)
 			/// Categories
 			if categories.count > 0 {

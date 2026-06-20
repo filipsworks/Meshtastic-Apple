@@ -474,10 +474,10 @@ extension AccessoryManager {
 					let endIndex = min(startIndex + chunkSize, audioData.count)
 					let chunkData = audioData[startIndex..<endIndex]
 					
-					// 8-byte Multi-part Header: [0xc0, 0xde, 0xc2] [0x03] [id_high, id_low] [chunkIndex] [totalChunks]
-					// 0x03 corresponds to CODEC2_1400
+					// 8-byte Multi-part Header: [0xc0, 0xde, 0xc2] [0x08] [id_high, id_low] [chunkIndex] [totalChunks]
+					// 0x08 corresponds to CODEC2_700C (ha-bridge compatible)
 					var payloadData = Data([
-						0xc0, 0xde, 0xc2, 0x03,
+						0xc0, 0xde, 0xc2, 0x08,
 						UInt8(audioMessageId >> 8), UInt8(audioMessageId & 0xff),
 						UInt8(chunkIndex), UInt8(totalChunks)
 					])

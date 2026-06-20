@@ -1220,7 +1220,7 @@ actor MeshPackets {
 								let chunkData = fullAudio[startIndex..<endIndex]
 								
 								var respData = Data([
-									0xc0, 0xde, 0xc2, 0x03, // 0x03 = CODEC2_1400
+									0xc0, 0xde, 0xc2, 0x08, // 0x08 = CODEC2_700C (ha-bridge compatible)
 									UInt8(reqAudioId >> 8), UInt8(reqAudioId & 0xff),
 									UInt8(chunkIndex), UInt8(totalChunks)
 								])

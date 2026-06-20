@@ -33,8 +33,8 @@ class AudioManager: NSObject, ObservableObject, AVAudioRecorderDelegate {
     override init() {
         super.init()
         setupAudioSession()
-        // Meshtastic using 1400bps (mode 3)
-        codec = Codec2(mode: .init(rawValue: 3) ?? ._1400)
+        // codec2 700C (mode 8) — matches ha-bridge so voice messages interoperate.
+        codec = Codec2(mode: ._700c)
     }
 
     private func setupAudioSession() {

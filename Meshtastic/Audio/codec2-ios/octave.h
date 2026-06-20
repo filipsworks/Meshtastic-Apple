@@ -9,14 +9,13 @@
 
 \*---------------------------------------------------------------------------*/
 
-
 /*
   Copyright (C) 2012 David Rowe
 
   All rights reserved.
 
   This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU Lesser General Public License version 2, as
+  it under the terms of the GNU Lesser General Public License version 2.1, as
   published by the Free Software Foundation.  This program is
   distributed in the hope that it will be useful, but WITHOUT ANY
   WARRANTY; without even the implied warranty of MERCHANTABILITY or
@@ -30,10 +29,14 @@
 #ifndef __OCTAVE__
 #define __OCTAVE__
 
+#include <stdio.h>
+
 #include "comp.h"
 
 void octave_save_int(FILE *f, char name[], int data[], int rows, int cols);
-void octave_save_float(FILE *f, char name[], float data[], int rows, int cols, int col_len);
-void octave_save_complex(FILE *f, char name[], COMP data[], int rows, int cols, int col_len);
+void octave_save_float(FILE *f, char name[], float data[], int rows, int cols,
+                       int col_len);
+void octave_save_complex(FILE *f, char name[], COMP data[], int rows, int cols,
+                         int col_len);
 
 #endif

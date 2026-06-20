@@ -90,6 +90,12 @@
 		282F3BE9011D878D8225F2EA /* fifo.c in Sources */ = {isa = PBXBuildFile; fileRef = 6EA56F92E99CC8E82BB481A2 /* fifo.c */; };
 		2849A5E4CE9FDC1DB33DFA34 /* TAKConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01028778B8BFD81F7A039593 /* TAKConnection.swift */; };
 		28A7106ADF632EA44C18A8FD /* codebookge.c in Sources */ = {isa = PBXBuildFile; fileRef = 046BC658D71247D20E5C1DDE /* codebookge.c */; };
+		EB00248BE372C82FCA2D4AE9 /* codebooknewamp1_energy.c in Sources */ = {isa = PBXBuildFile; fileRef = F62FF0A549F800238C1E1A0D /* codebooknewamp1_energy.c */; };
+		C13C9496D989C61022BEA276 /* codebooknewamp1.c in Sources */ = {isa = PBXBuildFile; fileRef = CA6DB7A55EF871410289E042 /* codebooknewamp1.c */; };
+		4CE2E52313CC635F30ADB627 /* codebookjmv.c in Sources */ = {isa = PBXBuildFile; fileRef = BEBE01ED0843EFEE0FBECBF2 /* codebookjmv.c */; };
+		A25D02CC80617A4518A5BAB2 /* newamp1.c in Sources */ = {isa = PBXBuildFile; fileRef = E036E522054AA7C9EA5948A2 /* newamp1.c */; };
+		1E110375D06A9A555E66A233 /* mbest.c in Sources */ = {isa = PBXBuildFile; fileRef = 37CA899EE9C5C21B1C6105E0 /* mbest.c */; };
+		AE55F0C45E6C56F817FF473D /* codec2_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = D27B30CD98DCAF9E1F436F50 /* codec2_fft.c */; };
 		292A724F2133D641BAFA828B /* codec2.c in Sources */ = {isa = PBXBuildFile; fileRef = F1DF2D95355B2DF098629B57 /* codec2.c */; };
 		2D57FD13038AA551E121E389 /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = FF91D8CC88299F4BC6B4E262 /* lpc.c */; };
 		300424F80C4A445A0FBAE82D /* TAKMeshtasticBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D006C85B250291D5925F30 /* TAKMeshtasticBridge.swift */; };
@@ -392,6 +398,12 @@
 /* Begin PBXFileReference section */
 		01028778B8BFD81F7A039593 /* TAKConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKConnection.swift; sourceTree = "<group>"; };
 		046BC658D71247D20E5C1DDE /* codebookge.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = codebookge.c; path = "../Audio/codec2-ios/codebookge.c"; sourceTree = "<group>"; };
+		F62FF0A549F800238C1E1A0D /* codebooknewamp1_energy.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = codebooknewamp1_energy.c; path = "../Audio/codec2-ios/codebooknewamp1_energy.c"; sourceTree = "<group>"; };
+		CA6DB7A55EF871410289E042 /* codebooknewamp1.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = codebooknewamp1.c; path = "../Audio/codec2-ios/codebooknewamp1.c"; sourceTree = "<group>"; };
+		BEBE01ED0843EFEE0FBECBF2 /* codebookjmv.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = codebookjmv.c; path = "../Audio/codec2-ios/codebookjmv.c"; sourceTree = "<group>"; };
+		E036E522054AA7C9EA5948A2 /* newamp1.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = newamp1.c; path = "../Audio/codec2-ios/newamp1.c"; sourceTree = "<group>"; };
+		37CA899EE9C5C21B1C6105E0 /* mbest.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mbest.c; path = "../Audio/codec2-ios/mbest.c"; sourceTree = "<group>"; };
+		D27B30CD98DCAF9E1F436F50 /* codec2_fft.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = codec2_fft.c; path = "../Audio/codec2-ios/codec2_fft.c"; sourceTree = "<group>"; };
 		050559ACD282012A112FA6E9 /* ht_coeff.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ht_coeff.h; path = "../Audio/codec2-ios/ht_coeff.h"; sourceTree = "<group>"; };
 		0618E6D0DF90B74EE32E6C06 /* TAKServerConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKServerConfig.swift; sourceTree = "<group>"; };
 		0756F6893A49116B0163137D /* fdmdv_put_test_bits.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = fdmdv_put_test_bits.c; path = "../Audio/codec2-ios/fdmdv_put_test_bits.c"; sourceTree = "<group>"; };
@@ -1156,6 +1168,12 @@
 				F1DF2D95355B2DF098629B57 /* codec2.c */,
 				69A0C91CD2C0045525681918 /* phaseexp.c */,
 				046BC658D71247D20E5C1DDE /* codebookge.c */,
+				F62FF0A549F800238C1E1A0D /* codebooknewamp1_energy.c */,
+				CA6DB7A55EF871410289E042 /* codebooknewamp1.c */,
+				BEBE01ED0843EFEE0FBECBF2 /* codebookjmv.c */,
+				E036E522054AA7C9EA5948A2 /* newamp1.c */,
+				37CA899EE9C5C21B1C6105E0 /* mbest.c */,
+				D27B30CD98DCAF9E1F436F50 /* codec2_fft.c */,
 				88FEE96D1CB1C3CB0446CC86 /* fsk.c */,
 				7144641D2A44A69B60AF89C1 /* codebook.c */,
 				5DEFEEA94DBB3BC3BE844A8E /* insert_errors.c */,
@@ -2304,6 +2322,12 @@
 				292A724F2133D641BAFA828B /* codec2.c in Sources */,
 				B8A09CFA1E7648B60C4B4A23 /* phaseexp.c in Sources */,
 				28A7106ADF632EA44C18A8FD /* codebookge.c in Sources */,
+				EB00248BE372C82FCA2D4AE9 /* codebooknewamp1_energy.c in Sources */,
+				C13C9496D989C61022BEA276 /* codebooknewamp1.c in Sources */,
+				4CE2E52313CC635F30ADB627 /* codebookjmv.c in Sources */,
+				A25D02CC80617A4518A5BAB2 /* newamp1.c in Sources */,
+				1E110375D06A9A555E66A233 /* mbest.c in Sources */,
+				AE55F0C45E6C56F817FF473D /* codec2_fft.c in Sources */,
 				1CCC3F7E7E1E93DC65090C30 /* fsk.c in Sources */,
 				8569B90A4FEBA5C3B2DADFC0 /* codebook.c in Sources */,
 				58C3174DF8189843E98FA1BE /* codebookvqanssi.c in Sources */,
@@ -2378,7 +2402,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gvh.MeshtasticClient.MeshtasticTests;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.MeshtasticTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -2400,7 +2424,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = gvh.MeshtasticClient.MeshtasticTests;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.MeshtasticTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -2447,7 +2471,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = GCH7VS5Y9R;
+				DEVELOPMENT_TEAM = BL449T369M;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2516,7 +2540,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = GCH7VS5Y9R;
+				DEVELOPMENT_TEAM = BL449T369M;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -2575,7 +2599,7 @@
 					"-weak_framework",
 					SwiftUI,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = gvh.MeshtasticClient;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2619,7 +2643,7 @@
 					"-weak_framework",
 					SwiftUI,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = gvh.MeshtasticClient;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2652,7 +2676,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 2.7.8;
-				PRODUCT_BUNDLE_IDENTIFIER = gvh.MeshtasticClient.Widgets;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.Widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -2685,7 +2709,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 2.7.8;
-				PRODUCT_BUNDLE_IDENTIFIER = gvh.MeshtasticClient.Widgets;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.Widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

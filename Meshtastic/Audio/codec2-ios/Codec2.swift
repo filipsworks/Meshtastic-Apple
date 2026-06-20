@@ -27,9 +27,11 @@ public class Codec2 {
    Codec 2 Bitrate settings (mode).
    */
   public enum Bitrate: Int32 {
-    /// 700 bps
+    /// 700C — 700 bps, codec2 mode 8 (used for voice messages; ha-bridge compatible)
+    case _700c = 8
+    /// 700 bps  (legacy mode 7; not built in the current codec2 vendoring)
     case _700  = 7
-    /// 700 bps (improved)
+    /// 700 bps (improved)  (legacy mode 6; not built in the current vendoring)
     case _700b = 6
     /// 1.2 kbps
     case _1200 = 5
