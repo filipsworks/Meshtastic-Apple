@@ -46,9 +46,12 @@ class MeshtasticAppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificat
 		#if targetEnvironment(simulator)
 		Logger.services.info("Skipping Siri authorization request in simulator benchmark harness")
 		#else
-		INPreferences.requestSiriAuthorization { status in
-			Logger.services.info("Siri authorization status: \(String(describing: status))")
-		}
+		// Siri requires the com.apple.developer.siri entitlement, which a personal
+		// (free) signing team cannot sign — calling INPreferences without it crashes.
+		// Disabled for personal-team builds; restore with a paid team + Siri capability.
+		// INPreferences.requestSiriAuthorization { status in
+		// 	Logger.services.info("Siri authorization status: \(String(describing: status))")
+		// }
 		#endif
 		#endif
 		return true
