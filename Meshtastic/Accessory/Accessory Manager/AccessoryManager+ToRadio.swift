@@ -407,8 +407,7 @@ extension AccessoryManager {
 			return
 		}
 
-		let messageUsers = UserEntity.fetchRequest()
-		messageUsers.predicate = NSPredicate(format: "num IN %@", [fromUserNum, Int64(toUserNum)])
+		let messageUsers = FetchDescriptor<UserEntity>(predicate: #Predicate { $0.num == fromUserNum || $0.num == toUserNum })
 
 		do {
 			let fetchedUsers = try context.fetch(messageUsers)
@@ -417,7 +416,8 @@ extension AccessoryManager {
 				throw AccessoryError.ioFailed("🚫 Message Users Not Found, Fail")
 			}
 			
-			let newMessage = MessageEntity(context: context)
+			let newMessage = MessageEntity()
+			context.insert(newMessage)
 			newMessage.messageId = Int64(UInt32.random(in: UInt32(UInt8.max)..<UInt32.max))
 			newMessage.messageTimestamp = Int32(Date().timeIntervalSince1970)
 			newMessage.receivedACK = false
@@ -468,8 +468,7 @@ extension AccessoryManager {
 			
 			// Use the connected node's LoRa config for delay calculation (our device's tx speed)
 			let connectedNodeNum = self.activeConnection?.device.num ?? 0
-			let connectedNodeRequest = NodeInfoEntity.fetchRequest()
-			connectedNodeRequest.predicate = NSPredicate(format: "num == %lld", connectedNodeNum)
+			let connectedNodeRequest = FetchDescriptor<NodeInfoEntity>(predicate: #Predicate { $0.num == connectedNodeNum })
 			let connectedNode = try? context.fetch(connectedNodeRequest).first
 			let modemPreset = connectedNode?.loRaConfig?.modemPreset
 			let chunkDelayNs = calculateChunkDelayNs(modemPreset: modemPreset)
