@@ -57,9 +57,9 @@ struct Settings: View {
 	}
 
 	private func isModuleSupported(_ module: ExcludedModules, excludedModules: Int) -> Bool {
-		// Voice messages (AUDIO_APP) are encoded/decoded in-app with codec2, so the
-		// feature works on every device regardless of the firmware's excluded modules.
-		if module == .audioConfig { return true }
+		// NOTE: this gates the device's *firmware* module-config screens (on-device
+		// I2S/PTT audio, pins, etc.). The in-app codec2 700C voice feature is
+		// independent of it and lives in the chat composer, not here.
 		return excludedModules & module.rawValue == 0
 	}
 
