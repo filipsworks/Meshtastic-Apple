@@ -440,11 +440,13 @@ struct DeviceOnboarding: View {
 			return .notifications
 		case .notifications:
 			if locationStatus == .authorizedWhenInUse || locationStatus == .authorizedAlways {
-				return .siri
+				return nil
 			}
 			return .location
 		case .location:
-			return .siri
+			// Siri/CarPlay onboarding removed — it needs the com.apple.developer.siri
+			// entitlement (unsignable by a personal team) and crashes without it.
+			return nil
 		case .siri:
 			return nil
 		}
@@ -579,19 +581,9 @@ struct DeviceOnboarding: View {
 		// Siri authorization prompt is not available on Mac Catalyst
 		Logger.services.info("Siri permissions not available on Mac Catalyst")
 		#else
-		await withCheckedContinuation { continuation in
-			INPreferences.requestSiriAuthorization { status in
-				switch status {
-				case .authorized:
-					Logger.services.info("Siri permissions are enabled")
-				case .denied:
-					Logger.services.info("Siri permissions denied")
-				default:
-					Logger.services.info("Siri permissions status: \(status.rawValue)")
-				}
-				continuation.resume()
-			}
-		}
+		// Siri authorization needs the com.apple.developer.siri entitlement, which a
+		// personal (free) team can't sign — calling INPreferences crashes. Skipped.
+		Logger.services.info("Siri permission request skipped (no Siri entitlement)")
 		#endif
 	}
 
