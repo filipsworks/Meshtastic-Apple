@@ -30,7 +30,8 @@ struct TextMessageField: View {
 				maxbytes: Self.maxbytes,
 				onSend: sendMessage,
 				onAlert: { typingMessage += "🔔 Alert Bell Character! \u{7}" },
-				onRequestPosition: requestPosition
+				onRequestPosition: requestPosition,
+				onSendAudio: sendAudioMessage
 			)
 		} else {
 			VStack(spacing: 0) {
@@ -229,10 +230,18 @@ private struct FormattingComposeArea: View {
 	let onSend: () -> Void
 	let onAlert: () -> Void
 	let onRequestPosition: () -> Void
+	let onSendAudio: () -> Void
 
+	@StateObject private var audioManager = AudioManager.shared
 	@State private var textSelection: TextSelection?
 	@State private var showToolbar = false
 	@State private var showLinkSheet = false
+
+	private func timeString(time: TimeInterval) -> String {
+		let minutes = Int(time) / 60 % 60
+		let seconds = Int(time) % 60
+		return String(format: "%02i:%02i", minutes, seconds)
+	}
 
 	var body: some View {
 		VStack(spacing: 0) {
@@ -275,9 +284,33 @@ private struct FormattingComposeArea: View {
 					.focused($isFocused)
 					.multilineTextAlignment(.leading)
 					.foregroundColor(.primary)
-				if !typingMessage.isEmpty {
+				if audioManager.isRecording {
+					HStack {
+						Text(timeString(time: audioManager.recordingDuration))
+							.foregroundColor(.red)
+							.font(.headline)
+						Spacer()
+						Button(action: { audioManager.cancelRecording() }) {
+							Image(systemName: "trash.circle.fill")
+								.font(.largeTitle)
+								.foregroundColor(.red)
+						}
+						Button(action: onSendAudio) {
+							Image(systemName: "arrow.up.circle.fill")
+								.font(.largeTitle)
+								.foregroundColor(.accentColor)
+						}
+					}
+					.padding(.leading, 10)
+				} else if !typingMessage.isEmpty {
 					Button(action: onSend) {
 						Image(systemName: "arrow.up.circle.fill")
+							.font(.largeTitle)
+							.foregroundColor(.accentColor)
+					}
+				} else {
+					Button(action: { audioManager.startRecording() }) {
+						Image(systemName: "mic.circle.fill")
 							.font(.largeTitle)
 							.foregroundColor(.accentColor)
 					}
