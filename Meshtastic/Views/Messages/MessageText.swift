@@ -70,6 +70,10 @@ struct MessageText: View {
 	}
 
 	private var messageContent: some View {
+		// File attachments render their own bubble; no translation/markdown.
+		if message.isFileMessage {
+			return AnyView(FileMessageView(message: message, isCurrentUser: isCurrentUser))
+		}
 		// Voice messages render their own player; no translation/markdown.
 		if message.isAudioMessage {
 			return AnyView(AudioMessageView(message: message, isCurrentUser: isCurrentUser))

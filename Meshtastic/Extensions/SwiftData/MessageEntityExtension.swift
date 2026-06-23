@@ -34,6 +34,11 @@ extension MessageEntity {
 		return audioData != nil && !audioData!.isEmpty && partialAudioInfo == nil
 	}
 
+	/// True once a file received/sent over the mesh has been stored.
+	public var isFileMessage: Bool {
+		return fileData != nil && !fileData!.isEmpty
+	}
+
 	var hasTranslatedPayload: Bool {
 		!(messagePayloadTranslated?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
 	}

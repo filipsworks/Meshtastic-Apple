@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0516B3FE2F68892000D0FC40 /* NodeFilterParametersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DCA1AE2F646B3B00D0724C /* NodeFilterParametersTests.swift */; };
+		0695C630FE46BC44DE3001D5 /* FileMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB00D7A1DAAC3D0E2B67872 /* FileMessageView.swift */; };
 		0B9642EC0DB1B971CB26E8AE /* RadarSweepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E06A9BCC789BD452DFA9CFB /* RadarSweepView.swift */; };
 		0C578A3A4426A60F8EA5337D /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AD0973D1DEA4E5D28871556 /* dump.c */; };
 		102B5EAB2E172F41003D191E /* DatadogCore in Frameworks */ = {isa = PBXBuildFile; productRef = 102B5EAA2E172F41003D191E /* DatadogCore */; };
@@ -122,6 +123,7 @@
 		2849A5E4CE9FDC1DB33DFA34 /* TAKConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01028778B8BFD81F7A039593 /* TAKConnection.swift */; };
 		28727A3963F72CE18C8B9C82 /* mbest.c in Sources */ = {isa = PBXBuildFile; fileRef = 3960EC9BE7DEEC47AFBA99C0 /* mbest.c */; };
 		300424F80C4A445A0FBAE82D /* TAKMeshtasticBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D006C85B250291D5925F30 /* TAKMeshtasticBridge.swift */; };
+		31C32BC1B6BC2F72085B0F03 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056E7BC1C9A22C57AA08E8F5 /* Transfer.swift */; };
 		3483028FA214DB1831E62303 /* AudioMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5B994B516CF7F9B849B5B1 /* AudioMessageView.swift */; };
 		3D3417B42E2730EC006A988B /* GeoJSONOverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3417B32E2730EC006A988B /* GeoJSONOverlayManager.swift */; };
 		3D3417C82E29D38A006A988B /* GeoJSONOverlayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3417C72E29D38A006A988B /* GeoJSONOverlayConfig.swift */; };
@@ -132,6 +134,7 @@
 		480AA94CBAEF3724415284DD /* Codec2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25FCB935A82B520B8BABB0 /* Codec2.swift */; };
 		48E682ECE71246C3BFBD6B8F /* ChannelEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E6EDE744E3446FA1084499 /* ChannelEntity.swift */; };
 		50D5C924DAA4B093B7A7C063 /* codebookjmv.c in Sources */ = {isa = PBXBuildFile; fileRef = 4C97C9C2C9C4D79A2010EDBA /* codebookjmv.c */; };
+		516E66F3A94C3B609CEB590C /* CRC32.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBE3DF84542F0BB573B87B9 /* CRC32.swift */; };
 		58D9198355AA5DD9C782C492 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AF6BE728E10B08B3E1B9281 /* kiss_fft.c */; };
 		5D3AFC6F08ED4C909C830C55 /* TelemetryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31483AF5F5354D3481698E32 /* TelemetryEntity.swift */; };
 		5F5ADB76A52D3C63268D3D0C /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2793179BEE852D18F05648A3 /* lpc.c */; };
@@ -561,6 +564,7 @@
 
 /* Begin PBXFileReference section */
 		01028778B8BFD81F7A039593 /* TAKConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKConnection.swift; sourceTree = "<group>"; };
+		056E7BC1C9A22C57AA08E8F5 /* Transfer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transfer.swift; path = Meshtastic/Helpers/FileTransfer/Transfer.swift; sourceTree = "<group>"; };
 		05DCA1AE2F646B3B00D0724C /* NodeFilterParametersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeFilterParametersTests.swift; sourceTree = "<group>"; };
 		05E0BD1A81CF4F6A90D56CE3 /* MeshtasticSchemaV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshtasticSchemaV1.swift; sourceTree = "<group>"; };
 		0618E6D0DF90B74EE32E6C06 /* TAKServerConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKServerConfig.swift; sourceTree = "<group>"; };
@@ -690,6 +694,7 @@
 		518D504DED9874EBF9D76578 /* Certificates */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = Certificates; sourceTree = "<group>"; };
 		56F20706A282AF9915C834E1 /* nlp.c */ = {isa = PBXFileReference; includeInIndex = 1; name = nlp.c; path = "Meshtastic/Audio/codec2-ios/nlp.c"; sourceTree = "<group>"; };
 		5AD0973D1DEA4E5D28871556 /* dump.c */ = {isa = PBXFileReference; includeInIndex = 1; name = dump.c; path = "Meshtastic/Audio/codec2-ios/dump.c"; sourceTree = "<group>"; };
+		5DB00D7A1DAAC3D0E2B67872 /* FileMessageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileMessageView.swift; path = Meshtastic/Views/Messages/FileMessageView.swift; sourceTree = "<group>"; };
 		5FCB3877F157D9011FA5C6CF /* SendMessageIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageIntentHandler.swift; sourceTree = "<group>"; };
 		64C6057F9508D4356DAF411F /* DiscoveryModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryModelTests.swift; sourceTree = "<group>"; };
 		6A5AED2FE1D23AC64C86B0FC /* codebookd.c */ = {isa = PBXFileReference; includeInIndex = 1; name = codebookd.c; path = "Meshtastic/Audio/codec2-ios/codebookd.c"; sourceTree = "<group>"; };
@@ -1128,6 +1133,7 @@
 		DEA1C1372F10002000A1B2C3 /* BackupManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManagement/BackupManagement.swift; sourceTree = "<group>"; };
 		DEA1C1392F10002000A1B2C3 /* BackupRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManagement/BackupRowView.swift; sourceTree = "<group>"; };
 		E98797BFD67F449B9ACCEDA7 /* WaypointEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaypointEntity.swift; sourceTree = "<group>"; };
+		EEBE3DF84542F0BB573B87B9 /* CRC32.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CRC32.swift; path = Meshtastic/Helpers/FileTransfer/CRC32.swift; sourceTree = "<group>"; };
 		F1B6FB13C4D4E03503BB1DF8 /* DiscoverySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverySummaryView.swift; sourceTree = "<group>"; };
 		F3196A22E5E3A4AB175B1E3F /* kiss_fftr.c */ = {isa = PBXFileReference; includeInIndex = 1; name = kiss_fftr.c; path = "Meshtastic/Audio/codec2-ios/kiss_fftr.c"; sourceTree = "<group>"; };
 		F3204EF969484E549C139730 /* MessageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEntity.swift; sourceTree = "<group>"; };
@@ -1736,6 +1742,16 @@
 			path = HelpAndDocumentation;
 			sourceTree = "<group>";
 		};
+		B60D0F6E8F3F44C32BD75061 /* FileTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				056E7BC1C9A22C57AA08E8F5 /* Transfer.swift */,
+				EEBE3DF84542F0BB573B87B9 /* CRC32.swift */,
+				5DB00D7A1DAAC3D0E2B67872 /* FileMessageView.swift */,
+			);
+			name = FileTransfer;
+			sourceTree = "<group>";
+		};
 		BCB6137F2C6728E700485544 /* AppIntents */ = {
 			isa = PBXGroup;
 			children = (
@@ -2092,6 +2108,7 @@
 				DD8EDE9226F97A2B00A5A10B /* Frameworks */,
 				DD86C7C62FE385D2000BC38E /* Recovered References */,
 				0CDFAE9D41C11533B5270858 /* AudioVoice */,
+				B60D0F6E8F3F44C32BD75061 /* FileTransfer */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 1;
@@ -3115,6 +3132,9 @@
 				3F9ADC53332ABCB79132170A /* AudioManager.swift in Sources */,
 				480AA94CBAEF3724415284DD /* Codec2.swift in Sources */,
 				3483028FA214DB1831E62303 /* AudioMessageView.swift in Sources */,
+				31C32BC1B6BC2F72085B0F03 /* Transfer.swift in Sources */,
+				516E66F3A94C3B609CEB590C /* CRC32.swift in Sources */,
+				0695C630FE46BC44DE3001D5 /* FileMessageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

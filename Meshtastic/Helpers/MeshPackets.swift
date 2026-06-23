@@ -75,6 +75,8 @@ actor MeshPackets {
 
 	/// Inbound codec2 voice chunks, keyed by audio-message id, until complete.
 	private var partialAudioMessages: [UInt16: [Int: Data]] = [:]
+	/// Inbound file transfers (ha-bridge transfer protocol), keyed by "from-xferID".
+	private var partialFileTransfers: [String: InboundTransfer] = [:]
 
 	/// Always the current shared container. Computed (not cached) so that after a data clear
 	/// recreates the container, the next `recreateShared()` rebuilds the actor on the new one
@@ -1068,6 +1070,68 @@ actor MeshPackets {
 			}
 		} else {
 			Logger.data.error("💥 Error Fetching NodeInfoEntity for Node \(packet.from.toHex(), privacy: .public)")
+		}
+	}
+
+	// File transfer over portnum 305 (ha-bridge transfer protocol: manifest + data
+	// chunks + CRC). Reassembles, then persists a MessageEntity carrying the file.
+	func fileAppPacket(packet: MeshPacket, connectedNode: Int64) async {
+		guard let parsed = Transfer.parse(packet.decoded.payload) else { return }
+		let xferID: Int
+		switch parsed {
+		case let .manifest(id, _, _, _, _, _, _, _): xferID = id
+		case let .data(id, _, _, _): xferID = id
+		}
+		let key = "\(packet.from)-\(xferID)"
+		let tr = partialFileTransfers[key]
+			?? InboundTransfer(xferID: xferID, fromID: String(packet.from), portnum: Transfer.filePortnum)
+		partialFileTransfers[key] = tr
+		switch parsed {
+		case let .manifest(_, kind, totalSize, totalChunks, chunkSize, crc, name, ctype):
+			tr.addManifest(kind: kind, totalSize: totalSize, totalChunks: totalChunks,
+						   chunkSize: chunkSize, crc32: crc, name: name, contentType: ctype)
+		case let .data(_, idx, total, chunkPayload):
+			tr.addData(idx: idx, totalChunks: total, payload: chunkPayload)
+		}
+		guard tr.isComplete, let blob = try? tr.assemble() else { return }
+		partialFileTransfers.removeValue(forKey: key)
+		let fileName = tr.name ?? "file-\(Int(Date().timeIntervalSince1970)).bin"
+		let contentType = tr.contentType ?? "application/octet-stream"
+		Logger.mesh.info("📁 File received: \(fileName, privacy: .public) (\(blob.count) bytes)")
+
+		let toNum = Int64(packet.to)
+		let fromNum = Int64(packet.from)
+		let usersDescriptor = FetchDescriptor<UserEntity>(predicate: #Predicate { $0.num == toNum || $0.num == fromNum })
+		do {
+			let fetchedUsers = try modelContext.fetch(usersDescriptor)
+			let newMessage = MessageEntity()
+			modelContext.insert(newMessage)
+			newMessage.messageId = Int64(packet.id)
+			newMessage.messageTimestamp = packet.rxTime > 0 ? Int32(bitPattern: packet.rxTime) : Int32(Date().timeIntervalSince1970)
+			if packet.relayNode != 0 { newMessage.relayNode = Int64(packet.relayNode) }
+			newMessage.receivedACK = false
+			newMessage.snr = packet.rxSnr
+			newMessage.rssi = packet.rxRssi
+			newMessage.channel = Int32(packet.channel)
+			newMessage.portNum = Int32(Transfer.filePortnum)
+			if fetchedUsers.first(where: { $0.num == packet.to }) != nil, packet.to != Constants.maximumNodeNum {
+				newMessage.toUser = fetchedUsers.first(where: { $0.num == packet.to })
+			}
+			if let from = fetchedUsers.first(where: { $0.num == packet.from }) {
+				newMessage.fromUser = from
+			} else if let newUser = try? createUser(num: Int64(truncatingIfNeeded: packet.from), context: modelContext) {
+				newMessage.fromUser = newUser
+			}
+			newMessage.fromUser?.userNode?.lastHeard = packet.rxTime > 0 ? Date(timeIntervalSince1970: TimeInterval(Int64(packet.rxTime))) : Date()
+			if packet.to != Constants.maximumNodeNum { newMessage.fromUser?.lastMessage = Date() }
+			newMessage.messagePayload = fileName
+			newMessage.messagePayloadMarkdown = fileName
+			newMessage.fileData = blob
+			newMessage.fileName = fileName
+			newMessage.fileType = contentType
+			try? modelContext.save()
+		} catch {
+			Logger.data.error("Failed to persist received file: \(error.localizedDescription, privacy: .public)")
 		}
 	}
 

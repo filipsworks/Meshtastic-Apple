@@ -539,6 +539,101 @@ extension AccessoryManager {
 		}
 	}
 	
+	public func sendFileMessage(fileData: Data, fileName: String, contentType: String, toUserNum: Int64, channel: Int32, replyID: Int64) async throws {
+		guard let fromUserNum = self.activeConnection?.device.num else {
+			Logger.services.error("Error while sending file. No active device.")
+			throw AccessoryError.ioFailed("No active device")
+		}
+		guard !fileData.isEmpty else {
+			Logger.mesh.info("🚫 Don't send an empty file")
+			return
+		}
+
+		let messageUsers = FetchDescriptor<UserEntity>(predicate: #Predicate { $0.num == fromUserNum || $0.num == toUserNum })
+		do {
+			let fetchedUsers = try context.fetch(messageUsers)
+			if fetchedUsers.isEmpty {
+				Logger.data.error("🚫 Message Users Not Found, Fail")
+				throw AccessoryError.ioFailed("🚫 Message Users Not Found, Fail")
+			}
+
+			let newMessage = MessageEntity()
+			context.insert(newMessage)
+			newMessage.messageId = Int64(UInt32.random(in: UInt32(UInt8.max)..<UInt32.max))
+			newMessage.messageTimestamp = Int32(Date().timeIntervalSince1970)
+			newMessage.receivedACK = false
+			newMessage.read = true
+			if toUserNum > 0 {
+				newMessage.toUser = fetchedUsers.first(where: { $0.num == toUserNum })
+				newMessage.toUser?.lastMessage = Date()
+			}
+			newMessage.fromUser = fetchedUsers.first(where: { $0.num == fromUserNum })
+			newMessage.admin = false
+			newMessage.channel = channel
+			if replyID > 0 { newMessage.replyID = replyID }
+			newMessage.messagePayload = fileName
+			newMessage.messagePayloadMarkdown = fileName
+			newMessage.fileData = fileData
+			newMessage.fileName = fileName
+			newMessage.fileType = contentType
+			newMessage.portNum = Int32(Transfer.filePortnum)
+
+			// Build the ha-bridge transfer plan (manifest + ordered data chunks).
+			let xferID = Int(UInt16(truncatingIfNeeded: newMessage.messageId))
+			let plan = Transfer.buildSendPlan(xferID: xferID, blob: fileData, kind: Transfer.kindFile,
+											  name: fileName, contentType: contentType)
+			let packets = [plan.manifest] + plan.dataPackets
+
+			let destNodeNum = toUserNum
+			let sourceNodeNum = fromUserNum
+			let chan = channel
+			let messageIdBase = newMessage.messageId
+
+			let connectedNodeNum = self.activeConnection?.device.num ?? 0
+			let connectedNodeRequest = FetchDescriptor<NodeInfoEntity>(predicate: #Predicate { $0.num == connectedNodeNum })
+			let connectedNode = try? context.fetch(connectedNodeRequest).first
+			let chunkDelayNs = calculateChunkDelayNs(modemPreset: connectedNode?.loRaConfig?.modemPreset)
+
+			Task {
+				for (index, packet) in packets.enumerated() {
+					var dataMessage = DataMessage()
+					dataMessage.payload = packet
+					dataMessage.portnum = PortNum(rawValue: Transfer.filePortnum) ?? .unknownApp
+
+					var meshPacket = MeshPacket()
+					meshPacket.id = UInt32(truncatingIfNeeded: messageIdBase) &+ UInt32(index)
+					if destNodeNum > 0 {
+						meshPacket.to = UInt32(destNodeNum)
+					} else {
+						meshPacket.to = Constants.maximumNodeNum
+					}
+					meshPacket.channel = UInt32(chan)
+					meshPacket.from = UInt32(sourceNodeNum)
+					meshPacket.decoded = dataMessage
+					meshPacket.wantAck = true
+
+					var toRadio = ToRadio()
+					toRadio.packet = meshPacket
+					try? await send(toRadio, debugDescription: "Sent file \(fileName) packet \(index + 1)/\(packets.count)")
+					if index < packets.count - 1 {
+						try? await Task.sleep(nanoseconds: chunkDelayNs)
+					}
+				}
+			}
+
+			do {
+				try context.save()
+				Logger.data.info("💾 Saved a new sent file message")
+			} catch {
+				context.rollback()
+				Logger.data.error("Error saving sent file: \(error.localizedDescription, privacy: .public)")
+				throw error
+			}
+		} catch {
+			Logger.data.error("💥 Send file failure")
+		}
+	}
+
 	private func calculateChunkDelayNs(modemPreset: Int32?) -> UInt64 {
 		guard let preset = modemPreset else {
 			return 1_500_000_000

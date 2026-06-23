@@ -321,6 +321,14 @@ extension AccessoryManager {
 		)
 	}
 
+	func handleFileAppPacket(_ packet: MeshPacket) async {
+		guard let device = activeConnection?.device, let deviceNum = device.num else {
+			Logger.services.error("Attempt to handle file message when no connected device.")
+			return
+		}
+		await MeshPackets.shared.fileAppPacket(packet: packet, connectedNode: deviceNum)
+	}
+
 	func storeAndForwardPacket(packet: MeshPacket, connectedNodeNum: Int64) {
 		if let storeAndForwardMessage = try? StoreAndForward(serializedBytes: packet.decoded.payload) {
 			// Handle each of the store and forward request / response messages

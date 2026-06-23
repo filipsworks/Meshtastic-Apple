@@ -1,5 +1,6 @@
 import SwiftUI
 import OSLog
+import UniformTypeIdentifiers
 
 struct TextMessageField: View {
 	static let maxbytes = 200
@@ -31,7 +32,8 @@ struct TextMessageField: View {
 				onSend: sendMessage,
 				onAlert: { typingMessage += "🔔 Alert Bell Character! \u{7}" },
 				onRequestPosition: requestPosition,
-				onSendAudio: sendAudioMessage
+				onSendAudio: sendAudioMessage,
+				onSendFile: { data, name, type in sendFileMessage(fileData: data, fileName: name, contentType: type) }
 			)
 		} else {
 			VStack(spacing: 0) {
@@ -211,6 +213,24 @@ struct TextMessageField: View {
 		}
 	}
 
+	private func sendFileMessage(fileData: Data, fileName: String, contentType: String) {
+		Task {
+			do {
+				try await accessoryManager.sendFileMessage(
+					fileData: fileData,
+					fileName: fileName,
+					contentType: contentType,
+					toUserNum: destination.userNum,
+					channel: destination.channelNum,
+					replyID: replyMessageId
+				)
+				replyMessageId = 0
+			} catch {
+				Logger.mesh.error("Error sending file message: \(error)")
+			}
+		}
+	}
+
 	private func timeString(time: TimeInterval) -> String {
 		let minutes = Int(time) / 60 % 60
 		let seconds = Int(time) % 60
@@ -231,16 +251,27 @@ private struct FormattingComposeArea: View {
 	let onAlert: () -> Void
 	let onRequestPosition: () -> Void
 	let onSendAudio: () -> Void
+	let onSendFile: (Data, String, String) -> Void
 
 	@StateObject private var audioManager = AudioManager.shared
 	@State private var textSelection: TextSelection?
 	@State private var showToolbar = false
 	@State private var showLinkSheet = false
+	@State private var showFileImporter = false
 
 	private func timeString(time: TimeInterval) -> String {
 		let minutes = Int(time) / 60 % 60
 		let seconds = Int(time) % 60
 		return String(format: "%02i:%02i", minutes, seconds)
+	}
+
+	private func handleFilePick(_ result: Result<[URL], Error>) {
+		guard case .success(let urls) = result, let url = urls.first else { return }
+		let scoped = url.startAccessingSecurityScopedResource()
+		defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+		guard let data = try? Data(contentsOf: url) else { return }
+		let type = UTType(filenameExtension: url.pathExtension)?.preferredMIMEType ?? "application/octet-stream"
+		onSendFile(data, url.lastPathComponent, type)
 	}
 
 	var body: some View {
@@ -377,6 +408,14 @@ private struct FormattingComposeArea: View {
 					#endif
 					AlertButton(action: onAlert, compact: true)
 					RequestPositionButton(action: onRequestPosition, compact: true)
+						Button { showFileImporter = true } label: {
+							Image(systemName: "paperclip")
+						}
+						.fileImporter(isPresented: $showFileImporter,
+									  allowedContentTypes: [.data, .item],
+									  allowsMultipleSelection: false) { result in
+							handleFilePick(result)
+						}
 				}
 			}
 			Spacer()

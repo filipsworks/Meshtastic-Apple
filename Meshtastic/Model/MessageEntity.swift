@@ -17,6 +17,10 @@ final class MessageEntity {
 	var adminDescription: String?
 	/// Codec2 voice clip (or a "PARTIAL_AUDIO:" reassembly blob); nil for text.
 	var audioData: Data?
+	/// Arbitrary file received/sent over the mesh (ha-bridge transfer protocol).
+	var fileData: Data?
+	var fileName: String?
+	var fileType: String?
 	var channel: Int32 = 0
 	var isEmoji: Bool = false
 	@Attribute(.unique) var messageId: Int64 = 0

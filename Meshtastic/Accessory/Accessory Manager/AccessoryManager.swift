@@ -735,8 +735,13 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 					await MeshPackets.shared.paxCounterPacket(packet: decodedInfo.packet)
 				case .mapReportApp:
 					Logger.mesh.info("[Map Report] packet received from \(packet.from.toHex(), privacy: .public)")
-				case .UNRECOGNIZED:
-					Logger.mesh.info("[Unrecognized] packet received from \(packet.from.toHex(), privacy: .public)")
+				case .UNRECOGNIZED(let portNumValue):
+					if portNumValue == Transfer.filePortnum {
+						Logger.mesh.info("[File] packet received from \(packet.from.toHex(), privacy: .public)")
+						await handleFileAppPacket(packet)
+					} else {
+						Logger.mesh.info("[Unrecognized] packet received from \(packet.from.toHex(), privacy: .public)")
+					}
 				case .max:
 					Logger.services.info("MAX PORT NUM OF 511")
 				case .atakPlugin:
