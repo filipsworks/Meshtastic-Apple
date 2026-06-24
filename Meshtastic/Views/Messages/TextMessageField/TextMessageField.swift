@@ -306,9 +306,19 @@ private struct FormattingComposeArea: View {
 					.contentShape(RoundedRectangle(cornerRadius: 20))
 					.onChange(of: typingMessage) { _, value in
 						totalBytes = value.utf8.count
+						// A programmatic text change (send empties the field; the byte-limit
+						// truncation below shortens it) leaves `textSelection` holding a UTF-16
+						// range into the *old* string. The next layout pass in
+						// UIKitTextEditorCoordinator maps that stale range onto the new string
+						// and traps in String.UTF16View._offsetRange. Drop the selection so the
+						// coordinator never sees an out-of-range index. (#1976)
+						if value.isEmpty {
+							textSelection = nil
+						}
 						while totalBytes > maxbytes {
 							typingMessage = String(typingMessage.dropLast())
 							totalBytes = typingMessage.utf8.count
+							textSelection = nil
 						}
 					}
 					.keyboardType(.default)
@@ -334,7 +344,7 @@ private struct FormattingComposeArea: View {
 					}
 					.padding(.leading, 10)
 				} else if !typingMessage.isEmpty {
-					Button(action: onSend) {
+					Button(action: send) {
 						Image(systemName: "arrow.up.circle.fill")
 							.font(.largeTitle)
 							.foregroundColor(.accentColor)
@@ -381,10 +391,29 @@ private struct FormattingComposeArea: View {
 			if keyPress.modifiers.contains(.shift) {
 				return .ignored
 			}
-			onSend()
+			send()
 			return .handled
 		}
 		#endif
+	}
+
+	// Clear any active selection before invoking the parent handlers, which mutate
+	// `typingMessage` programmatically (send empties it; position/alert replace or
+	// append). Doing this first means the TextEditor coordinator never updates with a
+	// text/selection pair where the selection's UTF-16 range is out of bounds. (#1976)
+	private func send() {
+		textSelection = nil
+		onSend()
+	}
+
+	private func alert() {
+		textSelection = nil
+		onAlert()
+	}
+
+	private func requestPosition() {
+		textSelection = nil
+		onRequestPosition()
 	}
 
 	private var toolbarContent: some View {
@@ -406,8 +435,8 @@ private struct FormattingComposeArea: View {
 						Image(systemName: "face.smiling")
 					}
 					#endif
-					AlertButton(action: onAlert, compact: true)
-					RequestPositionButton(action: onRequestPosition, compact: true)
+					AlertButton(action: alert, compact: true)
+					RequestPositionButton(action: requestPosition, compact: true)
 						Button { showFileImporter = true } label: {
 							Image(systemName: "paperclip")
 						}

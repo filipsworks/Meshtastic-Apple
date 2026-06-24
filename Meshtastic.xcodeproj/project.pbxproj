@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0516B3FE2F68892000D0FC40 /* NodeFilterParametersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DCA1AE2F646B3B00D0724C /* NodeFilterParametersTests.swift */; };
 		0695C630FE46BC44DE3001D5 /* FileMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB00D7A1DAAC3D0E2B67872 /* FileMessageView.swift */; };
+		05A1B2C32F70000100D0FC40 /* SettingsNodeSortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A1B2C42F70000100D0FC40 /* SettingsNodeSortTests.swift */; };
 		0B9642EC0DB1B971CB26E8AE /* RadarSweepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E06A9BCC789BD452DFA9CFB /* RadarSweepView.swift */; };
 		0C578A3A4426A60F8EA5337D /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AD0973D1DEA4E5D28871556 /* dump.c */; };
 		102B5EAB2E172F41003D191E /* DatadogCore in Frameworks */ = {isa = PBXBuildFile; productRef = 102B5EAA2E172F41003D191E /* DatadogCore */; };
@@ -191,6 +192,7 @@
 		AA003DOC0000002000000006 /* DocTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA003DOC0000001000000006 /* DocTranslationService.swift */; };
 		AA003DOC0000002000000007 /* TranslationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA003DOC0000001000000007 /* TranslationCache.swift */; };
 		AA003DOC0000002000000008 /* DocTranslationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA003DOC0000001000000008 /* DocTranslationTests.swift */; };
+		DD0000DEVLNKTST000000001 /* DeviceLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0000DEVLNKTST000000000 /* DeviceLinkTests.swift */; };
 		AA003DOC0000004000000001 /* docs in Resources */ = {isa = PBXBuildFile; fileRef = AA003DOC0000005000000001 /* docs */; };
 		AA003FM00000002000000001 /* FoundationModelAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA003FM00000001000000001 /* FoundationModelAvailability.swift */; };
 		AA004FMT0000002000000001 /* MarkdownFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA004FMT0000001000000001 /* MarkdownFormatting.swift */; };
@@ -241,6 +243,7 @@
 		BD7B1A838F8245A0B6BE56C5 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CCF00CDD3D48C9B9DCA554 /* WatchSessionManager.swift */; };
 		C1B995B38DC97D13D90D9C1A /* DiscoverySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B6FB13C4D4E03503BB1DF8 /* DiscoverySummaryView.swift */; };
 		C54AC9F4DA920A4F718CE21A /* DiscoveryScanEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD14FA280F0A130730DEB93 /* DiscoveryScanEngineTests.swift */; };
+		FDAF8808342245C4817C93EC /* NetworkConfigIPConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18295AFE686247778632C6DE /* NetworkConfigIPConversionTests.swift */; };
 		C79BFC99EDCC89DD45082753 /* DiscoveryScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CA8BAC814CF82E127EEABF /* DiscoveryScanView.swift */; };
 		D02589957BD040969FCB8663 /* PositionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97241903A924144A3EEB679 /* PositionEntity.swift */; };
 		D748D59A3AF3253FFCDEF8BF /* DiscoveryMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D942B763789DEA044C5EBD6 /* DiscoveryMapView.swift */; };
@@ -566,6 +569,7 @@
 		01028778B8BFD81F7A039593 /* TAKConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKConnection.swift; sourceTree = "<group>"; };
 		056E7BC1C9A22C57AA08E8F5 /* Transfer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transfer.swift; path = Meshtastic/Helpers/FileTransfer/Transfer.swift; sourceTree = "<group>"; };
 		05DCA1AE2F646B3B00D0724C /* NodeFilterParametersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeFilterParametersTests.swift; sourceTree = "<group>"; };
+		05A1B2C42F70000100D0FC40 /* SettingsNodeSortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNodeSortTests.swift; sourceTree = "<group>"; };
 		05E0BD1A81CF4F6A90D56CE3 /* MeshtasticSchemaV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshtasticSchemaV1.swift; sourceTree = "<group>"; };
 		0618E6D0DF90B74EE32E6C06 /* TAKServerConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TAKServerConfig.swift; sourceTree = "<group>"; };
 		06F707A31CB7D7BF9D9023DE /* AudioManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AudioManager.swift; path = Meshtastic/Audio/AudioManager.swift; sourceTree = "<group>"; };
@@ -762,6 +766,7 @@
 		AA003DOC0000001000000006 /* DocTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocTranslationService.swift; sourceTree = "<group>"; };
 		AA003DOC0000001000000007 /* TranslationCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TranslationCache.swift; path = Meshtastic/Services/TranslationCache.swift; sourceTree = "<group>"; };
 		AA003DOC0000001000000008 /* DocTranslationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocTranslationTests.swift; sourceTree = "<group>"; };
+		DD0000DEVLNKTST000000000 /* DeviceLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLinkTests.swift; sourceTree = "<group>"; };
 		AA003DOC0000005000000001 /* docs */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = docs; sourceTree = "<group>"; };
 		AA003FM00000001000000001 /* FoundationModelAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoundationModelAvailability.swift; path = Meshtastic/Services/FoundationModelAvailability.swift; sourceTree = "<group>"; };
 		AA004FMT0000001000000001 /* MarkdownFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFormatting.swift; sourceTree = "<group>"; };
@@ -780,6 +785,7 @@
 		AA10D0002D00000000000001 /* DiscoverySummaryPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverySummaryPDF.swift; sourceTree = "<group>"; };
 		AA11223344556677AABB0002 /* DiscoveryTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryTips.swift; sourceTree = "<group>"; };
 		AAD14FA280F0A130730DEB93 /* DiscoveryScanEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryScanEngineTests.swift; sourceTree = "<group>"; };
+		18295AFE686247778632C6DE /* NetworkConfigIPConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigIPConversionTests.swift; sourceTree = "<group>"; };
 		AB61EBF02E3326DC00B35962 /* NodeListItemCompact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeListItemCompact.swift; sourceTree = "<group>"; };
 		AB6E72752E3FC85A00639328 /* LayoutEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutEnums.swift; sourceTree = "<group>"; };
 		ABA8E63F2E2F2A2300E27791 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
@@ -1602,6 +1608,7 @@
 				DD9C70112E9F2A0000029299 /* DeviceOnboardingTests.swift */,
 				25F5D5D02C4375DF008036E3 /* RouterTests.swift */,
 				05DCA1AE2F646B3B00D0724C /* NodeFilterParametersTests.swift */,
+				05A1B2C42F70000100D0FC40 /* SettingsNodeSortTests.swift */,
 				AA0120250000000000000C02 /* PacketStreamModelTests.swift */,
 				AA000301CPTST000000000001 /* CarPlayTests.swift */,
 				DD000001NODNAVTST00000000 /* NodeNavigationTests.swift */,
@@ -1612,6 +1619,7 @@
 				DD000006GEOTST0000000000 /* GeoExtensionTests.swift */,
 				DD000007LORATST000000000 /* LoraDeviceEnumTests.swift */,
 				AAD14FA280F0A130730DEB93 /* DiscoveryScanEngineTests.swift */,
+				18295AFE686247778632C6DE /* NetworkConfigIPConversionTests.swift */,
 				64C6057F9508D4356DAF411F /* DiscoveryModelTests.swift */,
 				AA003DOC0000001000000005 /* DocBundleTests.swift */,
 				DD000008APPSTST000000000 /* AppSettingsEnumTests.swift */,
@@ -1655,6 +1663,7 @@
 				DD000030EVTFWNTST0000000 /* EventFirmwareNotificationTests.swift */,
 				AA009MCT0000001000000001 /* MarkdownConverterTests.swift */,
 				AA003DOC0000001000000008 /* DocTranslationTests.swift */,
+				DD0000DEVLNKTST000000000 /* DeviceLinkTests.swift */,
 			);
 			path = MeshtasticTests;
 			sourceTree = "<group>";
@@ -2664,14 +2673,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C54AC9F4DA920A4F718CE21A /* DiscoveryScanEngineTests.swift in Sources */,
+				FDAF8808342245C4817C93EC /* NetworkConfigIPConversionTests.swift in Sources */,
 				1396606FC903D7DA662B6326 /* DiscoveryModelTests.swift in Sources */,
 				AA003DOC0000002000000005 /* DocBundleTests.swift in Sources */,
 				AA003DOC0000002000000008 /* DocTranslationTests.swift in Sources */,
+				DD0000DEVLNKTST000000001 /* DeviceLinkTests.swift in Sources */,
 				AA009MCT0000002000000001 /* MarkdownConverterTests.swift in Sources */,
 				AA0001012E2730EC00600001 /* ConnectViewTests.swift in Sources */,
 				DD9C70102E9F2A0000029299 /* DeviceOnboardingTests.swift in Sources */,
 				25F5D5D12C4375DF008036E3 /* RouterTests.swift in Sources */,
 				0516B3FE2F68892000D0FC40 /* NodeFilterParametersTests.swift in Sources */,
+				05A1B2C32F70000100D0FC40 /* SettingsNodeSortTests.swift in Sources */,
 				AA0120250000000000000C01 /* PacketStreamModelTests.swift in Sources */,
 				AA000301CPTST000000000002 /* CarPlayTests.swift in Sources */,
 				DD000001NODNAVTST00000001 /* NodeNavigationTests.swift in Sources */,
@@ -3244,6 +3256,74 @@
 			};
 			name = Release;
 		};
+		AA0005WTCH00000000BC0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "Meshtastic Watch App/Meshtastic Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BL449T369M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Meshtastic Watch App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Meshtastic;
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Meshtastic needs your location to calculate distance and bearing to mesh nodes during foxhunt.";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = eu.voidware.meshtastic-voice;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.7.15;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		AA0005WTCH00000000BC0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = "Meshtastic Watch App/Meshtastic Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BL449T369M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Meshtastic Watch App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Meshtastic;
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Meshtastic needs your location to calculate distance and bearing to mesh nodes during foxhunt.";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = eu.voidware.meshtastic-voice;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.7.15;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		DDC2E17C26CE248F0042C5E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3390,7 +3470,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Meshtastic/Preview Content\"";
-				DEVELOPMENT_TEAM = LC728N76ZT;
+				DEVELOPMENT_TEAM = BL449T369M;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
@@ -3416,7 +3496,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 2.7.14;
+				MARKETING_VERSION = 2.7.15;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					SwiftUI,
@@ -3445,7 +3525,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Meshtastic/Preview Content\"";
-				DEVELOPMENT_TEAM = LC728N76ZT;
+				DEVELOPMENT_TEAM = BL449T369M;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
@@ -3471,7 +3551,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 2.7.14;
+				MARKETING_VERSION = 2.7.15;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					SwiftUI,
@@ -3497,7 +3577,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LC728N76ZT;
+				DEVELOPMENT_TEAM = BL449T369M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
@@ -3509,8 +3589,8 @@
 					"@executable_path/../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 2.7.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "eu.voidware.meshtastic-voice.Widgets";
+				MARKETING_VERSION = 2.7.15;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.Widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -3533,7 +3613,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LC728N76ZT;
+				DEVELOPMENT_TEAM = BL449T369M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
@@ -3545,8 +3625,8 @@
 					"@executable_path/../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 2.7.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "eu.voidware.meshtastic-voice.Widgets";
+				MARKETING_VERSION = 2.7.15;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.voidware.meshtastic-voice.Widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
