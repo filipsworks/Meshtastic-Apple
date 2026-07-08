@@ -9,8 +9,20 @@ class Router: ObservableObject {
 	@Published
 	var selectedTab: NavigationState.Tab
 
+	/// Transient deep-link *command* for the Messages tab (carries the channelId/userNum payload).
+	/// Set by `route(url:)` / restoration and consumed exactly once by the Messages view, which
+	/// resolves it into a selected conversation and then clears it. Kept separate from
+	/// `messagesSection` so the one-shot payload never reaches the sidebar selection and so a later
+	/// tab re-appear can't re-resolve it and snap the user back into the notified conversation.
 	@Published
 	var messagesState: MessagesNavigationState?
+
+	/// Durable, payload-free Messages sidebar/section selection (`.channels()` / `.directMessages()`
+	/// / nil). Drives the sidebar `List` selection and the content column. Because it only ever
+	/// holds payload-free values it always matches a sidebar row, keeping the collapsed
+	/// `NavigationSplitView` back stack intact. Survives across tab switches; reset by `popToRoot`.
+	@Published
+	var messagesSection: MessagesNavigationState?
 
 	@Published
 	var mapState: MapNavigationState?
@@ -36,6 +48,7 @@ class Router: ObservableObject {
 		set {
 			selectedTab = newValue.selectedTab
 			messagesState = newValue.messages
+			messagesSection = newValue.messages?.sidebarSection
 			selectedNodeNum = newValue.nodeListSelectedNodeNum
 			mapState = newValue.map
 			if let setting = newValue.settings {
@@ -89,6 +102,7 @@ class Router: ObservableObject {
 	) {
 		self.selectedTab = navigationState.selectedTab
 		self.messagesState = navigationState.messages
+		self.messagesSection = navigationState.messages?.sidebarSection
 		if let num = navigationState.nodeListSelectedNodeNum {
 			self.selectedNodeNum = num
 		}
@@ -120,6 +134,8 @@ class Router: ObservableObject {
 			routeNodes(components)
 		} else if components.path == "/map" {
 			routeMap(components)
+		} else if components.path == "/importGeoJSON" {
+			routeImportGeoJSON(components)
 		} else if components.path.hasPrefix("/settings") {
 			routeSettings(components)
 		} else {
@@ -154,6 +170,7 @@ class Router: ObservableObject {
 		}
 		selectedTab = .messages
 		messagesState = state
+		messagesSection = state?.sidebarSection
 	}
 
 	private func routeNodes(_ components: URLComponents) {
@@ -180,6 +197,7 @@ class Router: ObservableObject {
 		switch tab {
 		case .messages:
 			messagesState = nil
+			messagesSection = nil
 		case .nodes:
 			selectedNodeNum = nil
 		case .map:
@@ -200,14 +218,41 @@ class Router: ObservableObject {
 			.first(where: { $0.name == "waypointId" })?
 			.value
 			.flatMap(Int64.init)
+		let traceRouteId = components.queryItems?
+			.first(where: { $0.name == "tracerouteId" })?
+			.value
+			.flatMap(Int64.init)
 
 		selectedTab = .map
 		mapState = if let nodeId {
 			.selectedNode(nodeId)
 		} else if let waypointId {
 			.waypoint(waypointId)
+		} else if let traceRouteId {
+			.traceRoute(traceRouteId)
 		} else {
 			nil
+		}
+	}
+
+	/// Downloads (http/https) or reads (file) a GeoJSON map overlay from the `url` query param and
+	/// imports it via `MapDataManager`, reusing the same pipeline as the in-app file picker. Lets a
+	/// coverage map be imported hands-free, e.g. `xcrun simctl openurl <udid> "meshtastic:///importGeoJSON?url=<encoded-url>"`.
+	private func routeImportGeoJSON(_ components: URLComponents) {
+		guard let urlString = components.queryItems?.first(where: { $0.name == "url" })?.value else {
+			Logger.services.warning("🛣 [App] importGeoJSON route missing required 'url' query param.")
+			return
+		}
+
+		selectedTab = .map
+
+		Task {
+			do {
+				let metadata = try await MapDataManager.shared.importFromRemote(urlString: urlString)
+				Logger.services.info("🗺️ [App] Imported '\(metadata.originalName, privacy: .public)' (\(metadata.overlayCount, privacy: .public) overlays) via importGeoJSON deep link.")
+			} catch {
+				Logger.services.error("🗺️ [App] importGeoJSON deep link failed: \(error.localizedDescription, privacy: .public)")
+			}
 		}
 	}
 

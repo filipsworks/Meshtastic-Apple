@@ -70,6 +70,25 @@ class PersistenceController {
 		}
 	}
 
+	/// Nuclear reset: delete the on-disk store files and reopen a brand-new, guaranteed-empty
+	/// container. Used by the device-switch / cross-device reset paths as an escalation when the
+	/// per-model `clearDatabase` fails part-way (e.g. a relationship constraint aborts the batch
+	/// deletes) — proceeding on a half-cleared store is how one radio's nodes leak into another's
+	/// session. POSIX unlink semantics make this safe with stragglers: any old context still
+	/// holding the previous container writes to the unlinked inode, never into the new store.
+	/// Not usable when data must be preserved (routes, favorites) — everything is erased.
+	func destroyStoreAndRecreateContainer() {
+		guard !inMemory else {
+			recreateContainer()
+			return
+		}
+		let schema = Schema(versionedSchema: MeshtasticSchema.current)
+		let config = ModelConfiguration(storeName, schema: schema, isStoredInMemoryOnly: false, allowsSave: true)
+		Self.removeStoreFiles(at: config.url)
+		recreateContainer()
+		Logger.data.warning("💾 Store files destroyed and container recreated (escalated database reset)")
+	}
+
 	private static func removeStoreFiles(at storeURL: URL) {
 		let fm = FileManager.default
 		let storeFiles = [
@@ -202,10 +221,21 @@ class PersistenceController {
 
 	@MainActor
 	public func clearDatabase(includeRoutes: Bool = true) {
+		// Delete + SAVE one model type at a time. A batch `delete(model:)` enqueues a deletion that is
+		// committed on the next save and nullifies inverse relationships; reconciling MANY types'
+		// deletions in a SINGLE trailing save tears down objects whose inverse targets were also
+		// deleted in the same uncommitted batch and trips an internal SwiftData assertion (SIGTRAP).
+		// Saving after each delete keeps every reconcile against already-committed, consistent state.
+		// Mirrors MeshPackets.clearDatabase.
 		do {
+			// Sever tags AND images from the owning side before the batch deletes: batch-deleting
+			// the images while a device still references them fails with "mandatory OTO nullify
+			// inverse on DeviceHardwareImageEntity/device", aborting the whole clear.
+			// Mirrors MeshPackets.clearDatabase.
 			let hardwareDevices = try container.mainContext.fetch(FetchDescriptor<DeviceHardwareEntity>())
 			for device in hardwareDevices {
 				device.tags.removeAll()
+				device.images.removeAll()
 			}
 			if container.mainContext.hasChanges {
 				try container.mainContext.save()
@@ -214,7 +244,9 @@ class PersistenceController {
 			// Delete entities that are on the inverse side of many-to-many
 			// relationships first to avoid constraint trigger violations.
 			try container.mainContext.delete(model: DeviceHardwareTagEntity.self)
+			try container.mainContext.save()
 			try container.mainContext.delete(model: DeviceHardwareImageEntity.self)
+			try container.mainContext.save()
 
 			for modelType in MeshtasticSchema.allModels {
 				if !includeRoutes && (modelType == RouteEntity.self || modelType == LocationEntity.self) {
@@ -224,8 +256,8 @@ class PersistenceController {
 					continue // already deleted above
 				}
 				try container.mainContext.delete(model: modelType)
+				try container.mainContext.save()
 			}
-			try container.mainContext.save()
 			Logger.data.error("SwiftData database truncated. All app data has been erased.")
 		} catch {
 			Logger.data.error("Failed to clear SwiftData database: \(error.localizedDescription, privacy: .public)")

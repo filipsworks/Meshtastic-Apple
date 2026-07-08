@@ -17,7 +17,11 @@ struct MapSettingsForm: View {
 	@AppStorage("enableMapConvexHull") private var convexHull = false
 	@AppStorage("enableMapWaypoints") private var enableMapWaypoints = true
 	@AppStorage("mapOverlaysEnabled") private var mapOverlaysEnabled = false
+	@AppStorage("enableOfflineTiles") private var enableOfflineTiles = false
+	@AppStorage("enableMapClustering") private var enableMapClustering = true
+	@AppStorage("enableMapPreciseLocationsOnly") private var preciseLocationsOnly = false
 	@ObservedObject private var mapDataManager = MapDataManager.shared
+	@ObservedObject private var offlineMapManager = OfflineMapManager.shared
 	@Binding var traffic: Bool
 	@Binding var pointsOfInterest: Bool
 	@Binding var mapLayer: MapLayer
@@ -32,6 +36,7 @@ struct MapSettingsForm: View {
 				Section(header: Text("Map Options")) {
 					Picker(selection: $mapLayer, label: Text("")) {
 						ForEach(MapLayer.allCases, id: \.self) { layer in
+							// `.offline` is an overlay toggle now, not a base layer — keep it out of the base picker.
 							if layer != MapLayer.offline {
 								Text(layer.localized.capitalized)
 							}
@@ -65,6 +70,19 @@ struct MapSettingsForm: View {
 							} icon: {
 								Image(systemName: "signpost.right.and.left")
 									.symbolRenderingMode(.multicolor)
+							}
+						}
+						.tint(.accentColor)
+						Toggle(isOn: $preciseLocationsOnly) {
+							Label {
+								VStack(alignment: .leading) {
+									Text("Precise Locations Only")
+									Text("Hides nodes that broadcast an approximate location (the ones drawn with a translucent precision circle).")
+										.font(.caption)
+										.foregroundColor(.secondary)
+								}
+							} icon: {
+								Image(systemName: "scope")
 							}
 						}
 						.tint(.accentColor)
@@ -111,7 +129,60 @@ struct MapSettingsForm: View {
 					}
 				}
 
+				if meshMap {
+					Section(header: Text("Offline Maps")) {
+						NavigationLink {
+							OfflineMapsList()
+						} label: {
+							Label {
+								VStack(alignment: .leading) {
+									Text("Offline Maps")
+									if offlineMapManager.regions.isEmpty {
+										Text("Download map areas to use without a connection.")
+											.font(.caption)
+											.foregroundColor(.secondary)
+									} else {
+										Text("\(offlineMapManager.regions.count) downloaded · \(offlineMapManager.formattedTotalSize)")
+											.font(.caption)
+											.foregroundColor(.secondary)
+									}
+								}
+							} icon: {
+								Image(systemName: "arrow.down.circle")
+							}
+						}
+					}
+				}
+
 				Section(header: Text("Map Overlays")) {
+					if meshMap {
+						Toggle(isOn: $enableOfflineTiles) {
+							Label {
+								VStack(alignment: .leading) {
+									Text("Offline Tiles")
+									Text("Shows a saved offline map over the covered area, so it still works without an internet connection.")
+										.font(.caption)
+										.foregroundColor(.secondary)
+								}
+							} icon: {
+								Image(systemName: "square.dashed")
+							}
+						}
+						.tint(.accentColor)
+						Toggle(isOn: $enableMapClustering) {
+							Label {
+								VStack(alignment: .leading) {
+									Text("Cluster Nodes")
+									Text("Groups nearby nodes into one numbered pin; tap it to zoom in. Turn off to always show every node.")
+										.font(.caption)
+										.foregroundColor(.secondary)
+								}
+							} icon: {
+								Image(systemName: "circle.grid.3x3.fill")
+							}
+						}
+						.tint(.accentColor)
+					}
 					let hasUserData = GeoJSONOverlayManager.shared.hasUserData()
 					// Master toggle for map overlays
 					Toggle(isOn: $mapOverlaysEnabled) {
@@ -220,6 +291,14 @@ struct MapSettingsForm: View {
 		.onAppear {
 			// Initialize map data manager
 			mapDataManager.initialize()
+			offlineMapManager.loadIfNeeded()
+			// Migrate the legacy `.offline` base layer to the new independent offline-tiles overlay here
+			// (a shared entry point), so any presenter — incl. the per-node map — never shows the base
+			// picker with an unselectable `.offline` value when its segment is hidden on the new map.
+			if mapLayer == .offline {
+				mapLayer = .standard
+				enableOfflineTiles = true
+			}
 		}
 
 	}

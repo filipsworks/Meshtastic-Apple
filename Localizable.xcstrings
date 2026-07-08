@@ -1,6 +1,311 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ entered %@" : {
+      "comment" : "Geofence notification body. First %@ is the node name, second %@ is the waypoint name."
+    },
+    "%@ left %@" : {
+      "comment" : "Geofence notification body. First %@ is the node name, second %@ is the waypoint name."
+    },
+    "Entered %@" : {
+      "comment" : "Geofence notification title when a node enters the waypoint area. %@ is the waypoint name."
+    },
+    "Left %@" : {
+      "comment" : "Geofence notification title when a node leaves the waypoint area. %@ is the waypoint name."
+    },
+    "lockdown.backoff.body %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Try again in %lld s"
+          }
+        }
+      }
+    },
+    "lockdown.backoff.explanation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wait for the timer to elapse before trying again."
+          }
+        }
+      }
+    },
+    "lockdown.backoff.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Too many attempts"
+          }
+        }
+      }
+    },
+    "lockdown.connecting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Connecting to device…"
+          }
+        }
+      }
+    },
+    "lockdown.locked.auto_replay_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Stored passphrase no longer works. Enter the current one."
+          }
+        }
+      }
+    },
+    "lockdown.locked.needs_auth" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This device is locked. Enter the passphrase to continue."
+          }
+        }
+      }
+    },
+    "lockdown.locked.token_expired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Your session has expired. Re-enter the passphrase."
+          }
+        }
+      }
+    },
+    "lockdown.locked.token_rtc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Device clock unavailable; passphrase required."
+          }
+        }
+      }
+    },
+    "lockdown.locked.token_tamper" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Stored credentials invalid; re-enter the passphrase."
+          }
+        }
+      }
+    },
+    "lockdown.passphrase.field" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Passphrase"
+          }
+        }
+      }
+    },
+    "lockdown.passphrase.wrong" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Wrong passphrase. Try again."
+          }
+        }
+      }
+    },
+    "lockdown.session.boots_caption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Leave empty for firmware default."
+          }
+        }
+      }
+    },
+    "lockdown.session.boots_remaining" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Boots remaining (optional)"
+          }
+        }
+      }
+    },
+    "lockdown.session.cap_caption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Per-boot uptime cap. Leave empty for no cap. Device reboots when the cap elapses; next boot auto-unlocks via the boot-count TTL."
+          }
+        }
+      }
+    },
+    "lockdown.session.cap_minutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Session cap (minutes)"
+          }
+        }
+      }
+    },
+    "lockdown.session.hours_caption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Leave empty for no time limit."
+          }
+        }
+      }
+    },
+    "lockdown.session.hours_valid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hours valid (optional)"
+          }
+        }
+      }
+    },
+    "lockdown.session.section" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Session"
+          }
+        }
+      }
+    },
+    "lockdown.set_passphrase.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "First-time setup. Pick a passphrase you can re-enter."
+          }
+        }
+      }
+    },
+    "lockdown.set_passphrase.submit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set Passphrase"
+          }
+        }
+      }
+    },
+    "lockdown.set_passphrase.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set device passphrase"
+          }
+        }
+      }
+    },
+    "lockdown.unlock.submit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Unlock"
+          }
+        }
+      }
+    },
+    "lockdown.unlock.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Unlock device"
+          }
+        }
+      }
+    },
+    "Signed · verified" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signed · verified"
+          }
+        }
+      }
+    },
+    "Signed node" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signed node"
+          }
+        }
+      }
+    },
+    "Verified automatically" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verified automatically"
+          }
+        }
+      }
+    },
+    "Verified with the sender's key." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verified with the sender's key."
+          }
+        }
+      }
+    },
     "" : {
       "localizations" : {
         "da" : {
@@ -298,7 +603,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "將設備送回DFU重啟"
+            "value" : "將裝置送回DFU重啟"
           }
         }
       }
@@ -362,7 +667,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "請確保您的設備已安裝並連線至Wi-Fi或藍牙。"
+            "value" : "請確保您的裝置已安裝並連線至Wi-Fi或藍牙。"
           }
         }
       }
@@ -564,7 +869,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "斷開Meshtastic連線"
+            "value" : "「中斷 Meshtastic 連線」— 中斷與已連線 BLE 節點的連線。"
           }
         }
       }
@@ -696,7 +1001,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "使用 Siri 發送 Meshtastic 群組訊息，將訊息發送到網格頻道。"
+            "value" : "「傳送 Meshtastic 群組訊息」— 將訊息傳送至 Mesh 頻道。"
           }
         }
       }
@@ -1315,7 +1620,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@ - %2$@ 往  %3$@ 返"
+            "value" : "%@ - 沒有回應"
           }
         }
       }
@@ -1398,6 +1703,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ - 未送出"
+          }
+        }
+      }
+    },
+    "%@ · Slot %@" : {
+      "comment" : "A row that shows the frequency and slot of a channel.",
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · Slot %2$@"
+          }
+        }
+      }
+    },
+    "%@ · Updated %@" : {
+      "comment" : "A description of a downloaded offline map, including its size and the date it was last updated. The argument is the size of the map, the second argument is the formatted date of the last update.",
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · Updated %2$@"
           }
         }
       }
@@ -1749,6 +2078,36 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$llds"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$lld 秒"
+          }
+        }
+      }
+    },
+    "%@ • %@ Towards • %@ Back" : {
+      "comment" : "A label that shows the time a trace route was created, the number of hops the route took towards the destination, and the number of hops the route took back. The first argument is a date and time. The second argument is the string “%arg Hops”. The third argument is the number of hops the route took back.",
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ • %2$@ Towards • %3$@ Back"
+          }
+        }
+      }
+    },
+    "%@ → %@" : {
+      "comment" : "A label displaying the start and end nodes of a trace route. The first argument is the name or hex-encoded ID of the starting node. The second argument is the name or hex-encoded ID of the destination node.",
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ → %2$@"
           }
         }
       }
@@ -2158,7 +2517,14 @@
       }
     },
     "%@ dBm" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ dBm"
+          }
+        }
+      }
     },
     "%@ documentation page" : {
       "comment" : "Accessibility label and hint for the web view showing the documentation for a given page. The argument is the name of the page.",
@@ -2291,6 +2657,14 @@
           }
         }
       }
+    },
+    "%@ used on this device" : {
+      "comment" : "A footnote that shows the size of the offline map data on the user's device. The argument is the size of the offline map data in bytes.",
+      "isCommentAutoGenerated" : true
+    },
+    "%@ will be freed on this device." : {
+      "comment" : "A message in a confirmation dialog that lets the user remove an offline map. The argument is the size of the map.",
+      "isCommentAutoGenerated" : true
     },
     "%@, %@" : {
       "localizations" : {
@@ -2864,7 +3238,14 @@
       }
     },
     "%d dBm" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d dBm"
+          }
+        }
+      }
     },
     "%d Hops" : {
       "localizations" : {
@@ -3216,6 +3597,16 @@
         }
       }
     },
+    "%lld downloaded · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld downloaded · %2$@"
+          }
+        }
+      }
+    },
     "%lld duplicate" : {
       "comment" : "A label that indicates that a packet was received more than once.",
       "isCommentAutoGenerated" : true,
@@ -3533,7 +3924,14 @@
       }
     },
     "%lld Local Stats Readings" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 筆本機統計讀數"
+          }
+        }
+      }
     },
     "%lld Mesh" : {
       "localizations" : {
@@ -3653,7 +4051,15 @@
     },
     "%lld nodes discovered" : {
       "comment" : "A label showing the number of nodes that have been discovered during a scan. The argument is the number of nodes that have been discovered.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "發現 %lld 個節點"
+          }
+        }
+      }
     },
     "%lld of %lld parts received" : {
       "localizations" : {
@@ -4219,7 +4625,15 @@
     },
     "%lld/80 bytes" : {
       "comment" : "A label showing the number of bytes used in the status message.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld/80 位元組"
+          }
+        }
+      }
     },
     "%lld%%" : {
       "localizations" : {
@@ -4457,7 +4871,15 @@
     },
     "•" : {
       "comment" : "A separator between date and time.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "•"
+          }
+        }
+      }
     },
     "• %@" : {
       "localizations" : {
@@ -4849,7 +5271,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "您可能會看到一個錯誤訊息，表示檔案無法儲存。這是正常的，因為設備在更新後立即斷開連線。"
+            "value" : "您可能會看到一個錯誤訊息，表示檔案無法儲存。這是正常的，因為裝置在更新後立即斷開連線。"
           }
         }
       }
@@ -5015,7 +5437,14 @@
       }
     },
     "0.0.0.0" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0.0.0.0"
+          }
+        }
+      }
     },
     "1" : {
       "localizations" : {
@@ -5075,7 +5504,7 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "1"
           }
         }
@@ -6268,7 +6697,7 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "180"
           }
         }
@@ -6342,7 +6771,14 @@
       }
     },
     "255.255.255.0" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "255.255.255.0"
+          }
+        }
+      }
     },
     "256 bit" : {
       "localizations" : {
@@ -6427,28 +6863,84 @@
       }
     },
     "700 bps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "700 bps"
+          }
+        }
+      }
     },
     "700B bps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "700B bps"
+          }
+        }
+      }
     },
     "1200 bps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1200 bps"
+          }
+        }
+      }
     },
     "1300 bps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1300 bps"
+          }
+        }
+      }
     },
     "1400 bps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1400 bps"
+          }
+        }
+      }
     },
     "1600 bps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1600 bps"
+          }
+        }
+      }
     },
     "2400 bps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2400 bps"
+          }
+        }
+      }
     },
     "3200 bps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3200 bps"
+          }
+        }
+      }
     },
     "8089" : {
       "comment" : "The port number for the TAK Server.",
@@ -6510,7 +7002,7 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "8089"
           }
         }
@@ -6518,6 +7010,7 @@
     },
     "A channel index of 0 indicates the primary channel where broadcast packets are sent. Location data is broadcast from the first channel where it is enabled with firmware 2.7 forward." : {
       "comment" : "Description of the primary channel, which is the channel used for broadcasting location data.",
+      "extractionState" : "stale",
       "isCommentAutoGenerated" : true,
       "localizations" : {
         "de" : {
@@ -6577,10 +7070,14 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "0 表示主頻道，使用來發送播報包。位置數據從第一個被啟用且支援 2.7 版本的頻道中發送。"
+            "value" : "0 表示主要頻道，使用來發送播報包。位置數據從第一個被啟用且支援 2.7 版本的頻道中發送。"
           }
         }
       }
+    },
+    "A channel index of 0 indicates the primary channel where broadcast packets are sent. On firmware 2.6.10 and later, location data is broadcast from the first channel where it is enabled." : {
+      "comment" : "Description of",
+      "isCommentAutoGenerated" : true
     },
     "A default self-signed certificate is included for localhost connections. Import a custom .p12 if needed. Client CA (.pem) validates connecting TAK clients." : {
       "localizations" : {
@@ -6641,14 +7138,22 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "本地連線使用預設的自簽證書，若需，請導入自訂的.p12文件。客戶端CA(.pem)會驗證連接 TAK 客戶端。"
+            "value" : "本地連線使用預設的自簽證書，若需，請匯入自訂的.p12文件。用戶端CA(.pem)會驗證連線至 TAK 用戶端。"
           }
         }
       }
     },
     "A local stats request has been sent to %@. Responses can take some time." : {
       "comment" : "An alert message explaining that a local stats request has been sent to a specific node. The placeholder is replaced with the node name.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已向 %@ 傳送本機統計要求。回應可能需要一些時間。"
+          }
+        }
+      }
     },
     "A previous position report for this node." : {
       "comment" : "A description of a position history point.",
@@ -6914,7 +7419,15 @@
     },
     "A status message that is broadcast to the mesh. Other nodes will see this status in the node list." : {
       "comment" : "A description of the status message field.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "廣播至網狀網路的狀態訊息。其他節點會在節點列表中看到此狀態。"
+          }
+        }
+      }
     },
     "A Trace Route was sent, no response has been received." : {
       "localizations" : {
@@ -7656,7 +8169,15 @@
     },
     "Active Database" : {
       "comment" : "A section title for the list of active database files.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用中資料庫"
+          }
+        }
+      }
     },
     "Active Preset" : {
       "comment" : "A label displayed above the currently active modem preset.",
@@ -8505,7 +9026,14 @@
       }
     },
     "Address Mode" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位址模式"
+          }
+        }
+      }
     },
     "Admin Keys" : {
       "localizations" : {
@@ -8578,7 +9106,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "管理密碼"
+            "value" : "管理金鑰"
           }
         }
       }
@@ -9408,10 +9936,24 @@
       }
     },
     "Air Quality Metrics Enabled" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已啟用空氣品質遙測"
+          }
+        }
+      }
     },
     "Air Quality Sensor Options" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "空氣品質感測器選項"
+          }
+        }
+      }
     },
     "Airtime" : {
       "localizations" : {
@@ -10311,7 +10853,7 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Alpha"
           }
         }
@@ -10998,7 +11540,14 @@
       }
     },
     "An admin key must be set before enabling managed mode." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "啟用管理模式前必須先設定管理員金鑰。"
+          }
+        }
+      }
     },
     "An open source, off-grid, decentralized, mesh network that runs on affordable, low-power radios." : {
       "localizations" : {
@@ -11077,7 +11626,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "一個開源、離線運作、去中心化的網狀網路，運行於平價且低功耗的無線電設備上。"
+            "value" : "一個開源、離線運作、去中心化的網狀網路，運行於平價且低功耗的無線電裝置上。"
           }
         }
       }
@@ -11137,18 +11686,34 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "一個包圍所有 LoRa 節點在網格上的輪廓"
+            "value" : "包圍 Mesh 上所有 LoRa 節點位置的輪廓。"
           }
         }
       }
     },
     "Analyze Current Preset" : {
       "comment" : "A button that analyzes the current preset.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分析目前預設值"
+          }
+        }
+      }
     },
     "Analyze only your radio's current preset, seeded with everything already collected — every node heard, per-node message and sensor counts, and RF health including noise floor — so the run starts from your full history rather than an empty scan. Stop anytime to view the summary." : {
       "comment" : "A footer for the current data report section of the discovery scan view.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "僅分析您無線電的目前預設值，並以已收集的所有資料為基礎——包含聽到的每個節點、各節點訊息與感測器計數，以及含噪聲底限的 RF 健康狀態——讓掃描從完整歷史記錄開始，而非空白掃描。可隨時停止以檢視摘要。"
+          }
+        }
+      }
     },
     "Analyzing..." : {
       "comment" : "A placeholder text displayed while the system is analyzing a preset.",
@@ -11780,7 +12345,15 @@
     },
     "Application Support" : {
       "comment" : "A section header for files in the application support directory.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "應用程式支援"
+          }
+        }
+      }
     },
     "Approximate Location" : {
       "localizations" : {
@@ -11925,7 +12498,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "設備架構"
+            "value" : "裝置架構"
           }
         }
       }
@@ -12449,10 +13022,24 @@
       }
     },
     "Audio" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音訊"
+          }
+        }
+      }
     },
     "Audio Config" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音訊設定"
+          }
+        }
+      }
     },
     "Auto-Fix Channel" : {
       "comment" : "A button label that initiates the process of automatically fixing the TAK server's primary communication channel.",
@@ -12921,7 +13508,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "可以連接的設備"
+            "value" : "可連線的電台"
           }
         }
       }
@@ -13075,12 +13662,26 @@
             "state" : "translated",
             "value" : "Backup Failed"
           }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "備份失敗"
+          }
         }
       }
     },
     "Backup Management" : {
       "comment" : "A title for a screen that displays a list of node backups.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "備份管理"
+          }
+        }
+      }
     },
     "Backup Now" : {
       "localizations" : {
@@ -13088,6 +13689,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Backup Now"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "立即備份"
           }
         }
       }
@@ -13163,13 +13770,20 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "將您的私鑰複製到 iCloud 密碼夾中。"
+            "value" : "將您的私鑰備份至 iCloud 鑰匙圈。"
           }
         }
       }
     },
     "Bad Rx" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "錯誤接收"
+          }
+        }
+      }
     },
     "Bandwidth" : {
       "localizations" : {
@@ -14077,10 +14691,14 @@
       }
     },
     "Bitrate" : {
-
-    },
-    "Bits" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位元率"
+          }
+        }
+      }
     },
     "BLE" : {
       "localizations" : {
@@ -14229,7 +14847,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "藍牙設備"
+            "value" : "藍牙裝置"
           }
         }
       }
@@ -14393,13 +15011,20 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "藍芽 PIN 碼必須是 6 位數字。"
+            "value" : "藍牙 PIN 碼必須是 6 位數字。"
           }
         }
       }
     },
     "BLE Threshold" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BLE 閾值"
+          }
+        }
+      }
     },
     "Bluetooth" : {
       "localizations" : {
@@ -14496,7 +15121,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "藍芽"
+            "value" : "藍牙"
           }
         }
       }
@@ -14596,7 +15221,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "藍芽設定"
+            "value" : "藍牙設定"
           }
         }
       }
@@ -14892,7 +15517,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "將Mesh to TAK/CoT格式轉換"
+            "value" : "將 Meshtastic 位置、節點、航點與訊息橋接至 TAK/CoT 格式"
           }
         }
       }
@@ -14962,13 +15587,20 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "傳播設備指標"
+            "value" : "傳播裝置指標"
           }
         }
       }
     },
     "Busy Floor (-85 dBm)" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "忙碌底限（-85 dBm）"
+          }
+        }
+      }
     },
     "Button GPIO" : {
       "localizations" : {
@@ -15640,10 +16272,24 @@
       }
     },
     "Canceled" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已取消"
+          }
+        }
+      }
     },
     "Canceled: %d" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已取消：%d"
+          }
+        }
+      }
     },
     "Canned Messages" : {
       "localizations" : {
@@ -17857,6 +18503,9 @@
         }
       }
     },
+    "Channel Icons" : {
+
+    },
     "Channel Index" : {
       "comment" : "A heading for the channel index.",
       "isCommentAutoGenerated" : true,
@@ -18889,6 +19538,10 @@
         }
       }
     },
+    "Choose Area" : {
+      "comment" : "A title for the view that lets the user choose an area to download.",
+      "isCommentAutoGenerated" : true
+    },
     "Choosing the Right Device Role" : {
       "localizations" : {
         "de" : {
@@ -18948,10 +19601,14 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "選擇合適的設備角色"
+            "value" : "選擇合適的裝置角色"
           }
         }
       }
+    },
+    "Cities, parks, and more" : {
+      "comment" : "A prompt for a search bar.",
+      "isCommentAutoGenerated" : true
     },
     "Clear" : {
       "localizations" : {
@@ -19276,7 +19933,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "清除過時的節點"
+            "value" : "清除過期節點"
           }
         }
       }
@@ -19349,11 +20006,27 @@
     },
     "Clears all active contact filters." : {
       "comment" : "A hint for the reset button.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清除所有使用中的聯絡人篩選條件。"
+          }
+        }
+      }
     },
     "Clears all active node filters." : {
       "comment" : "A hint for the reset button.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清除所有使用中的節點篩選條件。"
+          }
+        }
+      }
     },
     "Client Base should only favorite other nodes you control. Improper use will hurt your local mesh." : {
       "comment" : "A message displayed in a confirmation dialog when trying to favorite a node as a CLIENT_BASE.",
@@ -19410,7 +20083,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "客戶端僅可對您控制的其他節點進行收藏。不當使用將損害您的本地網格"
+            "value" : "用戶端僅可將您控制的其他節點加入最愛。不當使用將損害您的本地 Mesh。"
           }
         }
       }
@@ -19620,7 +20293,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "客戶端歷史紀錄"
+            "value" : "用戶端歷史紀錄"
           }
         }
       }
@@ -19702,7 +20375,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "客戶端歷史紀錄請求已送出"
+            "value" : "用戶端歷史紀錄請求已送出"
           }
         }
       }
@@ -19784,7 +20457,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "客戶端選項"
+            "value" : "用戶端選項"
           }
         }
       }
@@ -19971,11 +20644,28 @@
         }
       }
     },
-    "Codec2 Enabled" : {
+    "Cluster Nodes" : {
 
     },
+    "Codec2 Enabled" : {
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已啟用 Codec2"
+          }
+        }
+      }
+    },
     "Codec2 Settings" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codec2 設定"
+          }
+        }
+      }
     },
     "Coding Rate" : {
       "localizations" : {
@@ -20061,7 +20751,15 @@
     },
     "Collapsed" : {
       "comment" : "A label describing a section that is collapsed.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已收合"
+          }
+        }
+      }
     },
     "Color" : {
       "localizations" : {
@@ -20228,7 +20926,14 @@
       }
     },
     "Community supported Linux device." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "社群支援的 Linux 裝置。"
+          }
+        }
+      }
     },
     "Compass" : {
       "localizations" : {
@@ -20301,7 +21006,14 @@
       }
     },
     "Compass Orientation" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "羅盤方向"
+          }
+        }
+      }
     },
     "Complete a Local Mesh Discovery scan to see results here." : {
       "comment" : "A description of the content of the view.",
@@ -20364,7 +21076,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "完成本地網格發現掃描後，請在此查看結果。"
+            "value" : "完成本地 Mesh 探索掃描後，即可在此查看結果。"
           }
         }
       }
@@ -20428,7 +21140,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "完整設備設置"
+            "value" : "完整裝置設定"
           }
         }
       }
@@ -21060,7 +21772,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "正在連接節點"
+            "value" : "正在連線節點"
           }
         }
       }
@@ -21142,7 +21854,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "透過Proxy連接到MQTT"
+            "value" : "透過Proxy連線到MQTT"
           }
         }
       }
@@ -21225,7 +21937,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "連接新的節點？"
+            "value" : "連線新的節點？"
           }
         }
       }
@@ -21292,7 +22004,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "連接本地Wi-Fi網絡上的節點"
+            "value" : "連線本地Wi-Fi網絡上的節點"
           }
         }
       }
@@ -21425,7 +22137,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "請確保設備連接到穩定的電源。"
+            "value" : "請確保裝置連線到穩定的電源。"
           }
         }
       }
@@ -21491,7 +22203,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "將您的mPWRD-OS設備透過藍牙連接到Wi-Fi網路"
+            "value" : "將您的mPWRD-OS裝置透過藍牙連線到Wi-Fi網路"
           }
         }
       }
@@ -21591,7 +22303,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "已連接"
+            "value" : "已連線"
           }
         }
       }
@@ -21733,7 +22445,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "已連接的節點 %@"
+            "value" : "已連線的節點 %@"
           }
         }
       }
@@ -21815,7 +22527,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "已連接的節點"
+            "value" : "已連線的節點"
           }
         }
       }
@@ -21915,7 +22627,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "連接中⋯⋯"
+            "value" : "連線中⋯⋯"
           }
         }
       }
@@ -21998,7 +22710,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "連接到新的設備時，手機上的 App 資料將會被清除。"
+            "value" : "連線到新的裝置時，手機上的 App 資料將會被清除。"
           }
         }
       }
@@ -22498,7 +23210,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "持續定位更新"
+            "value" : "持續位置更新"
           }
         }
       }
@@ -23098,7 +23810,15 @@
     },
     "Copy %@" : {
       "comment" : "A context menu item that copies a value to the clipboard. The argument is the name of the value.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "複製 %@"
+          }
+        }
+      }
     },
     "Could not find node" : {
       "localizations" : {
@@ -23183,7 +23903,14 @@
       }
     },
     "Count" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "計數"
+          }
+        }
+      }
     },
     "Counter Clockwise Rotary Event" : {
       "localizations" : {
@@ -23328,7 +24055,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "建立NFC聯絡人標籤"
+            "value" : "建立節點聯絡人 NFC 標籤"
           }
         }
       }
@@ -23416,7 +24143,14 @@
       }
     },
     "Created by" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建立者"
+          }
+        }
+      }
     },
     "Created by:" : {
       "extractionState" : "stale",
@@ -23790,9 +24524,21 @@
         }
       }
     },
+    "Current Location" : {
+      "comment" : "Name of the map target when the user selects their current location.",
+      "isCommentAutoGenerated" : true
+    },
     "Current Preset" : {
       "comment" : "A label displayed above the current",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目前預設值"
+          }
+        }
+      }
     },
     "Current: %lld" : {
       "localizations" : {
@@ -23875,6 +24621,10 @@
           }
         }
       }
+    },
+    "Dashed line back to the originator." : {
+      "comment" : "A description of a dashed line that represents the return path of a trace route.",
+      "isCommentAutoGenerated" : true
     },
     "Dashed line showing a recorded route path." : {
       "comment" : "A description of a dashed line that shows a recorded route path.",
@@ -24157,7 +24907,14 @@
       }
     },
     "dBm" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dBm"
+          }
+        }
+      }
     },
     "Debug" : {
       "localizations" : {
@@ -24568,7 +25325,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "必須使用預設密碼進行本地網格發現"
+            "value" : "需要預設金鑰"
           }
         }
       }
@@ -24802,7 +25559,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "刪除所有配置、鍵和 BLE 連接？"
+            "value" : "刪除所有配置、鍵和 BLE 連線？"
           }
         }
       }
@@ -25042,7 +25799,14 @@
       }
     },
     "Delete all local stats?" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刪除所有本機統計資料？"
+          }
+        }
+      }
     },
     "Delete all pax data?" : {
       "localizations" : {
@@ -25204,7 +25968,15 @@
     },
     "Delete Backup?" : {
       "comment" : "A confirmation dialog asking the user to confirm the deletion of a backup.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刪除備份？"
+          }
+        }
+      }
     },
     "Delete Message" : {
       "localizations" : {
@@ -25837,6 +26609,10 @@
           }
         }
       }
+    },
+    "Detail" : {
+      "comment" : "A label that describes the zoom range of the map.",
+      "isCommentAutoGenerated" : true
     },
     "Details" : {
       "comment" : "The title of a screen that shows the details of a single object.",
@@ -26744,7 +27520,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設備"
+            "value" : "裝置"
           }
         }
       }
@@ -26932,7 +27708,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設備設定"
+            "value" : "裝置設定"
           }
         }
       }
@@ -26996,7 +27772,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "設備配置指南"
+            "value" : "裝置配置指南"
           }
         }
       }
@@ -27060,7 +27836,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "設備已連線"
+            "value" : "裝置已連線"
           }
         }
       }
@@ -27231,7 +28007,15 @@
     },
     "Device Links" : {
       "comment" : "The title of a screen that lists links to other devices.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "裝置連結"
+          }
+        }
+      }
     },
     "Device Metrics" : {
       "localizations" : {
@@ -27462,7 +28246,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "設備選項"
+            "value" : "裝置選項"
           }
         }
       }
@@ -27610,7 +28394,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "設備角色為 \"%@\"。建議設定為 TAK 或 TAK Tracker 以獲得最佳運作效果。"
+            "value" : "裝置角色為 \"%@\"。建議設定為 TAK 或 TAK Tracker 以獲得最佳運作效果。"
           }
         }
       }
@@ -27674,7 +28458,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "設備角色"
+            "value" : "裝置角色"
           }
         }
       }
@@ -27828,7 +28612,14 @@
       }
     },
     "DHCP" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DHCP"
+          }
+        }
+      }
     },
     "Dilution of precision (DOP) PDOP used by default" : {
       "localizations" : {
@@ -28059,7 +28850,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "直接訊息密碼"
+            "value" : "直接訊息金鑰"
           }
         }
       }
@@ -28379,7 +29170,14 @@
       }
     },
     "Direct Response" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "直接回應"
+          }
+        }
+      }
     },
     "Disabled" : {
       "localizations" : {
@@ -28476,7 +29274,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "關閉"
+            "value" : "已停用"
           }
         }
       }
@@ -28576,7 +29374,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "斷開連接"
+            "value" : "斷開連線"
           }
         }
       }
@@ -29768,7 +30566,14 @@
       }
     },
     "DNS" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DNS"
+          }
+        }
+      }
     },
     "Do not close the app during the update." : {
       "comment" : "A warning that the app will be closed during the update.",
@@ -29977,7 +30782,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "說明翻譯"
+            "value" : "文件翻譯"
           }
         }
       }
@@ -30050,7 +30855,15 @@
     },
     "Documents" : {
       "comment" : "A section header for files in the user's documents directory.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件"
+          }
+        }
+      }
     },
     "Done" : {
       "localizations" : {
@@ -30212,11 +31025,27 @@
     },
     "Double tap to collapse" : {
       "comment" : "A hint for the accessibility of a collapsed section.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "點兩下以收合"
+          }
+        }
+      }
     },
     "Double tap to expand" : {
       "comment" : "A hint for expanding a section.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "點兩下以展開"
+          }
+        }
+      }
     },
     "Downlink Enabled" : {
       "localizations" : {
@@ -30366,6 +31195,13 @@
         }
       }
     },
+    "Download map areas to use without a connection." : {
+
+    },
+    "Download New Map" : {
+      "comment" : "A title for a screen that lets the user download a new map.",
+      "isCommentAutoGenerated" : true
+    },
     "Download TAK Server Data Package" : {
       "localizations" : {
         "de" : {
@@ -30432,7 +31268,15 @@
     },
     "Download the %@ language pack to read the documentation in your language." : {
       "comment" : "A description of the action of downloading a translation language pack.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下載 %@ 語言套件，以您的語言閱讀文件。"
+          }
+        }
+      }
     },
     "Downloaded" : {
       "comment" : "A label for the section of the firmware list that shows only downloaded firmware.",
@@ -30499,6 +31343,14 @@
           }
         }
       }
+    },
+    "Drag the box, its corners, or the map to frame an area" : {
+      "comment" : "A description of how to use the map selector.",
+      "isCommentAutoGenerated" : true
+    },
+    "Drag the box, its corners, or the map to frame the geofence area" : {
+      "comment" : "A description of how to define a geofence area.",
+      "isCommentAutoGenerated" : true
     },
     "Drop Pin in Maps" : {
       "extractionState" : "stale",
@@ -30578,16 +31430,44 @@
       }
     },
     "Drop redundant position broadcasts from the same node." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "捨棄來自同一節點的重複位置廣播。"
+          }
+        }
+      }
     },
     "Drop Unknown" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "捨棄未知"
+          }
+        }
+      }
     },
     "Dupes" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重複"
+          }
+        }
+      }
     },
     "Dupes: %d" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重複：%d"
+          }
+        }
+      }
     },
     "Dwell Duration" : {
       "comment" : "A label for the dwell duration picker.",
@@ -30718,6 +31598,10 @@
           }
         }
       }
+    },
+    "Each leg is colored by its hop SNR — green (good), yellow (fair), orange (bad), red (none)." : {
+      "comment" : "A description of the signal strength color coding for a trace route.",
+      "isCommentAutoGenerated" : true
     },
     "Each node has a short name (up to 4 bytes) shown in the colored circle, and a long name displayed next to it. The circle color is based on the node number. The short name can be an emoji or initials." : {
       "localizations" : {
@@ -30876,6 +31760,9 @@
           }
         }
       }
+    },
+    "Edit Bounding Box" : {
+
     },
     "Editing Waypoint" : {
       "localizations" : {
@@ -31337,7 +32224,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "啟用傳播設備指標到網格網路。啟用時，指標僅會傳輸給已連接的客戶端。"
+            "value" : "啟用向網狀網路廣播裝置指標。停用時，指標僅傳送給已連線的用戶端。"
           }
         }
       }
@@ -31425,14 +32312,36 @@
       }
     },
     "Enable Codec2 audio encoding/decoding for voice communication over the mesh." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "啟用 Codec2 音訊編解碼，以在網狀網路上進行語音通訊。"
+          }
+        }
+      }
     },
     "Enable dropping of unknown/undecryptable packets." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "啟用捨棄未知／無法解密的封包。"
+          }
+        }
+      }
     },
     "Enable neighbor info broadcasting. Periodically sends information about directly-heard neighbors to help visualize mesh topology." : {
       "comment" : "A description of the neighbor info broadcasting feature.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "啟用鄰居資訊廣播。定期傳送直接聽到的鄰居資訊，以協助視覺化網狀網路拓撲。"
+          }
+        }
+      }
     },
     "Enable Notifications" : {
       "localizations" : {
@@ -31517,7 +32426,14 @@
       }
     },
     "Enable per-node rate limiting to throttle chatty nodes." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "啟用各節點速率限制，以節流過於頻繁的節點。"
+          }
+        }
+      }
     },
     "Enable TAK Server" : {
       "localizations" : {
@@ -31918,7 +32834,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "啟用手機在網格地圖上的藍色定位點"
+            "value" : "在 Mesh 地圖上顯示您手機的藍色位置點。"
           }
         }
       }
@@ -32494,7 +33410,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "密碼保護"
+            "value" : "加密"
           }
         }
       }
@@ -32642,7 +33558,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "請確保您的設備已充電"
+            "value" : "請確保您的裝置已充電"
           }
         }
       }
@@ -33725,7 +34641,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "ESP32 OTA 更新需要 %@ 或更高版本的軟體更新。先使用 Web Flasher 更新設備的軟體版本。"
+            "value" : "ESP32 OTA 更新需要 %@ 或更高版本的軟體更新。先使用 Web Flasher 更新裝置的軟體版本。"
           }
         }
       }
@@ -34086,14 +35002,15 @@
         }
       }
     },
-    "Exhaust Hop Position" : {
-
-    },
-    "Exhaust Hop Telemetry" : {
-
-    },
     "Expanded" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已展開"
+          }
+        }
+      }
     },
     "Expiration" : {
       "localizations" : {
@@ -34853,7 +35770,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "重置廠房將刪除設備和應用程式資料。"
+            "value" : "恢復原廠設定將刪除裝置與 App 資料。"
           }
         }
       }
@@ -35293,7 +36210,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "已收藏和已忽略的節點永遠保留。其他節點根據使用者設定的時間表從應用程式資料庫中清除（具有PKC密鑰的節點至少保留7天）。此功能僅清除未儲存於設備節點資料庫中的節點。"
+            "value" : "已收藏和已忽略的節點永遠保留。其他節點根據使用者設定的時間表從應用程式資料庫中清除（具有PKC密鑰的節點至少保留7天）。此功能僅清除未儲存於裝置節點資料庫中的節點。"
           }
         }
       }
@@ -35461,6 +36378,9 @@
           }
         }
       }
+    },
+    "Favorites Only" : {
+
     },
     "Fetch the latest position of a cetain node" : {
       "localizations" : {
@@ -36068,7 +36988,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "尋找設備"
+            "value" : "尋找裝置"
           }
         }
       }
@@ -36985,7 +37905,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "是否需要修復主頻道？"
+            "value" : "修復主要頻道？"
           }
         }
       }
@@ -37336,6 +38256,10 @@
         }
       }
     },
+    "Flyover speed %@" : {
+      "comment" : "A button that starts or stops a flyover along a trace route. The argument is the string “%g times”.",
+      "isCommentAutoGenerated" : true
+    },
     "For all Mqtt functionality other than the map report you must also set uplink and downlink for each channel you want to bridge over Mqtt." : {
       "localizations" : {
         "da" : {
@@ -37643,7 +38567,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "為了安全起見，iOS 無法直接寫入外部 USB 設備，您必須手動保存檔案。"
+            "value" : "為了安全起見，iOS 無法直接寫入外部 USB 裝置，您必須手動保存檔案。"
           }
         }
       }
@@ -38253,7 +39177,14 @@
       }
     },
     "Gateway" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "閘道"
+          }
+        }
+      }
     },
     "Generate a data package (.zip) to configure TAK clients to connect to this server." : {
       "localizations" : {
@@ -38314,7 +39245,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "生成 TAK 客戶端配置數據包 (.zip)"
+            "value" : "產生資料套件（.zip）以設定 TAK 用戶端連線至此伺服器。"
           }
         }
       }
@@ -38561,6 +39492,13 @@
         }
       }
     },
+    "Geofence" : {
+
+    },
+    "Geofence Area" : {
+      "comment" : "A title for the Geofence Area screen.",
+      "isCommentAutoGenerated" : true
+    },
     "Get custom waterproof solar and detection sensor router nodes, aluminium desktop nodes and rugged handsets." : {
       "localizations" : {
         "da" : {
@@ -38696,7 +39634,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取得 Node 位置"
+            "value" : "取得節點位置"
           }
         }
       }
@@ -38937,7 +39875,14 @@
       }
     },
     "GPIO Configuration" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPIO 設定"
+          }
+        }
+      }
     },
     "GPIO Output Duration" : {
       "localizations" : {
@@ -39659,6 +40604,10 @@
         }
       }
     },
+    "Green marks the originator, red marks the target node." : {
+      "comment" : "A description of the color-coded endpoints of a trace route.",
+      "isCommentAutoGenerated" : true
+    },
     "Grey indicates successful delivery. Orange indicates a retryable error. Red indicates a permanent failure that will not succeed on retry." : {
       "comment" : "A description of the colors used in the AckErrors view.",
       "isCommentAutoGenerated" : true,
@@ -39806,6 +40755,9 @@
           }
         }
       }
+    },
+    "Groups nearby nodes into one numbered pin; tap it to zoom in. Turn off to always show every node." : {
+
     },
     "Gusts %@" : {
       "localizations" : {
@@ -39960,7 +40912,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "重置"
+            "value" : "強制重設"
           }
         }
       }
@@ -40213,6 +41165,7 @@
     },
     "Help & Docs" : {
       "comment" : "The title of the help and documentation view.",
+      "extractionState" : "stale",
       "isCommentAutoGenerated" : true,
       "localizations" : {
         "de" : {
@@ -40633,7 +41586,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "隱藏地圖標示"
+            "value" : "隱藏地圖示示"
           }
         }
       }
@@ -40703,10 +41656,24 @@
       }
     },
     "Hide node filters" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隱藏節點篩選"
+          }
+        }
+      }
     },
     "Hide password" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隱藏密碼"
+          }
+        }
+      }
     },
     "Hides the map legend." : {
       "localizations" : {
@@ -40767,13 +41734,20 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "隱藏地圖標示"
+            "value" : "隱藏地圖示示"
           }
         }
       }
     },
     "Hides the node filter options." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隱藏節點篩選選項。"
+          }
+        }
+      }
     },
     "HIGH" : {
       "localizations" : {
@@ -40856,6 +41830,10 @@
           }
         }
       }
+    },
+    "High detail" : {
+      "comment" : "Label for a higher-detail offline map option.",
+      "isCommentAutoGenerated" : true
     },
     "History Return Max" : {
       "localizations" : {
@@ -41009,11 +41987,15 @@
         }
       }
     },
-    "Hop Management" : {
-
-    },
     "Hops" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳數"
+          }
+        }
+      }
     },
     "Hops Away" : {
       "localizations" : {
@@ -41508,7 +42490,14 @@
       }
     },
     "How often air quality metrics are sent out over the mesh. Default is 30 minutes." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "空氣品質遙測透過網狀網路傳送的頻率。預設為 30 分鐘。"
+          }
+        }
+      }
     },
     "How often device metrics are sent out over the mesh. Default is 30 minutes." : {
       "localizations" : {
@@ -41840,7 +42829,15 @@
     },
     "How often to broadcast neighbor info. Default is 4 hours." : {
       "comment" : "A description of the update interval for neighbor info.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "廣播鄰居資訊的頻率。預設為 4 小時。"
+          }
+        }
+      }
     },
     "How often to send detection sensor state to mesh regardless of detection. Default is Never." : {
       "localizations" : {
@@ -42026,7 +43023,15 @@
     },
     "How to read it" : {
       "comment" : "A heading for the instructions on how to read the noise floor.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何解讀"
+          }
+        }
+      }
     },
     "How to Update" : {
       "comment" : "A label displayed above the list of available firmware update options.",
@@ -42154,7 +43159,7 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "https://"
           }
         }
@@ -42390,31 +43395,95 @@
     },
     "I want one" : {
       "comment" : "A button label.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我想要一個"
+          }
+        }
+      }
     },
     "I2S data in pin." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I2S 資料輸入接腳。"
+          }
+        }
+      }
     },
     "I2S DIN" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I2S DIN"
+          }
+        }
+      }
     },
     "I2S SCK" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I2S SCK"
+          }
+        }
+      }
     },
     "I2S SD" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I2S SD"
+          }
+        }
+      }
     },
     "I2S serial clock pin." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I2S 序列時鐘接腳。"
+          }
+        }
+      }
     },
     "I2S serial data pin." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I2S 序列資料接腳。"
+          }
+        }
+      }
     },
     "I2S word select pin." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I2S 字選接腳。"
+          }
+        }
+      }
     },
     "I2S WS" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I2S WS"
+          }
+        }
+      }
     },
     "IAQ" : {
       "localizations" : {
@@ -43079,7 +44148,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "若已連線，請按下下方按鈕重啟 DFU 模式。否則，請快速按下您的設備重置按鈕兩下。"
+            "value" : "若已連線，請按下下方按鈕重啟 DFU 模式。否則，請快速按下您的裝置重設按鈕兩下。"
           }
         }
       }
@@ -43407,7 +44476,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "如果預設的區域主題過於繁忙，您可以選擇一個較在地的主題。"
+            "value" : "若預設的地區主題過於繁忙，可選擇較在地的主題。"
           }
         }
       }
@@ -43471,7 +44540,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "如果您的設備已安裝到 OTA_1 分區的正確更新器，您可以嘗試使用 BLE 更新過程。"
+            "value" : "如果您的裝置已安裝到 OTA_1 分區的正確更新器，您可以嘗試使用 BLE 更新過程。"
           }
         }
       }
@@ -43535,14 +44604,22 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "如果您的設備已安裝到 OTA_1 分區的正確更新器，您可以嘗試使用 WiFi 更新過程。"
+            "value" : "如果您的裝置已安裝到 OTA_1 分區的正確更新器，您可以嘗試使用 WiFi 更新過程。"
           }
         }
       }
     },
     "Ignore" : {
       "comment" : "A label for a button that can ignore a node.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "忽略"
+          }
+        }
+      }
     },
     "Ignore MQTT" : {
       "localizations" : {
@@ -43844,7 +44921,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "導入"
+            "value" : "匯入"
           }
         }
       }
@@ -43908,7 +44985,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "導入 .pem"
+            "value" : "匯入 .pem"
           }
         }
       }
@@ -43972,7 +45049,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "導入自訂.p12文件"
+            "value" : "匯入自訂.p12文件"
           }
         }
       }
@@ -44518,7 +45595,14 @@
       }
     },
     "Indicates how to rotate or invert the compass output for accurate display." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指示如何旋轉或反轉羅盤輸出，以正確顯示。"
+          }
+        }
+      }
     },
     "Indicates reduced GPS precision. The node is somewhere within the shaded area." : {
       "comment" : "A description of a position precision circle.",
@@ -44575,7 +45659,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "顯示縮小GPS精確度。該節點位於陰影區域內。"
+            "value" : "表示 GPS 精確度降低，節點位於陰影範圍內的某處。"
           }
         }
       }
@@ -45217,7 +46301,14 @@
       }
     },
     "IP" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IP"
+          }
+        }
+      }
     },
     "IP Address" : {
       "localizations" : {
@@ -45658,7 +46749,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "請保持設備與手機的距離"
+            "value" : "請保持裝置與手機的距離"
           }
         }
       }
@@ -46264,7 +47355,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "最後一次接觸的設備:"
+            "value" : "最後一次接觸的裝置:"
           }
         }
       }
@@ -46334,13 +47425,20 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "最後一次看到設備：%@"
+            "value" : "最後一次看到裝置：%@"
           }
         }
       }
     },
     "Last updated by" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最後更新者"
+          }
+        }
+      }
     },
     "Last updated by:" : {
       "extractionState" : "stale",
@@ -46605,7 +47703,15 @@
     },
     "Latest" : {
       "comment" : "A button that resets the chart view to the latest reading.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最新"
+          }
+        }
+      }
     },
     "Latitude" : {
       "localizations" : {
@@ -47177,6 +48283,16 @@
         }
       }
     },
+    "Licensed band" : {
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "執照頻段"
+          }
+        }
+      }
+    },
     "Licensed Operator" : {
       "localizations" : {
         "da" : {
@@ -47424,14 +48540,36 @@
       }
     },
     "Live" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "即時"
+          }
+        }
+      }
     },
     "LIVE" : {
       "comment" : "A label that indicates a live state",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "即時"
+          }
+        }
+      }
     },
     "Live view of mesh packets crossing the network. Overrides the category and level filters below." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "網狀網路封包穿越網路的即時檢視。會覆寫下方的類別與層級篩選。"
+          }
+        }
+      }
     },
     "Load Earlier Messages" : {
       "comment" : "A button that loads older messages.",
@@ -47896,7 +49034,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "本地網格發現"
+            "value" : "本地 Mesh 探索"
           }
         }
       }
@@ -47963,7 +49101,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "本地網格發現需要主頻使用預設密碼。請重設主頻密碼為預設後再掃描。"
+            "value" : "本地 Mesh 探索需要主要頻道使用預設金鑰。掃描前請將主要頻道金鑰重設為預設值。"
           }
         }
       }
@@ -48047,17 +49185,50 @@
       }
     },
     "Local Stats" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本機統計"
+          }
+        }
+      }
     },
     "Local Stats Log" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本機統計記錄"
+          }
+        }
+      }
     },
     "Local Stats Requested" : {
       "comment" : "The title of an alert that appears when a user successfully requests a local stats update.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已要求本機統計"
+          }
+        }
+      }
     },
     "Location" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位置"
+          }
+        }
+      }
+    },
+    "Location Sharing" : {
+      "comment" : "Title of a help item that describes the location sharing channel.",
+      "isCommentAutoGenerated" : true
     },
     "Location:" : {
       "localizations" : {
@@ -49451,7 +50622,15 @@
     },
     "Lower values usually mean a quieter receiver environment." : {
       "comment" : "A description of the meaning of a lower noise floor value.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數值較低通常表示接收環境較安靜。"
+          }
+        }
+      }
     },
     "Manage Channels" : {
       "localizations" : {
@@ -50006,7 +51185,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "手動連接"
+            "value" : "手動連線"
           }
         }
       }
@@ -50152,6 +51331,10 @@
           }
         }
       }
+    },
+    "Map data © OpenStreetMap, Protomaps" : {
+      "comment" : "A copyright notice for OpenStreetMap and Protomaps.",
+      "isCommentAutoGenerated" : true
     },
     "Map Legend" : {
       "comment" : "A title for a view that displays a map legend.",
@@ -50477,20 +51660,83 @@
         }
       }
     },
+    "Map updated" : {
+      "comment" : "A label that displays the date and time of the last update to a map.",
+      "isCommentAutoGenerated" : true
+    },
+    "Marks the channel currently used for position broadcasts." : {
+      "comment" : "Text displayed in a help item for the location sharing channel.",
+      "isCommentAutoGenerated" : true
+    },
     "Master enable for the traffic management module." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "流量管理模組的主開關。"
+          }
+        }
+      }
     },
     "Max Hops" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最大跳數"
+          }
+        }
+      }
     },
     "Max Packets" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最大封包數"
+          }
+        }
+      }
     },
     "Max Transmit Power" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最大發射功率"
+          }
+        }
+      }
+    },
+    "Maximum hop distance from the requestor at which direct NodeInfo responses are served from the local cache." : {
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "從請求者起算，可從本機快取直接回應節點資訊的最大跳數距離。"
+          }
+        }
+      }
     },
     "Maximum packets allowed per node within the rate limit window." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "速率限制時間窗內，每個節點允許的最大封包數。"
+          }
+        }
+      }
+    },
+    "Maximum unknown/undecryptable packets per rate window before the source is dropped." : {
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在捨棄來源前，每個速率時間窗內允許的未知／無法解密封包上限。"
+          }
+        }
+      }
     },
     "Mesh activity update" : {
       "localizations" : {
@@ -50635,7 +51881,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "網格覆蓋"
+            "value" : "Mesh 覆蓋範圍"
           }
         }
       }
@@ -51344,7 +52590,14 @@
       }
     },
     "meshtastic.pool.ntp.org" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "meshtastic.pool.ntp.org"
+          }
+        }
+      }
     },
     "Meshtastic® Copyright Meshtastic LLC" : {
       "localizations" : {
@@ -52281,7 +53534,14 @@
       }
     },
     "Min Interval (s)" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最小間隔（秒）"
+          }
+        }
+      }
     },
     "Minimum Distance" : {
       "localizations" : {
@@ -52365,11 +53625,15 @@
         }
       }
     },
-    "Minimum hop distance from requestor before responding to NodeInfo requests." : {
-
-    },
     "Minimum interval in seconds between position updates from the same node." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同一節點位置更新的最小間隔（秒）。"
+          }
+        }
+      }
     },
     "Minimum required: **%@**" : {
       "comment" : "A label displaying the minimum required firmware version.",
@@ -53127,9 +54391,29 @@
         }
       }
     },
+    "MQTT Downlink" : {
+      "comment" : "MQTT downlink channel help text.",
+      "isCommentAutoGenerated" : true
+    },
+    "MQTT packets for this channel can be sent back over LoRa when MQTT is configured." : {
+      "comment" : "MQTT downlink channel help text.",
+      "isCommentAutoGenerated" : true
+    },
+    "MQTT Uplink" : {
+      "comment" : "MQTT uplink channel help text.",
+      "isCommentAutoGenerated" : true
+    },
     "msh.to/%@" : {
       "comment" : "A label that links to a specific device link. The argument is the short code of the device link.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "msh.to/%@"
+          }
+        }
+      }
     },
     "mTLS" : {
       "localizations" : {
@@ -53189,7 +54473,7 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "mTLS"
           }
         }
@@ -53379,7 +54663,15 @@
     },
     "Mute notifications" : {
       "comment" : "A label for a button that mutes notifications.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "靜音通知"
+          }
+        }
+      }
     },
     "Name" : {
       "localizations" : {
@@ -53680,7 +54972,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "附近設備"
+            "value" : "附近裝置"
           }
         }
       }
@@ -53768,11 +55060,26 @@
       }
     },
     "Neighbor Info" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鄰居資訊"
+          }
+        }
+      }
     },
     "Neighbor Info Config" : {
       "comment" : "The title of the Neighbor Info configuration screen.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鄰居資訊設定"
+          }
+        }
+      }
     },
     "Network" : {
       "localizations" : {
@@ -54105,7 +55412,14 @@
       }
     },
     "Network Servers" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "網路伺服器"
+          }
+        }
+      }
     },
     "Network Status Orange" : {
       "localizations" : {
@@ -54475,7 +55789,15 @@
     },
     "No backups available" : {
       "comment" : "A message displayed when a user has no backups.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "沒有可用的備份"
+          }
+        }
+      }
     },
     "No Connected Node" : {
       "localizations" : {
@@ -54548,7 +55870,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "沒有已連接的節點"
+            "value" : "沒有已連線的節點"
           }
         }
       }
@@ -54725,7 +56047,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "未連接到節點"
+            "value" : "未連線至節點"
           }
         }
       }
@@ -54791,7 +56113,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "未連線設備。將使用第一個發現的設備。"
+            "value" : "未連線裝置。將使用第一個發現的裝置。"
           }
         }
       }
@@ -54873,7 +56195,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "沒有已連接的節點"
+            "value" : "沒有已連線的節點"
           }
         }
       }
@@ -55163,13 +56485,20 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "此設備尚未下載任何軟體。"
+            "value" : "此裝置尚未下載任何軟體。"
           }
         }
       }
     },
     "No Local Stats" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "沒有本機統計"
+          }
+        }
+      }
     },
     "No LocalStats data collected" : {
       "comment" : "A message displayed when a user has not yet collected LocalStats data.",
@@ -55313,6 +56642,10 @@
           }
         }
       }
+    },
+    "No offline maps yet. Download an area to use the map without a connection." : {
+      "comment" : "A message displayed when there are no offline maps available.",
+      "isCommentAutoGenerated" : true
     },
     "No PAX Counter Logs" : {
       "localizations" : {
@@ -55633,7 +56966,14 @@
       }
     },
     "No Reading" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "沒有讀數"
+          }
+        }
+      }
     },
     "No records found for %@" : {
       "comment" : "A view that shows when a list is empty. The argument is the name of the entity being listed.",
@@ -55754,10 +57094,14 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "未找到SSH客戶端。我們將打開App Store讓您下載一個。"
+            "value" : "找不到 SSH 用戶端。我們將開啟 App Store，讓您安裝一個。"
           }
         }
       }
+    },
+    "No Trace Routes" : {
+      "comment" : "A title for a view that shows when there are no trace routes.",
+      "isCommentAutoGenerated" : true
     },
     "Node" : {
       "localizations" : {
@@ -55843,7 +57187,15 @@
     },
     "Node Backups" : {
       "comment" : "A heading for the list of node backups.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "節點備份"
+          }
+        }
+      }
     },
     "Node Core Data Backup %@ - %@ - %@" : {
       "comment" : "A label displaying a file name and its creation date.",
@@ -55853,6 +57205,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Node Core Data Backup %1$@ - %2$@ - %3$@"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "節點核心資料備份 %1$@ - %2$@ - %3$@"
           }
         }
       }
@@ -55941,7 +57299,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Node Core Data Backup %1$@/%2$@ - %3$@ - %4$@"
+            "value" : "節點 Core Data 備份 %1$@/%2$@ - %3$@ - %4$@"
           }
         }
       }
@@ -56007,7 +57365,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "最近2小時內收到訊號。在地圖上顯示有脈動的環形圖標。"
+            "value" : "節點在過去 2 小時內曾被聽到。在地圖上以脈動環標示。"
           }
         }
       }
@@ -56417,7 +57775,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "連線設備名稱: %@"
+            "value" : "節點名稱：%@"
           }
         }
       }
@@ -56483,7 +57841,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "最近未被聽到。在地圖上顯示無脈動環。"
+            "value" : "節點最近未被聽到。在地圖上不顯示脈動環。"
           }
         }
       }
@@ -56695,7 +58053,14 @@
       }
     },
     "NodeInfo Direct Response" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "節點資訊直接回應"
+          }
+        }
+      }
     },
     "Nodes" : {
       "localizations" : {
@@ -56852,22 +58217,64 @@
       }
     },
     "Nodes Online" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在線節點"
+          }
+        }
+      }
     },
     "Noise" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "噪聲"
+          }
+        }
+      }
     },
     "Noise Floor" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "噪聲底限"
+          }
+        }
+      }
     },
     "Noise Floor %d dBm" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "噪聲底限 %d dBm"
+          }
+        }
+      }
     },
     "Noise Floor Info" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "噪聲底限資訊"
+          }
+        }
+      }
     },
     "Noise Floor No Reading" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "噪聲底限無讀數"
+          }
+        }
+      }
     },
     "Nordic DFU Update" : {
       "comment" : "The title of the Nordic DFU update screen.",
@@ -57210,7 +58617,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "此更新將會暫時斷開您的設備"
+            "value" : "此更新將會暫時斷開您的裝置"
           }
         }
       }
@@ -57444,7 +58851,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "已連線設備的電池電量低警報通知"
+            "value" : "已連線裝置的電池電量低警報通知"
           }
         }
       }
@@ -57525,11 +58932,21 @@
         }
       }
     },
-    "NTP Server" : {
+    "Notify on Enter" : {
 
     },
-    "Number of bits of precision for position deduplication (0-32)." : {
+    "Notify on Exit" : {
 
+    },
+    "NTP Server" : {
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NTP 伺服器"
+          }
+        }
+      }
     },
     "Number of hops" : {
       "localizations" : {
@@ -57777,7 +59194,22 @@
         }
       }
     },
-    "Number of unknown packets before dropping from a node." : {
+    "Observed" : {
+      "comment" : "A label indicating that a trace route was observed.",
+      "isCommentAutoGenerated" : true
+    },
+    "Off" : {
+
+    },
+    "Offline Map" : {
+      "comment" : "Default name for an offline map.",
+      "isCommentAutoGenerated" : true
+    },
+    "OFFLINE MAP" : {
+      "comment" : "A label displayed in the top-center of the map.",
+      "isCommentAutoGenerated" : true
+    },
+    "Offline Maps" : {
 
     },
     "Offline Node" : {
@@ -57839,6 +59271,10 @@
           }
         }
       }
+    },
+    "Offline Tiles" : {
+      "comment" : "The title of a view that displays a map of a city with offline tiles.",
+      "isCommentAutoGenerated" : true
     },
     "Ok" : {
       "localizations" : {
@@ -58715,7 +60151,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "在meshtastic.org上打開%@"
+            "value" : "在meshtastic.org上開啟%@"
           }
         }
       }
@@ -58785,13 +60221,20 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "打開指南針"
+            "value" : "開啟指南針"
           }
         }
       }
     },
     "Open in Maps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在地圖中開啟"
+          }
+        }
+      }
     },
     "Open Local File..." : {
       "localizations" : {
@@ -58852,7 +60295,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "打開本地檔案..."
+            "value" : "開啟本地檔案..."
           }
         }
       }
@@ -58934,7 +60377,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打開設定"
+            "value" : "開啟設定"
           }
         }
       }
@@ -58998,7 +60441,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "打開SSH客戶端"
+            "value" : "開啟 SSH 用戶端"
           }
         }
       }
@@ -59124,7 +60567,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "打開 %@ 說明書"
+            "value" : "開啟 %@ 說明書"
           }
         }
       }
@@ -59454,10 +60897,14 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "請自行在頻道設定中調整主頻道，然後返回此頁面"
+            "value" : "請自行在頻道設定中調整主要頻道，然後返回此頁面。"
           }
         }
       }
+    },
+    "Origin & Target" : {
+      "comment" : "A label displayed for the originator and target nodes in a trace route.",
+      "isCommentAutoGenerated" : true
     },
     "OS Log Entry Details" : {
       "localizations" : {
@@ -59755,6 +61202,10 @@
         }
       }
     },
+    "Outbound Path" : {
+      "comment" : "A description of the path taken by a message on its way to the target.",
+      "isCommentAutoGenerated" : true
+    },
     "Output live debug logging over serial, view and export position-redacted device logs over Bluetooth." : {
       "localizations" : {
         "da" : {
@@ -59832,7 +61283,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "透過序列埠輸出即時偵錯記錄，並可透過藍芽檢視與匯出經位置隱藏處理的裝置日誌。"
+            "value" : "透過序列埠輸出即時偵錯記錄，並可透過藍牙檢視與匯出經位置隱藏處理的裝置日誌。"
           }
         }
       }
@@ -60083,6 +61534,10 @@
         }
       }
     },
+    "Overlaps “%@”. Move or resize so it doesn’t overlap an existing map." : {
+      "comment" : "A warning to show when the selected area overlaps an existing map. The argument is the name of the existing map.",
+      "isCommentAutoGenerated" : true
+    },
     "Override automatic OLED screen detection." : {
       "localizations" : {
         "da" : {
@@ -60318,16 +61773,48 @@
       }
     },
     "Packet Stream" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "封包串流"
+          }
+        }
+      }
     },
     "Packets" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "封包"
+          }
+        }
+      }
+    },
+    "Packets from this channel can be forwarded to MQTT when MQTT is configured." : {
+      "comment" : "Text displayed in a help item that describes how MQTT uplink packets from a channel can be forwarded to MQTT when MQTT is",
+      "isCommentAutoGenerated" : true
     },
     "Packets Rx" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "接收封包"
+          }
+        }
+      }
     },
     "Packets Tx" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "傳送封包"
+          }
+        }
+      }
     },
     "Pairing Mode" : {
       "localizations" : {
@@ -60494,7 +61981,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "參加分佈式翻譯"
+            "value" : "參與分散式翻譯"
           }
         }
       }
@@ -61713,7 +63200,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "基於 PKI 的遠端管理，需搭配 2.5 版以上的韌體。"
+            "value" : "基於 PKI 的節點管理，需搭配 2.5 版以上的韌體。"
           }
         }
       }
@@ -61779,7 +63266,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "將設備放入DFU模式並通過USB連接"
+            "value" : "將裝置放入DFU模式並通過USB連線"
           }
         }
       }
@@ -62078,7 +63565,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "請先連接裝置來進行設定。"
+            "value" : "請先連線裝置來進行設定。"
           }
         }
       }
@@ -62210,7 +63697,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "請重新連線到您的設備以載入軟體資訊。"
+            "value" : "請重新連線到您的裝置以載入軟體資訊。"
           }
         }
       }
@@ -62450,7 +63937,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "定位"
+            "value" : "位置"
           }
         }
       }
@@ -62550,16 +64037,30 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "定位設定"
+            "value" : "位置設定"
           }
         }
       }
     },
     "Position Dedup" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位置去重"
+          }
+        }
+      }
     },
     "Position Deduplication" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位置去重"
+          }
+        }
+      }
     },
     "Position Exchange Failed" : {
       "localizations" : {
@@ -63286,7 +64787,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "定位精度圓圈"
+            "value" : "位置精度圓圈"
           }
         }
       }
@@ -63662,7 +65163,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "裝置的 GPS 會提供定位資訊，如果選擇「已停用」或「無此功能」，則可以手動設定固定位置。"
+            "value" : "裝置的 GPS 會提供位置資訊，若選擇「已停用」或「無此功能」，則可手動設定固定位置。"
           }
         }
       }
@@ -64441,11 +65942,9 @@
         }
       }
     },
-    "Precision Bits" : {
-
-    },
-    "Preserve hop_limit for router-to-router traffic." : {
-
+    "Preparing…" : {
+      "comment" : "A message displayed when an offline map is being prepared.",
+      "isCommentAutoGenerated" : true
     },
     "Presets" : {
       "localizations" : {
@@ -65606,7 +67105,14 @@
       }
     },
     "PTT Pin" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PTT 接腳"
+          }
+        }
+      }
     },
     "Public Key" : {
       "localizations" : {
@@ -65849,7 +67355,14 @@
       }
     },
     "Push-to-talk GPIO pin number." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "按鍵發話 GPIO 接腳編號。"
+          }
+        }
+      }
     },
     "PWD" : {
       "localizations" : {
@@ -66007,6 +67520,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Quietest channel: **%1$@** (%2$@ dBm noise floor)"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最安靜頻道：**%1$@**（%2$@ dBm 噪聲底限）"
           }
         }
       }
@@ -66192,6 +67711,9 @@
           }
         }
       }
+    },
+    "Radius" : {
+
     },
     "Range Test" : {
       "localizations" : {
@@ -66452,7 +67974,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "未收到無線電的範圍測試配置，請重新連接設備"
+            "value" : "未收到無線電的範圍測試配置，請重新連線裝置"
           }
         }
       }
@@ -66522,7 +68044,14 @@
       }
     },
     "Rate Limiting" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "速率限制"
+          }
+        }
+      }
     },
     "Re-run Analysis" : {
       "comment" : "A button that triggers a re-run of the analysis.",
@@ -66724,7 +68253,15 @@
     },
     "Readings can vary quickly with nearby transmitters, antenna setup, filters, and local interference." : {
       "comment" : "A description of how noise floor readings can change.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "讀數可能因附近發射器、天線設定、濾波器與本地干擾而快速變化。"
+          }
+        }
+      }
     },
     "Reboot" : {
       "localizations" : {
@@ -67540,7 +69077,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "記錄了訊息從網格到此節點所經過的跳躍路徑。"
+            "value" : "記錄訊息經由 Mesh 抵達此節點所經過的跳躍路徑。"
           }
         }
       }
@@ -67862,7 +69399,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "區域"
+            "value" : "地區"
           }
         }
       }
@@ -67932,7 +69469,14 @@
       }
     },
     "Relayed" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已轉發"
+          }
+        }
+      }
     },
     "Relayed by %d %@" : {
       "localizations" : {
@@ -68011,7 +69555,14 @@
       }
     },
     "Relayed: %d" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已轉發：%d"
+          }
+        }
+      }
     },
     "Release Notes" : {
       "localizations" : {
@@ -68487,6 +70038,13 @@
         }
       }
     },
+    "Remove Bounding Box" : {
+
+    },
+    "Remove Download" : {
+      "comment" : "A button that deletes a map from the user's device.",
+      "isCommentAutoGenerated" : true
+    },
     "Remove from favorites" : {
       "localizations" : {
         "da" : {
@@ -68632,6 +70190,18 @@
           }
         }
       }
+    },
+    "Remove this offline map?" : {
+      "comment" : "A confirmation dialog for removing an offline map.",
+      "isCommentAutoGenerated" : true
+    },
+    "Rename" : {
+      "comment" : "A button that renames a downloaded map.",
+      "isCommentAutoGenerated" : true
+    },
+    "Rename Map" : {
+      "comment" : "A dialog that appears when the user taps the rename button.",
+      "isCommentAutoGenerated" : true
     },
     "Replace Channels" : {
       "localizations" : {
@@ -68898,7 +70468,14 @@
       }
     },
     "Request Local Stats" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "要求本機統計"
+          }
+        }
+      }
     },
     "Request PKI Admin: %@" : {
       "localizations" : {
@@ -68981,6 +70558,10 @@
           }
         }
       }
+    },
+    "Requested" : {
+      "comment" : "A label indicating that a trace route was requested.",
+      "isCommentAutoGenerated" : true
     },
     "Required" : {
       "comment" : "A field for entering a Wi-Fi password.",
@@ -69107,7 +70688,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "需要您的手機精確定位"
+            "value" : "需要您的手機取得精確 GPS 位置"
           }
         }
       }
@@ -69271,24 +70852,54 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重置 App 設定"
+            "value" : "重設 App 設定"
           }
         }
       }
     },
     "Reset contact filters" : {
       "comment" : "A button that resets all active contact filters.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重設聯絡人篩選"
+          }
+        }
+      }
     },
     "Reset node database and favorites?" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重設節點資料庫與我的最愛？"
+          }
+        }
+      }
     },
     "Reset node database, preserving favorites?" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重設節點資料庫（保留我的最愛）？"
+          }
+        }
+      }
     },
     "Reset node filters" : {
       "comment" : "A button that resets all active node filters.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重設節點篩選"
+          }
+        }
+      }
     },
     "Reset NodeDB" : {
       "localizations" : {
@@ -69367,7 +70978,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重置 NodeDB"
+            "value" : "重設 NodeDB"
           }
         }
       }
@@ -69431,16 +71042,34 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "重置為預設值"
+            "value" : "重設為預設值"
           }
         }
       }
     },
     "Resetting…" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重設中…"
+          }
+        }
+      }
+    },
+    "Resize Area" : {
+      "comment" : "A button that opens a map view for resizing a downloaded region.",
+      "isCommentAutoGenerated" : true
     },
     "Respond to NodeInfo requests directly from local cache." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "直接從本機快取回應 NodeInfo 請求。"
+          }
+        }
+      }
     },
     "Restart" : {
       "localizations" : {
@@ -69735,10 +71364,24 @@
       }
     },
     "Restore Failed" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還原失敗"
+          }
+        }
+      }
     },
     "Restoring Backup" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還原備份中"
+          }
+        }
+      }
     },
     "Resume" : {
       "localizations" : {
@@ -70317,6 +71960,10 @@
           }
         }
       }
+    },
+    "Return Path" : {
+      "comment" : "A description of the return path of a trace route.",
+      "isCommentAutoGenerated" : true
     },
     "Review the app" : {
       "localizations" : {
@@ -71866,9 +73513,6 @@
         }
       }
     },
-    "Router Preserve Hops" : {
-
-    },
     "Routes" : {
       "localizations" : {
         "da" : {
@@ -72094,7 +73738,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信號強度 %d dBm"
+            "value" : "訊號強度 %d dBm"
           }
         }
       }
@@ -72241,20 +73885,41 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "RSSI %lld dBm"
           }
         }
       }
     },
     "RSSI threshold for BLE device counting. Default is −80 dBm." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BLE 裝置計數的 RSSI 閾值。預設為 −80 dBm。"
+          }
+        }
+      }
     },
     "RSSI threshold for WiFi device counting. Default is −80 dBm." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wi-Fi 裝置計數的 RSSI 閾值。預設為 −80 dBm。"
+          }
+        }
+      }
     },
     "Rsyslog Server" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rsyslog 伺服器"
+          }
+        }
+      }
     },
     "RX Boosted Gain" : {
       "localizations" : {
@@ -73472,7 +75137,15 @@
     },
     "Scrolls the chart to the newest reading" : {
       "comment" : "A hint for the accessibility of the \"Latest\" button.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "將圖表捲動至最新讀數"
+          }
+        }
+      }
     },
     "Search" : {
       "localizations" : {
@@ -73887,7 +75560,14 @@
       }
     },
     "Seconds" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "秒"
+          }
+        }
+      }
     },
     "Secure mTLS connection on port 8089. Both server and client certificates are required. TAK Channel Index selects the channel index where TAK messages will be sent." : {
       "comment" : "A footer for the TAK Server configuration section.",
@@ -73950,7 +75630,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "使用 TLS 進行安全連線，端口為 8089，需要雙方伺服器和客戶端證書。TAK 頻道索引選擇將 TAK 訊息發送到哪個頻道。"
+            "value" : "使用 TLS 進行安全連線，端口為 8089，需要雙方伺服器和用戶端證書。TAK 頻道索引選擇將 TAK 訊息發送到哪個頻道。"
           }
         }
       }
@@ -74792,7 +76472,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "從下拉選單中選擇一個節點，以管理已連接或遠端的裝置。"
+            "value" : "從下拉選單中選擇一個節點，以管理已連線或遠端的裝置。"
           }
         }
       }
@@ -75424,7 +77104,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Send ${messageContent} to ${nodeNumber}"
+            "value" : "傳送 ${messageContent} 至節點 ${nodeNumber}"
           }
         }
       }
@@ -76839,7 +78519,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "傳感器選項"
+            "value" : "感測器選項"
           }
         }
       }
@@ -76905,7 +78585,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "感測信號包數"
+            "value" : "感測器封包數"
           }
         }
       }
@@ -77072,7 +78752,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sent a Position Packet from the Apple device GPS to node: %@"
+            "value" : "已從 Apple 裝置 GPS 傳送位置封包至節點：%@"
           }
         }
       }
@@ -78062,7 +79742,14 @@
       }
     },
     "Server:Port" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "伺服器：連線埠"
+          }
+        }
+      }
     },
     "Session Detail" : {
       "comment" : "A title for a view that displays details of a single discovery session.",
@@ -78404,10 +80091,7 @@
         }
       }
     },
-    "Set hop_limit to 0 for relayed position broadcasts (own packets unaffected)." : {
-
-    },
-    "Set hop_limit to 0 for relayed telemetry broadcasts (own packets unaffected)." : {
+    "Set Bounding Box" : {
 
     },
     "Set LoRa Region" : {
@@ -78505,7 +80189,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定 LoRa 區域"
+            "value" : "設定 LoRa 地區"
           }
         }
       }
@@ -79910,7 +81594,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "顯示確認對話框前執行廢棄機場重置"
+            "value" : "顯示確認對話框前執行廢棄機場重設"
           }
         }
       }
@@ -80211,7 +81895,14 @@
       }
     },
     "Show node filters" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示節點篩選"
+          }
+        }
+      }
     },
     "Show nodes" : {
       "localizations" : {
@@ -80365,6 +82056,9 @@
         }
       }
     },
+    "Show on Map" : {
+
+    },
     "Show on the mesh map." : {
       "localizations" : {
         "da" : {
@@ -80514,7 +82208,14 @@
       }
     },
     "Show password" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示密碼"
+          }
+        }
+      }
     },
     "Show Translation" : {
       "comment" : "A label for a button that toggles whether the translation of a message is shown.",
@@ -80589,8 +82290,17 @@
             "state" : "new",
             "value" : "Showing latest %1$lld of %2$lld positions. Export includes all positions."
           }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示最新 %1$lld 筆，共 %2$lld 筆位置。匯出包含所有位置。"
+          }
         }
       }
+    },
+    "Shows a saved offline map over the covered area, so it still works without an internet connection." : {
+
     },
     "Shows direction and distance to a node based on GPS positions. Requires both your device and the remote node to share location." : {
       "localizations" : {
@@ -80651,7 +82361,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "顯示基於GPS位置的節點方向和距離。需要您的設備和遠端節點共享位置。"
+            "value" : "顯示基於GPS位置的節點方向和距離。需要您的裝置和遠端節點共享位置。"
           }
         }
       }
@@ -80721,7 +82431,14 @@
       }
     },
     "Shows the node filter options." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示節點篩選選項。"
+          }
+        }
+      }
     },
     "Shut Down" : {
       "localizations" : {
@@ -80942,7 +82659,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "關機？"
+            "value" : "關閉節點？"
           }
         }
       }
@@ -81018,7 +82735,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "關機？"
+            "value" : "關閉節點？"
           }
         }
       }
@@ -81240,7 +82957,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信號（僅限直接傳輸）"
+            "value" : "訊號（僅限直接傳輸）"
           }
         }
       }
@@ -81327,6 +83044,10 @@
         }
       }
     },
+    "Signal Strength" : {
+      "comment" : "A label displayed above the signal strength legend.",
+      "isCommentAutoGenerated" : true
+    },
     "Signal Strength Meter" : {
       "localizations" : {
         "de" : {
@@ -81386,7 +83107,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信號強度計"
+            "value" : "訊號強度計"
           }
         }
       }
@@ -81450,7 +83171,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信號：不良"
+            "value" : "訊號：差"
           }
         }
       }
@@ -81514,7 +83235,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信號：良好"
+            "value" : "訊號：尚可"
           }
         }
       }
@@ -81578,7 +83299,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信號：良好"
+            "value" : "訊號：良好"
           }
         }
       }
@@ -81642,7 +83363,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信號非常差"
+            "value" : "訊號：極差"
           }
         }
       }
@@ -81779,6 +83500,14 @@
           }
         }
       }
+    },
+    "Size" : {
+      "comment" : "A label that describes the size of a map.",
+      "isCommentAutoGenerated" : true
+    },
+    "Size of selected map: %@" : {
+      "comment" : "A label that shows the size of the selected map area. The value is a localized string that describes the area in square kilometers. The argument is the string “—”.",
+      "isCommentAutoGenerated" : true
     },
     "Smart Position" : {
       "localizations" : {
@@ -82167,7 +83896,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信號強度超過目前模組預設的限制，信號穩定可靠"
+            "value" : "SNR 高於目前 Modem 預設限制，訊號強而穩定。"
           }
         }
       }
@@ -82231,7 +83960,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "信噪比遠低於模組預設限制，通信在這個信號水平下很難進行"
+            "value" : "SNR 遠低於 Modem 預設限制，在此訊號強度下難以通訊。"
           }
         }
       }
@@ -82527,6 +84256,13 @@
           }
         }
       }
+    },
+    "Solid line toward the target; arrows point in the direction of travel." : {
+
+    },
+    "Source" : {
+      "comment" : "A label that displays the source of a map.",
+      "isCommentAutoGenerated" : true
     },
     "Speed" : {
       "localizations" : {
@@ -82996,7 +84732,7 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "ssh %1$@@%2$@"
           }
         }
@@ -83168,6 +84904,10 @@
         }
       }
     },
+    "Standard" : {
+      "comment" : "Label for a high-detail offline map download.",
+      "isCommentAutoGenerated" : true
+    },
     "Start" : {
       "localizations" : {
         "da" : {
@@ -83267,6 +85007,10 @@
           }
         }
       }
+    },
+    "Start flyover" : {
+      "comment" : "A button that starts a flyover over the trace route.",
+      "isCommentAutoGenerated" : true
     },
     "Start Scan" : {
       "comment" : "A button that starts a scan.",
@@ -83401,10 +85145,24 @@
       }
     },
     "Static" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "靜態"
+          }
+        }
+      }
     },
     "Static IPv4 Configuration" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "靜態 IPv4 設定"
+          }
+        }
+      }
     },
     "Status" : {
       "localizations" : {
@@ -83471,11 +85229,26 @@
       }
     },
     "Status Message" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "狀態訊息"
+          }
+        }
+      }
     },
     "Status Message Config" : {
       "comment" : "The title of the screen that allows the user to configure the status message that is broadcast to other nodes.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "狀態訊息設定"
+          }
+        }
+      }
     },
     "Step 1: Connect Device" : {
       "comment" : "A step in the",
@@ -83538,7 +85311,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "步驟1：連接設備"
+            "value" : "步驟1：連線裝置"
           }
         }
       }
@@ -83608,6 +85381,10 @@
           }
         }
       }
+    },
+    "Stop flyover" : {
+      "comment" : "A button that stops a flyover.",
+      "isCommentAutoGenerated" : true
     },
     "Stop Scan" : {
       "comment" : "A button that stops a scan.",
@@ -83922,7 +85699,14 @@
       }
     },
     "Subnet" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "子網路"
+          }
+        }
+      }
     },
     "Subscribed" : {
       "localizations" : {
@@ -84253,7 +86037,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "支援的 I2C 連接感測器將自動偵測，這些感測器包括 BMP280、BME280、BME680、MCP9808、INA219、INA260、LPS22 和 SHTC3。"
+            "value" : "支援的 I2C 連線感測器將自動偵測，這些感測器包括 BMP280、BME280、BME680、MCP9808、INA219、INA260、LPS22 和 SHTC3。"
           }
         }
       }
@@ -84313,7 +86097,14 @@
       }
     },
     "Switching Radio" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切換無線電"
+          }
+        }
+      }
     },
     "Table Empty" : {
       "comment" : "A title for a view that shows when a list is empty.",
@@ -85280,7 +87071,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "遙測（傳感器）"
+            "value" : "遙測"
           }
         }
       }
@@ -85774,7 +87565,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Web Flasher 無法在此設備或 USB 或 BLE 上更新"
+            "value" : "Web Flasher 無法在此裝置或 USB 或 BLE 上更新"
           }
         }
       }
@@ -85862,7 +87653,14 @@
       }
     },
     "The audio sample rate to use for Codec2. Lower bitrates use less bandwidth but reduce audio quality." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codec2 使用的音訊取樣率。較低位元率使用較少頻寬，但會降低音質。"
+          }
+        }
+      }
     },
     "The channel is encrypted with a 128 or 256 bit AES key." : {
       "comment" : "Text displayed in a list item that describes a channel that is encrypted with a 128 or 256 bit AES key.",
@@ -85991,7 +87789,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "此頻道未經安全加密，並用於精確定位數據。"
+            "value" : "此頻道未經安全加密，並用於精確位置資料。"
           }
         }
       }
@@ -86123,7 +87921,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "該頻道使用無密碼或1位已知密碼，但不是用於精確定位數據。"
+            "value" : "此頻道使用無金鑰或 1 位元組已知金鑰，但不會用於精確位置資料。"
           }
         }
       }
@@ -86563,7 +88361,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "完整布局中的梯度條顯示整體信號品質，從紅色（無信號）到橙色、黃色、綠色（良好信號），結合了相對於您的模組預設的 SNR 和 RSSI。"
+            "value" : "完整布局中的梯度條顯示整體訊號品質，從紅色（無訊號）到橙色、黃色、綠色（良好訊號），結合了相對於您的模組預設的 SNR 和 RSSI。"
           }
         }
       }
@@ -87059,7 +88857,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "最近沒有收到訊號，可能正在休眠或距離太遠"
+            "value" : "最近沒有收到此節點的訊號，可能正在休眠或超出範圍。"
           }
         }
       }
@@ -87187,13 +88985,14 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "編號的圓圈表示該節點正在使用哪個頻道。只有當節點在副頻道上（非主頻道0）時才顯示"
+            "value" : "編號的圓圈表示該節點正在使用哪個頻道。只有當節點在次要頻道上（非主要頻道0）時才顯示"
           }
         }
       }
     },
     "The primary channel handles broadcast traffic. Add secondary channels for separate messaging groups, each secured by their own key. [Learn more](https://meshtastic.org/docs/configuration/tips/)" : {
       "comment" : "A description of the channels feature.",
+      "extractionState" : "stale",
       "isCommentAutoGenerated" : true,
       "localizations" : {
         "de" : {
@@ -87253,10 +89052,14 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "主頻道負責廣播流量。為每個獨立訊息群組添加副頻道，每個群組都使用其獨特的密碼進行保護。[了解更多](https://meshtastic.org/docs/configuration/tips/)"
+            "value" : "主要頻道負責廣播流量。為每個獨立訊息群組添加次要頻道，每個群組都使用其專屬金鑰進行保護。[了解更多](https://meshtastic.org/docs/configuration/tips/)"
           }
         }
       }
+    },
+    "The primary channel handles broadcast traffic. The location icon marks which channel sends your position; cloud icons show MQTT uplink and downlink. Add secondary channels for separate messaging groups. [Learn more](https://meshtastic.org/docs/configuration/tips/)" : {
+      "comment" : "A description of the channels screen.",
+      "isCommentAutoGenerated" : true
     },
     "The primary channel must use the default key to perform a discovery scan." : {
       "comment" : "A warning message that appears when the primary channel is not using the default key.",
@@ -87320,7 +89123,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "主頻道必須使用預設密碼進行發現掃描"
+            "value" : "主要頻道必須使用預設金鑰才能進行探索掃描。"
           }
         }
       }
@@ -87466,14 +89269,22 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "建議更新ESP32設備的方法是使用桌面電腦上的Web Flasher（Chrome瀏覽器）。"
+            "value" : "建議更新ESP32裝置的方法是使用桌面電腦上的Web Flasher（Chrome瀏覽器）。"
           }
         }
       }
     },
     "The red reference line marks a busy -85 dBm floor, not a hard failure threshold." : {
       "comment" : "A warning that the noise floor is not a hard failure threshold.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "紅色參考線標示忙碌時的 -85 dBm 底限，並非硬性故障閾值。"
+          }
+        }
+      }
     },
     "The region where you will be using your radios." : {
       "localizations" : {
@@ -88108,7 +89919,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "未收到 PKC 管理員對此節點的設備資料請求回應"
+            "value" : "未收到 PKC 管理員對此節點的裝置資料請求回應"
           }
         }
       }
@@ -88248,7 +90059,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "此設定僅適用於 TAK 或 TAK Tracker 設備角色"
+            "value" : "此設定僅適用於 TAK 或 TAK Tracker 裝置角色"
           }
         }
       }
@@ -88386,7 +90197,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "這些值包含在 TAK 位置報告中。將任何設定設置為預設以讓固件使用 Cyan 和 Team Member。"
+            "value" : "這些值包含在 TAK 位置報告中。將任何設定設定為預設以讓固件使用 Cyan 和 Team Member。"
           }
         }
       }
@@ -88801,6 +90612,10 @@
         }
       }
     },
+    "This map is larger than the %@ per-map limit. Zoom in or lower the detail." : {
+      "comment" : "A description of an error that might occur when downloading a map. The argument is the size limit, formatted in bytes.",
+      "isCommentAutoGenerated" : true
+    },
     "This message was likely not delivered." : {
       "localizations" : {
         "da" : {
@@ -89020,7 +90835,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "此工具會掃描您的本地區域，尋找附近的 Meshtastic 無線電，並根據不同頻率設定自動切換。它會在每個設定上靜靜收聽幾分鐘，然後根據發現的無線電數量和空頻率的忙碌程度顯示最適合您位置的設定。在支援設備上，本地設備 AI 將分析掃描結果並推薦最佳設定，無需網路連接。"
+            "value" : "此工具會掃描您的本地區域，尋找附近的 Meshtastic 無線電，並根據不同頻率設定自動切換。它會在每個設定上靜靜收聽幾分鐘，然後根據發現的無線電數量和空頻率的忙碌程度顯示最適合您位置的設定。在支援裝置上，本地裝置 AI 將分析掃描結果並推薦最佳設定，無需網路連線。"
           }
         }
       }
@@ -89086,7 +90901,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "此將將您的主頻道變為：\n• 名稱： TAK\n• 密碼： 新 256 位 AES 密碼\n• LoRa 預設：短快 (建議用於 TAK )\n\n此為 TAK 伺服器正常運作所必需。任何已存在的頻道共享連結將會失效。"
+            "value" : "此將變更您的主要頻道為：\n• 名稱：TAK\n• 加密：新的 256 位元 AES 金鑰\n• LoRa 預設：Short Fast（建議用於 TAK）\n\n此為 TAK 伺服器正常運作所必需。任何既有的頻道分享連結將會失效。"
           }
         }
       }
@@ -89168,7 +90983,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "這將禁用固定位置並移除當前設定的位置。"
+            "value" : "這將停用固定位置並移除目前設定的位置。"
           }
         }
       }
@@ -89181,6 +90996,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "This will permanently delete the backup for %1$@ and free %2$@ of storage."
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "這將永久刪除 %1$@ 的備份，並釋放 %2$@ 儲存空間。"
           }
         }
       }
@@ -89261,8 +91082,18 @@
         }
       }
     },
-    "Threshold" : {
+    "This would exceed the %@ total offline storage limit. Remove a map first." : {
 
+    },
+    "Threshold" : {
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "閾值"
+          }
+        }
+      }
     },
     "Time" : {
       "localizations" : {
@@ -89495,7 +91326,14 @@
       }
     },
     "Time window in seconds for rate limiting calculations." : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "速率限制計算的時間窗（秒）。"
+          }
+        }
+      }
     },
     "Time Zone" : {
       "localizations" : {
@@ -89862,7 +91700,14 @@
       }
     },
     "Timestamps" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間戳記"
+          }
+        }
+      }
     },
     "Timing and Overrides" : {
       "localizations" : {
@@ -89935,7 +91780,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "時間和重置"
+            "value" : "時間和重設"
           }
         }
       }
@@ -90227,7 +92072,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "為遵守如 CCPA 和 GDPR 等隱私法規，我們避免分享精確的位置信息。取而代之，我們使用匿名化或近似（不精確）的位置資訊，以保護您的隱私。"
+            "value" : "為遵守如 CCPA 和 GDPR 等隱私法規，我們避免分享精確的位置資訊。取而代之，我們使用匿名化或近似（不精確）的位置資訊，以保護您的隱私。"
           }
         }
       }
@@ -90522,7 +92367,15 @@
     },
     "Total Backup Storage" : {
       "comment" : "A label displayed above the total storage usage of all node backups.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "備份儲存空間總計"
+          }
+        }
+      }
     },
     "Total Dwell Time" : {
       "comment" : "A label for the total dwell time of a discovery session.",
@@ -91312,6 +93165,18 @@
         }
       }
     },
+    "Trace Route: %@ → %@" : {
+      "comment" : "A title that shows the start and end of a trace route. The argument is the start name, the second argument is the end name.",
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Trace Route: %1$@ → %2$@"
+          }
+        }
+      }
+    },
     "Trace Routes" : {
       "localizations" : {
         "de" : {
@@ -91524,10 +93389,24 @@
       }
     },
     "Traffic Management" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "流量管理"
+          }
+        }
+      }
     },
     "Traffic Management Config" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "流量管理設定"
+          }
+        }
+      }
     },
     "Translate" : {
       "comment" : "A button to translate a message.",
@@ -91596,7 +93475,14 @@
       }
     },
     "Translate Documentation" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻譯文件"
+          }
+        }
+      }
     },
     "Translating…" : {
       "comment" : "A label that appears while a web page is being translated.",
@@ -91723,7 +93609,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "正在進行翻譯…"
+            "value" : "正在翻譯…"
           }
         }
       }
@@ -91894,7 +93780,15 @@
     },
     "Transmit over LoRa" : {
       "comment" : "A toggle that enables or disables transmitting neighbor info over LoRa.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "透過 LoRa 傳送"
+          }
+        }
+      }
     },
     "Treat double tap on supported accelerometers as a user button press." : {
       "localizations" : {
@@ -93099,7 +94993,14 @@
       }
     },
     "Unknown Packet Handling" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未知封包處理"
+          }
+        }
+      }
     },
     "Unmessagable" : {
       "localizations" : {
@@ -93255,7 +95156,15 @@
     },
     "Unmute" : {
       "comment" : "A label for a button that unmutes notifications.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消靜音"
+          }
+        }
+      }
     },
     "Unset" : {
       "localizations" : {
@@ -96359,7 +98268,14 @@
       }
     },
     "Using your connected device's position" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用您已連線裝置的位置"
+          }
+        }
+      }
     },
     "Utilizes the network connection on your phone to connect to MQTT." : {
       "localizations" : {
@@ -96438,7 +98354,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "透過手機的網路連線來連接至 MQTT 伺服器。"
+            "value" : "透過手機的網路連線來連線至 MQTT 伺服器。"
           }
         }
       }
@@ -96678,7 +98594,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "確認與您通訊的對象，可以透過實體或電話的方式比較公開鍵。此節點的最新公開鍵與之前記錄的公開鍵不符。若鍵值變更是由於機箱重置或其他故意操作，可以刪除該節點，讓它重新交換鍵值。但若鍵值變更是由於其他原因，也可能表示更嚴重的安全問題。"
+            "value" : "確認與您通訊的對象，可以透過實體或電話的方式比較公開鍵。此節點的最新公開鍵與之前記錄的公開鍵不符。若鍵值變更是由於機箱重設或其他故意操作，可以刪除該節點，讓它重新交換鍵值。但若鍵值變更是由於其他原因，也可能表示更嚴重的安全問題。"
           }
         }
       }
@@ -97135,7 +99051,15 @@
     },
     "Visible Range" : {
       "comment" : "A label that displays the currently selected range of the chart.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可見範圍"
+          }
+        }
+      }
     },
     "Voice Message" : {
 
@@ -97429,7 +99353,14 @@
       }
     },
     "Waiting for packets…" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "等待封包中…"
+          }
+        }
+      }
     },
     "Waiting to be acknowledged. . ." : {
       "localizations" : {
@@ -98824,7 +100755,15 @@
     },
     "Whether to transmit neighbor info over LoRa in addition to MQTT and PhoneAPI. Not available on channels with default key and name." : {
       "comment" : "A description of the neighbor info transmission option.",
-      "isCommentAutoGenerated" : true
+      "isCommentAutoGenerated" : true,
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "是否除了 MQTT 與 PhoneAPI 外，也透過 LoRa 傳送鄰居資訊。使用預設金鑰與名稱的頻道不適用。"
+          }
+        }
+      }
     },
     "Wi-Fi Provisioning" : {
       "localizations" : {
@@ -99189,7 +101128,14 @@
       }
     },
     "WiFi Threshold" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wi-Fi 閾值"
+          }
+        }
+      }
     },
     "Will sleep everything as much as possible, for the tracker and sensor role this will also include the lora radio. Don't use this setting if you want to use your device with the phone apps or are using a device without a user button." : {
       "localizations" : {
@@ -99374,7 +101320,14 @@
       }
     },
     "Window (s)" : {
-
+      "localizations" : {
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間窗（秒）"
+          }
+        }
+      }
     },
     "Write Contact to NFC Tag" : {
       "comment" : "A button that writes a contact to an NFC tag.",
@@ -100088,7 +102041,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "您即將將新固件更新到您的設備，此過程具有風險。如果更新失敗，可能會失敗，並且在某些情況下需要重新更新系統啟動器。"
+            "value" : "您即將將新固件更新到您的裝置，此過程具有風險。如果更新失敗，可能會失敗，並且在某些情況下需要重新更新系統啟動器。"
           }
         }
       }
@@ -100154,10 +102107,14 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "您可以自行修改您的主頻道來解決此問題。"
+            "value" : "您可以自行修改主要頻道來解決此問題："
           }
         }
       }
+    },
+    "You can keep up to %lld offline maps. Remove one to download another." : {
+      "comment" : "A message that a map can't be downloaded because the user has reached the maximum number of offline maps.",
+      "isCommentAutoGenerated" : true
     },
     "Your channel has been configured for TAK. To share the QR code: go to Settings > Share QR Code" : {
       "comment" : "A message displayed when a user successfully configures their primary channel for TAK. It instructs the user to share the QR code to invite TAK buddies.",
@@ -100273,8 +102230,8 @@
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "您的連線設備已運行過時的軟體版本，包含已知安全漏洞。強烈建議更新您的軟體版本以保護您的設備和鏈網。"
+            "state" : "translated",
+            "value" : "您已連線的裝置韌體版本低於 **%@**，其中包含已知安全漏洞。強烈建議更新韌體以保護您的裝置與網狀網路。"
           }
         }
       }
@@ -100584,7 +102541,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "您的節點將定期向配置的 MQTT 伺服器發送未加密的地圖報告封包，內容包括 ID、簡短名稱和完整名稱、大略位置、硬體型號、角色（Role）、韌體版本、LoRa 區域、Modem預設值以及主要頻道名稱。"
+            "value" : "您的節點將定期向配置的 MQTT 伺服器發送未加密的地圖報告封包，內容包括 ID、簡短名稱和完整名稱、大略位置、硬體型號、角色（Role）、韌體版本、LoRa 地區、Modem預設值以及主要頻道名稱。"
           }
         }
       }
@@ -100732,7 +102689,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "您的密碼會透過藍牙直接傳輸到設備，並且不會被儲存。"
+            "value" : "您的密碼會透過藍牙直接傳輸到裝置，並且不會被儲存。"
           }
         }
       }
@@ -100880,7 +102837,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "您的主頻道使用預設設定（沒有名稱或預設密碼）， TAK 伺服器正在讀取模式運作。"
+            "value" : "您的主要頻道使用預設設定（無名稱或預設加密金鑰）。TAK 伺服器正以唯讀模式運作。"
           }
         }
       }
@@ -100950,7 +102907,7 @@
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "您的公鑰由您的私鑰產生並發送到其他網格節點，以便他們與您共同計算共享密碼。"
+            "value" : "您的公鑰由私鑰產生，並傳送給 Mesh 上的其他節點，以便與您計算共用密鑰。"
           }
         }
       }

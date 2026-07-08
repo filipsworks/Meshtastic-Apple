@@ -20,6 +20,7 @@ struct Connect: View {
 	
 	@Environment(\.modelContext) private var context
 	@EnvironmentObject var accessoryManager: AccessoryManager
+	@EnvironmentObject var lockdown: LockdownCoordinator
 	@Environment(\.colorScheme) private var colorScheme
 	@State var router: Router
 	@State var node: NodeInfoEntity?
@@ -37,6 +38,10 @@ struct Connect: View {
 	@Environment(\.scenePhase) private var scenePhase
 	@State private var pendingNymeaDevice: NymeaDiscoveredDevice?
 	@State private var isSwitchingRadio = false
+	@State private var showingShutdownConfirm = false
+	/// Stable identity of the node whose context menu opened the shutdown dialog, captured at tap
+	/// time so the confirmation can't drift to a different node if the connection changes first.
+	@State private var pendingShutdownNodeNum: Int64?
 
 	private var sortedAvailableDevices: [Device] {
 		accessoryManager.devices.sorted { lhs, rhs in
@@ -62,8 +67,28 @@ struct Connect: View {
 	/// during render. `modelContext` is safe metadata (nil on a detached/deleted object), so
 	/// gating every read through this accessor prevents the crash. (Same guard pattern as #1944.)
 	private var safeNode: NodeInfoEntity? {
-		guard let node, node.modelContext != nil else { return nil }
+		Connect.liveNode(node)
+	}
+
+	/// Returns `node` only while it is still a live SwiftData object (`modelContext != nil`),
+	/// otherwise nil. Reading attributes on a faulted/detached `@Model` traps, so callers gate
+	/// every read through this. Static + value-in/value-out so it can be unit-tested directly.
+	static func liveNode(_ node: NodeInfoEntity?) -> NodeInfoEntity? {
+		guard let node, node.modelContext != nil, !node.isDeleted else { return nil }
 		return node
+	}
+
+	/// The user a shutdown should be sent to, or nil when the shutdown must be safely skipped.
+	///
+	/// Resolved at confirm time — never captured ahead of the dialog — so a faulted/detached
+	/// `@Model` is gated by `liveNode` rather than trapping (the #2006 crash class). It also
+	/// verifies the live node still matches `expectedNum`, the identity captured when the menu was
+	/// opened: the dialog deliberately survives connection changes, so without this check a radio
+	/// switch between the long-press and tapping "Shutdown Node?" would shut down the newly
+	/// connected node instead of the one the user chose.
+	static func shutdownTarget(for node: NodeInfoEntity?, expectedNum: Int64?) -> UserEntity? {
+		guard let expectedNum, let live = liveNode(node), live.num == expectedNum else { return nil }
+		return live.user
 	}
 
 	var body: some View {
@@ -222,23 +247,23 @@ struct Connect: View {
 											Label("Disconnect", systemImage: "antenna.radiowaves.left.and.right.slash")
 										}
 										Button(role: .destructive) {
-											Task {
-												do {
-													if let user = node.user {
-														try await accessoryManager.sendShutdown(fromUser: user, toUser: user)
-													}
-												} catch {
-													Logger.mesh.error("Shutdown Failed: \(error)")
-												}
-											}
-											
+											// Re-check liveness at tap time: the menu-captured `node` can fault if
+											// the context is recreated between the menu appearing and this tap, and
+											// reading `.num` on a faulted @Model would trap (the #2006 crash class).
+											pendingShutdownNodeNum = Connect.liveNode(node)?.num
+											showingShutdownConfirm = true
 										} label: {
 											Label("Power Off", systemImage: "power")
 										}
 									}
 								}
 							}
-							if isUnsetRegion {
+							// FR-013: suppress action-prompting banners when the
+							// connected device is lockdown-enabled but the current
+							// connection is not yet authorized. Non-lockdown
+							// firmware leaves the coordinator at .none, so the
+							// banner shows normally there too.
+							if isUnsetRegion && !lockdown.isBlockingSession {
 								HStack {
 									NavigationLink {
 										LoRaConfig(node: safeNode)
@@ -413,6 +438,34 @@ struct Connect: View {
 						mqttProxyConnected: accessoryManager.mqttProxyConnected,
 						mqttTopic: accessoryManager.mqttManager.topics.first ?? ""
 					)
+				}
+			}
+			// Attached to the root VStack (not the connected-device subtree, which unmounts
+			// on disconnect) so the confirmation survives a connection state change between
+			// the long-press and the user tapping "Shutdown Node?".
+			.confirmationDialog(
+				"Are you sure?",
+				isPresented: $showingShutdownConfirm,
+				titleVisibility: .visible
+			) {
+				Button("Shutdown Node?", role: .destructive) {
+					Task {
+						// Resolve the target at confirm time rather than capturing it ahead of the
+						// dialog: a cached @Model can fault if the context is recreated (disconnect/
+						// reconnect, node switch) while the dialog is up, and reading a faulted model
+						// traps. shutdownTarget gates on modelContext != nil and verifies the live
+						// node still matches the identity captured when the menu was opened, so the
+						// shutdown can't drift to a node connected after the long-press.
+						guard let user = Connect.shutdownTarget(for: node, expectedNum: pendingShutdownNodeNum) else {
+							Logger.mesh.warning("Shutdown skipped: no live connected node or connection changed")
+							return
+						}
+						do {
+							try await accessoryManager.sendShutdown(fromUser: user, toUser: user)
+						} catch {
+							Logger.mesh.error("Shutdown Failed: \(error)")
+						}
+					}
 				}
 			}
 		}
@@ -781,7 +834,7 @@ func backupCurrentDatabase(forTargetNode targetNodeNum: Int64?, accessoryManager
 
 @MainActor
 func backupCurrentAndRestoreDatabase(
-	forNode targetNodeNum: Int64,
+	forNode targetNodeNum: Int64?,
 	accessoryManager: AccessoryManager,
 	appState: AppState,
 	selectedTab: NavigationState.Tab,
@@ -802,16 +855,39 @@ func backupCurrentAndRestoreDatabase(
 	await Task.yield()
 
 	await MeshPackets.shared.flushDebouncedSaves()
-	await MeshPackets.shared.clearDatabase(includeRoutes: false)
-	// Repoint at a fresh container so the restore below (and the post-restore UI refresh) operate
-	// on a context with no stale registrations. The databaseResetID bump stays after the restore.
-	accessoryManager.repointToFreshContainer()
-	Logger.backup.info("💾 Database cleared and container recreated")
+	let cleared = await MeshPackets.shared.clearDatabase(includeRoutes: false)
+	if cleared {
+		// Repoint at a fresh container so the restore below (and the post-restore UI refresh)
+		// operate on a context with no stale registrations. The databaseResetID bump stays after
+		// the restore.
+		accessoryManager.repointToFreshContainer()
+		Logger.backup.info("💾 Database cleared and container recreated")
+	} else {
+		// The per-model clear aborted part-way (e.g. a relationship constraint failed a batch
+		// delete). A half-cleared store MUST NOT receive the next radio's dump — that is exactly
+		// how nodes bleed between radios — so escalate: destroy the store files and reopen a
+		// guaranteed-empty container. The current radio's data was backed up above; routes are
+		// lost in this (already-broken) path, which beats merging two radios' databases.
+		Logger.backup.error("💾 clearDatabase failed — escalating to store destruction before the switch")
+		PersistenceController.shared.destroyStoreAndRecreateContainer()
+		// Repoint re-creates once more on the fresh (now empty) store and rebuilds the
+		// MeshPackets actor + cached context; the double recreate is harmless.
+		accessoryManager.repointToFreshContainer()
+	}
 
-	let restoreResult = await NodeBackupManager.shared.restoreFromBackup(
-		forNode: targetNodeNum,
-		into: PersistenceController.shared.container
-	)
+	// The clear above is unconditional — a switch must NEVER dump the new radio's nodes on top
+	// of the old radio's (nodes have no owner column; the store is global). The restore is the
+	// only optional part: with no resolvable target node (first connect to a never-seen radio)
+	// there is simply no backup to import, and the radio populates the now-empty store fresh.
+	let restoreResult: NodeBackupResult
+	if let targetNodeNum {
+		restoreResult = await NodeBackupManager.shared.restoreFromBackup(
+			forNode: targetNodeNum,
+			into: PersistenceController.shared.container
+		)
+	} else {
+		restoreResult = .noBackupFound
+	}
 
 	// The clear ran on the MeshPackets context and the restore imported through a separate
 	// liveContext, neither of which the UI's main context observes — and a batch delete sends
@@ -852,30 +928,39 @@ func switchToDevice(
 	}()
 	Logger.backup.info("💾 Node switch — current: \(currentNodeNum.map { String($0) } ?? "nil", privacy: .public), target: \(targetNodeNum.map { String($0) } ?? "unknown", privacy: .public)")
 
+	// Mark the switch in flight so the disconnect's teardown doesn't re-arm discovery and
+	// auto-connect can't launch a second connect + node dump while the store is mid-reset.
+	accessoryManager.isSwitchingDevices = true
+	defer {
+		accessoryManager.isSwitchingDevices = false
+		// closeConnection suppressed its usual discovery restart during the switch; if the
+		// switch's connect didn't succeed, restart discovery now so devices reappear.
+		if !accessoryManager.isConnected {
+			accessoryManager.startDiscovery()
+		}
+	}
+
 	// 4. Disconnect from current device
 	if accessoryManager.allowDisconnect {
 		try? await accessoryManager.disconnect()
 	}
 
-	await backupCurrentDatabase(forTargetNode: targetNodeNum, accessoryManager: accessoryManager)
-
-	if let targetNodeNum {
-		let restoreResult = await backupCurrentAndRestoreDatabase(
-			forNode: targetNodeNum,
-			accessoryManager: accessoryManager,
-			appState: appState,
-			selectedTab: .connect
-		)
-		switch restoreResult {
-		case .success:
-			Logger.backup.info("💾 Backup restored for target node \(targetNodeNum)")
-		case .skipped(let reason):
-			Logger.backup.warning("💾 Restore skipped: \(reason, privacy: .public)")
-		case .noBackupFound:
-			Logger.backup.info("💾 No backup for target node \(targetNodeNum) — radio will populate fresh data")
-		}
-	} else {
-		Logger.backup.warning("💾 Target node num is nil — cannot restore, radio will populate fresh data")
+	// Clear (always) and restore (when the target has a backup). Runs even when the target
+	// node number is unknown — a switch to a never-seen radio previously skipped the clear
+	// and dumped the new radio's nodes on top of the old radio's data.
+	let restoreResult = await backupCurrentAndRestoreDatabase(
+		forNode: targetNodeNum,
+		accessoryManager: accessoryManager,
+		appState: appState,
+		selectedTab: .connect
+	)
+	switch restoreResult {
+	case .success:
+		Logger.backup.info("💾 Backup restored for target node \(targetNodeNum.map { String($0) } ?? "?", privacy: .public)")
+	case .skipped(let reason):
+		Logger.backup.warning("💾 Restore skipped: \(reason, privacy: .public)")
+	case .noBackupFound:
+		Logger.backup.info("💾 No backup for target node \(targetNodeNum.map { String($0) } ?? "unknown", privacy: .public) — radio will populate fresh data")
 	}
 
 	onRestoreComplete?()

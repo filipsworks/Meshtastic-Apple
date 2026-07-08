@@ -703,144 +703,175 @@ extension AccessoryManager {
 	}
 
 	public func saveChannelSet(base64UrlString: String, addChannels: Bool = false, okToMQTT: Bool = false) async throws {
+		let channelLink = try MeshtasticChannelURL.parse(base64UrlString, defaultAddChannels: addChannels)
+		try await saveChannelSet(
+			channelSet: channelLink.channelSet,
+			addChannels: channelLink.addChannels,
+			okToMQTT: okToMQTT
+		)
+	}
+
+	public func saveChannelSet(channelSet incomingChannelSet: ChannelSet, addChannels: Bool = false, okToMQTT: Bool = false) async throws {
 		guard let deviceNum = self.activeConnection?.device.num else {
 			Logger.services.error("Error while sending saveChannelSet request.  No active device.")
 			throw AccessoryError.ioFailed("No active device")
 		}
-		// Before we get started delete the existing channels from the myNodeInfo
-		if !addChannels {
-			tryClearExistingChannels()
+
+		guard !incomingChannelSet.settings.isEmpty else {
+			throw AccessoryError.appError("No channels found in QR code")
 		}
 
-		let decodedString = base64UrlString.base64urlToBase64()
-		if let decodedData = Data(base64Encoded: decodedString) {
-			let channelSet: ChannelSet = try ChannelSet(serializedBytes: decodedData)
+		guard incomingChannelSet.settings.count <= 8 else {
+			throw AccessoryError.appError("A Meshtastic radio supports up to 8 channels")
+		}
 
-			var myInfo: MyInfoEntity!
-			var i: Int32 = 0
+		if !addChannels && !incomingChannelSet.hasLoraConfig {
+			throw AccessoryError.appError("Replace requires LoRa configuration in the QR code")
+		}
 
-			if addChannels {
-				let fetchMyInfoRequest = FetchDescriptor<MyInfoEntity>(predicate: #Predicate { $0.myNodeNum == deviceNum })
+		var channelSet = incomingChannelSet
+		let incomingChannelNames = channelSet.settings.map(\.name)
+		guard Set(incomingChannelNames).count == incomingChannelNames.count else {
+			throw AccessoryError.appError("Channel names must be unique")
+		}
+		var i: Int32 = 0
 
-				let fetchedMyInfo = try context.fetch(fetchMyInfoRequest)
-				if fetchedMyInfo.count != 1 {
-					throw AccessoryError.appError("MyInfo not found")
-				}
-				
-				// We are trying to add a channel so lets get the last index
-				myInfo = fetchedMyInfo[0]
-				i = Int32(myInfo.channels.count)
-				
-				// Bail out if the index is negative or bigger than our max of 8
-				if i < 0 || i > 8 {
-					throw AccessoryError.appError("Index out of range \(i)")
-				}
+		if addChannels {
+			let fetchMyInfoRequest = FetchDescriptor<MyInfoEntity>(predicate: #Predicate { $0.myNodeNum == deviceNum })
+
+			let fetchedMyInfo = try context.fetch(fetchMyInfoRequest)
+			guard fetchedMyInfo.count == 1, let fetched = fetchedMyInfo.first else {
+				throw AccessoryError.appError("MyInfo not found")
+			}
+
+			i = Int32(fetched.channels.count)
+
+			guard i >= 0 && i < 8 else {
+				throw AccessoryError.appError("No free channel slots available")
+			}
+
+			guard fetched.channels.count + channelSet.settings.count <= 8 else {
+				throw AccessoryError.appError("Not enough free channel slots")
 			}
 
 			for cs in channelSet.settings {
-
-				if addChannels {
-					// Bail out if the same channel name already exists
-					if myInfo.channels.first(where: { $0.name == cs.name }) != nil {
-						throw AccessoryError.appError("Channel already exists")
-					}
+				if fetched.channels.contains(where: { $0.name == cs.name }) {
+					throw AccessoryError.appError("Channel already exists")
 				}
-
-				var chan = Channel()
-				chan.role = (i == 0) ? .primary : .secondary
-				chan.settings = cs
-				chan.index = i
-				// Ensure moduleSettings is always explicitly set so the device
-				// stores a defined position_precision value. QR codes typically
-				// omit moduleSettings which causes the firmware to default to 32
-				// (full precision), leaking exact GPS coordinates.
-				if !cs.hasModuleSettings {
-					chan.settings.moduleSettings.positionPrecision = 0
-					chan.settings.moduleSettings.isMuted = false
-				}
-				i += 1
-
-				var adminPacket = AdminMessage()
-				adminPacket.setChannel = chan
-
-				var meshPacket = MeshPacket()
-				meshPacket.to = UInt32(deviceNum)
-				meshPacket.from = UInt32(deviceNum)
-				meshPacket.id = UInt32.random(in: UInt32(UInt8.max)..<UInt32.max)
-				meshPacket.priority = MeshPacket.Priority.reliable
-				meshPacket.wantAck = true
-				meshPacket.channel = 0
-
-				guard let adminData = try? adminPacket.serializedData() else {
-					throw AccessoryError.ioFailed("saveChannelSet: Unable to serialize Admin packet")
-				}
-
-				var dataMessage = DataMessage()
-				dataMessage.payload = adminData
-				dataMessage.portnum = PortNum.adminApp
-				meshPacket.decoded = dataMessage
-
-				var toRadio = ToRadio()
-				toRadio.packet = meshPacket
-
-				let logString = String.localizedStringWithFormat("Sent a Channel for: %@ Channel Index %d".localized, String(deviceNum), chan.index)
-				try await send(toRadio, debugDescription: logString)
-				await MeshPackets.shared.channelPacket(channel: chan, fromNum: self.activeDeviceNum ?? 0)
 			}
-			if !addChannels {
-				// Save the LoRa Config and the device will reboot
-				var adminPacket = AdminMessage()
-				adminPacket.setConfig.lora = channelSet.loraConfig
-				adminPacket.setConfig.lora.configOkToMqtt = okToMQTT // Preserve users okToMQTT choice
-				var meshPacket: MeshPacket = MeshPacket()
-				meshPacket.to = UInt32(deviceNum)
-				meshPacket.from	= UInt32(deviceNum)
-				meshPacket.id = UInt32.random(in: UInt32(UInt8.max)..<UInt32.max)
-				meshPacket.priority =  MeshPacket.Priority.reliable
-				meshPacket.wantAck = true
-				meshPacket.channel = 0
-				var dataMessage = DataMessage()
-				guard let adminData: Data = try? adminPacket.serializedData() else {
-					throw AccessoryError.ioFailed("sendReboot: Unable to serialize Admin packet")
-				}
-				dataMessage.payload = adminData
-				dataMessage.portnum = PortNum.adminApp
-				meshPacket.decoded = dataMessage
-				var toRadio: ToRadio!
-				toRadio = ToRadio()
-				toRadio.packet = meshPacket
-				
-				let logString = String.localizedStringWithFormat("Sent a LoRa.Config for: %@".localized, String(deviceNum))
-				try await send(toRadio, debugDescription: logString)
+		} else {
+			let currentLoRaConfig = currentLoRaConfig(for: deviceNum)
+			channelSet.loraConfig.configOkToMqtt = currentLoRaConfig?.configOkToMqtt ?? okToMQTT
+			if let txPower = currentLoRaConfig?.txPower {
+				channelSet.loraConfig.txPower = txPower
 			}
-			if !addChannels {
-				// Save the LoRa Config and the device will reboot
-				var adminPacket = AdminMessage()
-				adminPacket.setConfig.lora = channelSet.loraConfig
-				adminPacket.setConfig.lora.configOkToMqtt = okToMQTT // Preserve users okToMQTT choice
-				var meshPacket: MeshPacket = MeshPacket()
-				meshPacket.to = UInt32(deviceNum)
-				meshPacket.from	= UInt32(deviceNum)
-				meshPacket.id = UInt32.random(in: UInt32(UInt8.max)..<UInt32.max)
-				meshPacket.priority =  MeshPacket.Priority.reliable
-				meshPacket.wantAck = true
-				meshPacket.channel = 0
-				var dataMessage = DataMessage()
-				guard let adminData: Data = try? adminPacket.serializedData() else {
-					throw AccessoryError.ioFailed("sendReboot: Unable to serialize Admin packet")
-				}
-				dataMessage.payload = adminData
-				dataMessage.portnum = PortNum.adminApp
-				meshPacket.decoded = dataMessage
-				var toRadio: ToRadio!
-				toRadio = ToRadio()
-				toRadio.packet = meshPacket
-				
-				let logString = String.localizedStringWithFormat("Sent a LoRa.Config for: %@".localized, String(deviceNum))
-				try await send(toRadio, debugDescription: logString)
+		}
+
+		var deliveredChannels: [Channel] = []
+		for cs in channelSet.settings {
+			var chan = Channel()
+			chan.role = (i == 0) ? .primary : .secondary
+			chan.settings = cs
+			chan.index = i
+			// Ensure moduleSettings is always explicitly set so the device
+			// stores a defined position_precision value. QR codes typically
+			// omit moduleSettings which causes the firmware to default to 32
+			// (full precision), leaking exact GPS coordinates.
+			if !cs.hasModuleSettings {
+				chan.settings.moduleSettings.positionPrecision = 0
+				chan.settings.moduleSettings.isMuted = false
 			}
+			i += 1
+
+			var adminPacket = AdminMessage()
+			adminPacket.setChannel = chan
+
+			var meshPacket = MeshPacket()
+			meshPacket.to = UInt32(deviceNum)
+			meshPacket.from = UInt32(deviceNum)
+			meshPacket.id = UInt32.random(in: UInt32(UInt8.max)..<UInt32.max)
+			meshPacket.priority = MeshPacket.Priority.reliable
+			meshPacket.wantAck = true
+			meshPacket.channel = 0
+
+			guard let adminData = try? adminPacket.serializedData() else {
+				throw AccessoryError.ioFailed("saveChannelSet: Unable to serialize Admin packet")
+			}
+
+			var dataMessage = DataMessage()
+			dataMessage.payload = adminData
+			dataMessage.portnum = PortNum.adminApp
+			meshPacket.decoded = dataMessage
+
+			var toRadio = ToRadio()
+			toRadio.packet = meshPacket
+
+			let logString = String.localizedStringWithFormat("Sent a Channel for: %@ Channel Index %d".localized, String(deviceNum), chan.index)
+			try await send(toRadio, debugDescription: logString)
+			deliveredChannels.append(chan)
+		}
+
+		// Replacing channels also replaces the LoRa config (the replace-mode guard
+		// above guarantees one is present), and sending it reboots the device.
+		let didSendLoRaConfig = !addChannels
+		if didSendLoRaConfig {
+			// Save the LoRa Config and the device will reboot if required.
+			var adminPacket = AdminMessage()
+			adminPacket.setConfig.lora = channelSet.loraConfig
+			var meshPacket = MeshPacket()
+			meshPacket.to = UInt32(deviceNum)
+			meshPacket.from	= UInt32(deviceNum)
+			meshPacket.id = UInt32.random(in: UInt32(UInt8.max)..<UInt32.max)
+			meshPacket.priority =  MeshPacket.Priority.reliable
+			meshPacket.wantAck = true
+			meshPacket.channel = 0
+			var dataMessage = DataMessage()
+			guard let adminData: Data = try? adminPacket.serializedData() else {
+				throw AccessoryError.ioFailed("saveChannelSet: Unable to serialize LoRa config")
+			}
+			dataMessage.payload = adminData
+			dataMessage.portnum = PortNum.adminApp
+			meshPacket.decoded = dataMessage
+			var toRadio = ToRadio()
+			toRadio.packet = meshPacket
+
+			let logString = String.localizedStringWithFormat("Sent a LoRa.Config for: %@".localized, String(deviceNum))
+			try await send(toRadio, debugDescription: logString)
+		}
+
+		// Mirror delivered channels locally only after channel and LoRa writes
+		// succeed, so a failed replace cannot wipe local state.
+		if !addChannels {
+			tryClearExistingChannels()
+		}
+		for chan in deliveredChannels {
+			await MeshPackets.shared.channelPacket(channel: chan, fromNum: deviceNum)
+		}
+
+		// Re-sync after the change. When we sent a LoRa config the device reboots
+		// and the connection drops, so the follow-up wantConfig is expected to fail
+		// — treat that as success since the channels/config were already delivered.
+		// When no reboot is expected, let wantConfig errors surface normally.
+		if didSendLoRaConfig {
+			do {
+				Logger.transport.debug("[AccessoryManager] sending wantConfig after channel set (device may reboot)")
+				try await sendWantConfig()
+			} catch {
+				Logger.transport.warning("[AccessoryManager] wantConfig after channel set did not complete; device is likely rebooting: \(error.localizedDescription, privacy: .public)")
+			}
+		} else {
 			Logger.transport.debug("[AccessoryManager] sending wantConfig for saveChannelSet")
 			try await sendWantConfig()
+		}
+	}
+
+	private func currentLoRaConfig(for deviceNum: Int64) -> Config.LoRaConfig? {
+		let request = FetchDescriptor<NodeInfoEntity>(predicate: #Predicate { $0.num == deviceNum })
+		do {
+			return try context.fetch(request).first?.loRaConfig?.toProto()
+		} catch {
+			Logger.data.error("Failed to fetch current LoRa config while saving channel set: \(error.localizedDescription, privacy: .public)")
+			return nil
 		}
 	}
 
@@ -864,6 +895,192 @@ extension AccessoryManager {
 		let messageDescription = "🛟 Saved Channel \(channel.index) for \(toUser.longName ?? "Unknown".localized)"
 		try await sendAdminMessageToRadio(meshPacket: meshPacket, adminDescription: messageDescription)
 		return Int64(meshPacket.id)
+	}
+
+	/// Join a mesh advertised by a beacon: set the primary channel to the offered channel (name +
+	/// PSK), then apply the offered region/preset. The channel change lands first (no reboot); the
+	/// LoRa config change reboots the radio onto the advertised mesh. `region`/`preset` fall back to
+	/// the radio's current values when the beacon didn't advertise them. `channelNum` is forced to 0
+	/// so the firmware derives the frequency from the new channel name + preset + region.
+	@MainActor
+	public func joinBeaconMesh(channelName: String, channelPSK: Data, region: RegionCodes?, preset: ModemPresets?) async throws {
+		guard let deviceNum = self.activeConnection?.device.num else {
+			throw AccessoryError.ioFailed("No active device")
+		}
+		guard let node = getNodeInfo(id: Int64(deviceNum), context: context), let user = node.user else {
+			throw AccessoryError.appError("Connected node not found")
+		}
+
+		// Snapshot the current primary channel so a partial failure (channel write succeeds but the
+		// LoRa apply fails) can be rolled back — otherwise the radio is stranded on a new channel with
+		// the old preset/region on an undecodable frequency (research D3 / contract C4).
+		let primarySnapshot = beaconPrimaryChannelSnapshot(for: node)
+
+		// D5: an offered channel with an empty PSK is an "open channel" — use the well-known default
+		// public key rather than sending an empty (no-encryption) key.
+		let effectivePSK = channelPSK.isEmpty ? Data([1]) : channelPSK
+
+		// 1. Set the primary channel to the beacon's offered channel (no reboot).
+		var channel = Channel()
+		channel.index = 0
+		channel.role = .primary
+		channel.settings.name = channelName
+		channel.settings.psk = effectivePSK
+		// Default to no position sharing on a foreign/beacon-advertised mesh (privacy). Otherwise the
+		// firmware defaults moduleSettings to full precision (32), leaking exact GPS coordinates —
+		// mirrors addBeaconChannel's handling for the same "join someone else's mesh" scenario.
+		channel.settings.moduleSettings.positionPrecision = 0
+		_ = try await saveChannel(channel: channel, fromUser: user, toUser: user)
+
+		// 2. Apply region/preset (reboots). Carry the full existing LoRa config so unrelated fields
+		//    (bandwidth, coding rate, overrides, MQTT flags…) aren't wiped.
+		var lora = Config.LoRaConfig()
+		if let existing = node.loRaConfig, !existing.isDeleted {
+			lora.usePreset = existing.usePreset
+			lora.hopLimit = UInt32(existing.hopLimit)
+			lora.txEnabled = existing.txEnabled
+			lora.txPower = existing.txPower
+			lora.bandwidth = UInt32(existing.bandwidth)
+			lora.codingRate = UInt32(existing.codingRate)
+			lora.spreadFactor = UInt32(existing.spreadFactor)
+			lora.frequencyOffset = existing.frequencyOffset
+			lora.overrideFrequency = existing.overrideFrequency
+			lora.overrideDutyCycle = existing.overrideDutyCycle
+			lora.sx126XRxBoostedGain = existing.sx126xRxBoostedGain
+			lora.ignoreMqtt = existing.ignoreMqtt
+			lora.configOkToMqtt = existing.okToMqtt
+			lora.region = Config.LoRaConfig.RegionCode(rawValue: Int(existing.regionCode)) ?? .unset
+			lora.modemPreset = ModemPresets(rawValue: Int(existing.modemPreset))?.protoEnumValue() ?? .longFast
+		}
+		if let region { lora.region = region.protoEnumValue() }
+		if let preset { lora.modemPreset = preset.protoEnumValue() }
+		lora.usePreset = true
+		// Derive the frequency from the new channel + preset + region rather than a stale slot.
+		lora.channelNum = 0
+		do {
+			_ = try await saveLoRaConfig(config: lora, fromUser: user, toUser: user)
+		} catch {
+			// Roll the primary channel back so we don't strand the radio between meshes. The channel
+			// write doesn't reboot, so this restore is safe.
+			Logger.admin.error("🔀 [Beacon] LoRa apply failed after channel write; rolling back primary channel: \(error.localizedDescription, privacy: .public)")
+			if let primarySnapshot {
+				do {
+					_ = try await saveChannel(channel: primarySnapshot, fromUser: user, toUser: user)
+					Logger.admin.info("🔀 [Beacon] Rolled back primary channel after failed switch")
+				} catch {
+					Logger.admin.error("🔀 [Beacon] Primary channel rollback also failed: \(error.localizedDescription, privacy: .public)")
+				}
+			}
+			throw error
+		}
+		Logger.mesh.info("🔀 [Beacon] Switched to advertised channel '\(channelName, privacy: .private)' and applied preset/region")
+	}
+
+	/// Reconstruct a `Channel` proto for the connected node's current primary channel (index 0),
+	/// used to roll back a failed Switch. Returns `nil` when there's no stored primary to restore.
+	@MainActor
+	private func beaconPrimaryChannelSnapshot(for node: NodeInfoEntity) -> Channel? {
+		guard let primary = node.myInfo?.channels.first(where: { $0.index == 0 || $0.role == 1 }) else {
+			return nil
+		}
+		var channel = Channel()
+		channel.index = 0
+		channel.role = .primary
+		channel.settings.name = primary.name ?? ""
+		channel.settings.psk = primary.psk ?? Data()
+		channel.settings.uplinkEnabled = primary.uplinkEnabled
+		channel.settings.downlinkEnabled = primary.downlinkEnabled
+		channel.settings.moduleSettings.positionPrecision = UInt32(primary.positionPrecision)
+		return channel
+	}
+
+	/// A secondary channel slot a beacon channel could replace (research D2).
+	public struct BeaconSecondaryChannel: Identifiable, Sendable {
+		public let index: Int32
+		public let name: String
+		public var id: Int32 { index }
+	}
+
+	/// The connected node's secondary channels (index 1–7) that a beacon channel could replace when
+	/// no free slot is available (research D2). Never returns the primary (index 0); falls back to
+	/// "Channel N" for an unnamed slot.
+	@MainActor
+	public func beaconReplaceableSecondaryChannels() -> [BeaconSecondaryChannel] {
+		guard let deviceNum = self.activeConnection?.device.num,
+			  let node = getNodeInfo(id: Int64(deviceNum), context: context) else {
+			return []
+		}
+		return (node.myInfo?.channels ?? [])
+			.filter { $0.index >= 1 && $0.index <= 7 }
+			.sorted { $0.index < $1.index }
+			.map { channel in
+				let name = channel.name?.isEmpty == false ? channel.name! : "Channel \(channel.index)"
+				return BeaconSecondaryChannel(index: channel.index, name: name)
+			}
+	}
+
+	/// Whether at least one secondary slot (1–7) is free on the connected node.
+	@MainActor
+	public func beaconHasFreeSecondarySlot() -> Bool {
+		guard let deviceNum = self.activeConnection?.device.num,
+			  let node = getNodeInfo(id: Int64(deviceNum), context: context) else {
+			return false
+		}
+		let usedIndexes = Set(node.myInfo?.channels.map { $0.index } ?? [])
+		return (Int32(1)...Int32(7)).contains { !usedIndexes.contains($0) }
+	}
+
+	/// Add a beacon's advertised channel to a secondary slot without touching the primary channel or
+	/// LoRa config — so **no reboot** (contract C3 / FR-016, research D2). Used by the Add channel
+	/// action, which is only offered when the offered mesh already runs on the radio's current
+	/// preset/region/frequency slot.
+	///
+	/// When `replacingIndex` is nil, picks the lowest free secondary index (1–7); when all secondary
+	/// slots are taken, throws so the UI can offer the replace-a-secondary picker (D2). When
+	/// `replacingIndex` is provided, writes into that (secondary) slot, overwriting the channel there —
+	/// never the primary (index 0).
+	@MainActor
+	public func addBeaconChannel(channelName: String, channelPSK: Data, replacingIndex: Int32? = nil) async throws {
+		guard let deviceNum = self.activeConnection?.device.num else {
+			throw AccessoryError.ioFailed("No active device")
+		}
+		guard let node = getNodeInfo(id: Int64(deviceNum), context: context), let user = node.user else {
+			throw AccessoryError.appError("Connected node not found")
+		}
+
+		let targetIndex: Int32
+		if let replacingIndex {
+			// Protect the primary channel — only secondary slots may be replaced (D2).
+			guard (Int32(1)...Int32(7)).contains(replacingIndex) else {
+				throw AccessoryError.appError("Cannot replace the primary channel")
+			}
+			targetIndex = replacingIndex
+		} else {
+			let usedIndexes = Set(node.myInfo?.channels.map { $0.index } ?? [])
+			// Secondary slots are 1...7 (0 is reserved for the primary channel).
+			guard let freeIndex = (Int32(1)...Int32(7)).first(where: { !usedIndexes.contains($0) }) else {
+				throw AccessoryError.appError("No free channel slot — remove a secondary channel first")
+			}
+			targetIndex = freeIndex
+		}
+
+		// D5: an offered channel with an empty PSK is an "open channel" — use the default public key.
+		let effectivePSK = channelPSK.isEmpty ? Data([1]) : channelPSK
+
+		var channel = Channel()
+		channel.index = targetIndex
+		channel.role = .secondary
+		channel.settings.name = channelName
+		channel.settings.psk = effectivePSK
+		// Default to no position sharing on an added foreign channel.
+		channel.settings.moduleSettings.positionPrecision = 0
+
+		_ = try await saveChannel(channel: channel, fromUser: user, toUser: user)
+
+		// Mirror the added channel into local state so it appears immediately (no reboot / re-sync).
+		await MeshPackets.shared.channelPacket(channel: channel, fromNum: deviceNum)
+
+		Logger.mesh.info("➕ [Beacon] Added advertised channel '\(channelName, privacy: .private)' to secondary slot \(targetIndex, privacy: .public) — no reboot")
 	}
 
 	public func sendWaypoint(waypoint: Waypoint) async throws {
@@ -1296,6 +1513,36 @@ extension AccessoryManager {
 		try await sendAdminMessageToRadio(meshPacket: meshPacket, adminDescription: messageDescription)
 
 		await MeshPackets.shared.upsertDetectionSensorModuleConfigPacket(config: config, nodeNum: toUser.num)
+
+		return Int64(meshPacket.id)
+	}
+
+	public func saveMeshBeaconModuleConfig(config: ModuleConfig.MeshBeaconConfig, fromUser: UserEntity, toUser: UserEntity) async throws -> Int64 {
+
+		var adminPacket = AdminMessage()
+		adminPacket.setModuleConfig.meshBeacon = config
+		if fromUser != toUser {
+			adminPacket.sessionPasskey = toUser.userNode?.sessionPasskey ?? Data()
+		}
+		var meshPacket: MeshPacket = MeshPacket()
+		meshPacket.id = UInt32.random(in: UInt32(UInt8.max)..<UInt32.max)
+		meshPacket.to = UInt32(toUser.num)
+		meshPacket.from	= UInt32(fromUser.num)
+		meshPacket.priority =  MeshPacket.Priority.reliable
+		meshPacket.wantAck = true
+
+		var dataMessage = DataMessage()
+		guard let adminData: Data = try? adminPacket.serializedData() else {
+			throw AccessoryError.ioFailed("saveMeshBeaconModuleConfig: Unable to serialize admin packet")
+		}
+		dataMessage.payload = adminData
+		dataMessage.portnum = PortNum.adminApp
+		meshPacket.decoded = dataMessage
+
+		let messageDescription = "🛟 Saved Mesh Beacon Module Config for \(toUser.longName ?? "Unknown".localized)"
+		try await sendAdminMessageToRadio(meshPacket: meshPacket, adminDescription: messageDescription)
+
+		await MeshPackets.shared.upsertMeshBeaconModuleConfigPacket(config: config, nodeNum: toUser.num)
 
 		return Int64(meshPacket.id)
 	}

@@ -183,6 +183,17 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 	@Published var isInBackground: Bool = false
 	@Published var firmwareEdition: FirmwareEditions = .vanilla
 
+	/// MESHTASTIC_LOCKDOWN-hardened firmware state machine. See
+	/// Meshtastic/Helpers/LockdownCoordinator.swift and
+	/// specs/007-lockdown-mode/. Set by MeshtasticApp at startup.
+	var lockdownCoordinator: LockdownCoordinator?
+
+	/// Region → legal-preset lookup advertised by the connected radio during the
+	/// want_config handshake (FromRadio.region_presets, 2.8+). Empty when the
+	/// firmware predates the feature or hasn't sent it yet — callers must treat an
+	/// absent region (or an empty map) as "no constraint". Reset on disconnect.
+	@Published var loRaRegionPresets: [Config.LoRaConfig.RegionCode: RegionPresetInfo] = [:]
+
 	var activeConnection: (device: Device, connection: any Connection)?
 
 	/// Reference to the active discovery scan engine, if any
@@ -198,6 +209,14 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 	var wantStoreAndForwardPackets = false
 	var shouldAutomaticallyConnectToPreferredPeripheralAfterError = true
 	var userRequestedConnectionCancellation = false
+
+	/// True while a device switch (backup → clear → restore → connect) is in flight.
+	/// Suppresses the discovery restart in `closeConnection()` and auto-connect on
+	/// discovery events: the disconnect at the start of a switch must not let discovery
+	/// fire a concurrent connect whose node dump would interleave with the database
+	/// clear/restore (one source of nodes bleeding between radios). Set/cleared by
+	/// `switchToDevice` (Views/Connect/Connect.swift).
+	var isSwitchingDevices = false
 
 	// Conncetion process
 	var connectionSteps: SequentialSteps?
@@ -270,8 +289,11 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 			return
 		}
 
-		_ = await MeshPackets.shared.clearStaleNodes(nodeExpireDays: Int(UserDefaults.purgeStaleNodeDays))
-		
+		// Note: stale-node pruning used to run here, serializing a full fetch+delete+save on the
+		// ingestion actor ahead of the config handshake and node-DB dump (one cause of slow/hung
+		// connects). It now runs after the connection completes — see connect() Step 8 — where it
+		// also prunes against post-dump lastHeard values instead of pre-dump ones.
+
 		try await withTaskCancellationHandler {
 			var toRadio: ToRadio = ToRadio()
 			toRadio.wantConfigID = UInt32(NONCE_ONLY_CONFIG)
@@ -346,6 +368,10 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 			self.activeConnection = nil
 		}
 		self.activeDeviceNum = nil
+
+		// Lockdown: clear per-connection state. If a Lock Now was in flight, the
+		// disconnect resolves the coordinator to `.lockNowAcknowledged`.
+		lockdownCoordinator?.onDisconnect()
 		
 		connectionEventTask?.cancel()
 		connectionEventTask = nil
@@ -388,8 +414,14 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 		// startDiscovery() would silently no-op and the device would never reappear in the list.
 		discoveryTask?.cancel()
 		discoveryTask = nil
-		
-		self.startDiscovery()
+
+		// During a device switch the teardown must NOT re-arm discovery: with autoconnect on,
+		// discovery can immediately re-connect (and start a node dump) while the switch is
+		// still clearing/restoring the database — interleaving one radio's dump with another
+		// radio's data. The switch flow restarts discovery itself if its connect fails.
+		if !isSwitchingDevices {
+			self.startDiscovery()
+		}
 	}
 	
 	// Should only be called by UI-facing callers.
@@ -461,6 +493,7 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 			self.isConnected = false
 			self.isConnecting = false
 			self.firmwareEdition = .vanilla
+			self.loRaRegionPresets = [:]
 		case .connecting, .communicating, .retrying:
 			self.isConnected = false
 			self.isConnecting = true
@@ -763,6 +796,20 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 					await MeshPackets.shared.paxCounterPacket(packet: decodedInfo.packet)
 				case .mapReportApp:
 					Logger.mesh.info("[Map Report] packet received from \(packet.from.toHex(), privacy: .public)")
+				case .meshBeaconApp:
+					if let beacon = try? MeshBeacon(serializedBytes: decodedInfo.packet.decoded.payload) {
+						if let engine = discoveryScanEngine, engine.isScanning {
+							engine.handleBeacon(beacon, packet: decodedInfo.packet)
+						} else {
+							// No active scan: passively capture the beacon as a session-less record so it
+							// shows in the Beacons list and feeds the next scan setup (FR-015). Two gates
+							// apply: "no active scan" here, plus the connected node's MeshBeaconConfig
+							// FLAG_LISTEN_ENABLED enforced inside ingestPassiveBeacon.
+							ingestPassiveBeacon(beacon, packet: decodedInfo.packet)
+						}
+					} else {
+						Logger.mesh.info("[Mesh Beacon] packet received from \(packet.from.toHex(), privacy: .public) — failed to decode payload")
+					}
 				case .UNRECOGNIZED(let portNumValue):
 					if portNumValue == Transfer.filePortnum {
 						Logger.mesh.info("[File] packet received from \(packet.from.toHex(), privacy: .public)")
@@ -817,6 +864,9 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 		case .metadata(let metadata):
 			await handleDeviceMetadata(metadata)
 
+		case .regionPresets(let regionPresets):
+			handleRegionPresets(regionPresets)
+
 		case .deviceuiConfig:
 #if DEBUG
 			Logger.admin.info("🕸️ MESH PACKET received for deviceUIConfig UNHANDLED \((try? decodedInfo.packet.jsonString()) ?? "JSON Decode Failure", privacy: .public)")
@@ -859,25 +909,31 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 			case UInt32(NONCE_ONLY_DB):
 				// Open the gate for the wantDatabaseContinuation
 				Task { await wantDatabaseGate.open() }
-				
+
 				// If we get the "done" for NONCE_ONLY_DB, but are still waiting for the first NodeInfo,
 				// Then the database is probably empty, and can continue
 				if let firstDatabaseNodeInfoContinuation {
 					self.firstDatabaseNodeInfoContinuation = nil
 					firstDatabaseNodeInfoContinuation.resume()
 				}
-				
+
 				// Perform a single batch save after database retrieval completes
 				// This significantly improves performance on reconnect
-				do {
-					try context.save()
-					Logger.data.info("💾 [Database] Batch saved all node info after database retrieval")
+				Task {
+					// The dump was ingested with deferred saves on the MeshPackets actor
+					// (see handleNodeInfo); flush it so every node from the dump is persisted
+					// now rather than waiting on the debounce timer.
+					await MeshPackets.shared.flushDebouncedSaves()
+					do {
+						try context.save()
+						Logger.data.info("💾 [Database] Batch saved all node info after database retrieval")
 
-					// Push updated node data to the companion Watch app
-					WatchSessionManager.shared.sendNodesToWatch()
-				} catch {
-					let nsError = error as NSError
-					Logger.data.error("💥 [Database] Error saving batch node info: \(nsError, privacy: .public)")
+						// Push updated node data to the companion Watch app
+						WatchSessionManager.shared.sendNodesToWatch()
+					} catch {
+						let nsError = error as NSError
+						Logger.data.error("💥 [Database] Error saving batch node info: \(nsError, privacy: .public)")
+					}
 				}
 				
 			default:
@@ -889,7 +945,13 @@ class AccessoryManager: ObservableObject, MqttClientProxyManagerDelegate {
 			if state == .subscribed {
 				Task { try? await sendWantConfig() }
 			}
-			
+
+		case .lockdownStatus(let status):
+			// MESHTASTIC_LOCKDOWN-hardened firmware reports state after config_complete_id
+			// (and again in response to each LockdownAuth admin command). Route to the
+			// coordinator, which owns the per-connection state machine + passphrase cache.
+			lockdownCoordinator?.handle(status)
+
 		default:
 			Logger.transport.error("Unknown FromRadio variant: \(decodedInfo.payloadVariant.debugDescription)")
 		}
@@ -948,9 +1010,14 @@ extension AccessoryManager {
 		checkIsVersionSupported(forVersion: "2.8.0")
 	}
 
-	/// StatusMessage module was introduced in firmware 2.6.0.
+	/// The Status Message module (`ModuleConfig.StatusMessageConfig` + the
+	/// `NODE_STATUS_APP` broadcast) ships in firmware 2.8.0 (design#115). Gate the editor on
+	/// it so we don't expose a broken/empty config screen on a *known* older firmware.
+	/// `checkIsVersionSupported` is intentionally permissive when the version is unknown
+	/// (first-launch / reconnect window) — matching every other capability gate here — so the
+	/// editor still appears until the radio reports a confirmed sub-2.8.0 version.
 	var supportsStatusMessage: Bool {
-		checkIsVersionSupported(forVersion: "2.6.0")
+		checkIsVersionSupported(forVersion: "2.8.0")
 	}
 }
 
@@ -1024,6 +1091,79 @@ extension AccessoryManager {
 				Logger.transport.info("[AccessoryManager] Previosuly in the background but not scanning, starting scanning again")
 				self.startDiscovery()
 			}
+		}
+	}
+}
+
+// MARK: - Passive beacon listen (FR-015 / contract C7)
+
+extension AccessoryManager {
+
+	/// Persist a `MESH_BEACON_APP` beacon heard outside an active scan as a session-less
+	/// `DiscoveredBeaconEntity` (session / presetResult nil). Ignores beacons from the connected
+	/// node itself and de-dupes against a recent identical capture (same node + channel within a
+	/// short window) so a beacon broadcast repeatedly doesn't spam the list.
+	func ingestPassiveBeacon(_ beacon: MeshBeacon, packet: MeshPacket) {
+		let fromNodeNum = Int64(packet.from)
+
+		// Ignore self-beacons (FR-001/FR-002).
+		let connectedNodeNum = Int64(UserDefaults.preferredPeripheralNum)
+		guard fromNodeNum != connectedNodeNum else { return }
+
+		// FR-015: only capture passive beacons when the connected node is configured to listen
+		// (MeshBeaconConfig FLAG_LISTEN_ENABLED). Without the config synced, or with listening off,
+		// we don't store — this is in addition to the "no active scan" gate at the call site.
+		let listenFlags = getNodeInfo(id: connectedNodeNum, context: context)?.meshBeaconConfig?.flags ?? 0
+		guard MeshBeaconFlags.has(listenFlags, MeshBeaconFlags.listenEnabled) else {
+			Logger.mesh.debug("📡 [Beacon] Passive beacon ignored — listening not enabled on connected node")
+			return
+		}
+
+		let hasCustomChannel = beacon.hasOfferChannel && !beacon.offerChannel.name.isEmpty
+		let channelName = hasCustomChannel ? beacon.offerChannel.name : ""
+
+		// De-dupe: skip if we already stored a session-less beacon from this node + channel within the
+		// last 5 minutes. (The session-less check is done in memory to avoid a relationship predicate.)
+		let cutoff = Date().addingTimeInterval(-300)
+		let descriptor = FetchDescriptor<DiscoveredBeaconEntity>(
+			predicate: #Predicate { entity in
+				entity.nodeNum == fromNodeNum
+				&& entity.offerChannelName == channelName
+				&& entity.timestamp > cutoff
+			}
+		)
+		if let existing = try? context.fetch(descriptor),
+		   existing.contains(where: { $0.session == nil }) {
+			return
+		}
+
+		let entity = DiscoveredBeaconEntity()
+		entity.nodeNum = fromNodeNum
+		entity.message = beacon.message
+		entity.offerRegion = beacon.offerRegion != .unset ? beacon.offerRegion.rawValue : 0
+		entity.offerPreset = beacon.hasOfferPreset ? beacon.offerPreset.rawValue : -1
+		entity.hasOfferChannel = hasCustomChannel
+		entity.offerChannelName = channelName
+		entity.offerChannelPSK = hasCustomChannel ? beacon.offerChannel.psk : Data()
+		entity.snr = packet.rxSnr
+		entity.rssi = Int(packet.rxRssi)
+		entity.timestamp = Date()
+		entity.heardOnPresetName = ""
+		// Session-less: heard passively, not during a scan.
+		entity.session = nil
+		entity.presetResult = nil
+
+		if let knownNode = getNodeInfo(id: fromNodeNum, context: context) {
+			entity.shortName = knownNode.user?.shortName ?? ""
+			entity.longName = knownNode.user?.longName ?? ""
+		}
+
+		context.insert(entity)
+		do {
+			try context.save()
+			Logger.mesh.info("📡 [Beacon] Passively captured beacon from \(packet.from.toHex(), privacy: .public) — customChannel \(hasCustomChannel, privacy: .public)")
+		} catch {
+			Logger.data.error("🚫 Failed to persist passive beacon: \(error.localizedDescription, privacy: .public)")
 		}
 	}
 }

@@ -63,7 +63,13 @@ struct Settings: View {
 		], excludedModules: excludedModules)
 			|| isTAKModuleSupported(node)
 			|| isTrafficManagementModuleSupported(node)
+			|| isMeshBeaconModuleSupported(node)
 			|| accessoryManager.supportsStatusMessage
+	}
+
+	private func isMeshBeaconModuleSupported(_ node: NodeInfoEntity?) -> Bool {
+		guard node != nil else { return false }
+		return accessoryManager.checkIsVersionSupported(forVersion: "2.8.0")
 	}
 
 	private func isModuleSupported(_ module: ExcludedModules, excludedModules: Int) -> Bool {
@@ -270,6 +276,16 @@ struct Settings: View {
 				}
 			}
 
+			if isMeshBeaconModuleSupported(node) {
+				NavigationLink(value: SettingsNavigationState.meshBeacon) {
+					Label {
+						Text("Mesh Beacon")
+					} icon: {
+						Image(systemName: "dot.radiowaves.left.and.right")
+					}
+				}
+			}
+
 			if isModuleSupported(.extnotifConfig, excludedModules: excludedModules) {
 				NavigationLink(value: SettingsNavigationState.externalNotification) {
 					Label {
@@ -410,6 +426,13 @@ struct Settings: View {
 					Text("Logs")
 				} icon: {
 					Image(systemName: "scroll")
+				}
+			}
+			NavigationLink(value: SettingsNavigationState.traceRoutes) {
+				Label {
+					Text("Trace Routes")
+				} icon: {
+					Image(systemName: "point.3.connected.trianglepath.dotted")
 				}
 			}
 		}
@@ -653,6 +676,8 @@ struct Settings: View {
 					CannedMessagesConfig(node: configNode)
 				case .detectionSensor:
 					DetectionSensorConfig(node: configNode)
+				case .meshBeacon:
+					MeshBeaconConfig(node: configNode)
 				case .externalNotification:
 					ExternalNotificationConfig(node: configNode)
 				case .mqtt:
@@ -679,6 +704,8 @@ struct Settings: View {
 					TrafficManagementConfig(node: configNode)
 				case .debugLogs:
 					AppLog()
+				case .traceRoutes:
+					AllTraceRoutesLog()
 				case .appFiles:
 					AppData()
 				case .firmwareUpdates:
